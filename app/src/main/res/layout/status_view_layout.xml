@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+    <!--加载中-->
+    <LinearLayout
+        android:id="@+id/statusLoadingView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        tools:visibility="visible">
+
+        <ProgressBar
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="数据加载中..."
+            android:textColor="@color/normalFontColor" />
+    </LinearLayout>
+    <!--加载失败-->
+
+    <TextView
+        android:id="@+id/statusFailView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="加载失败，点击重试"
+        android:textColor="@color/normalFontColor"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/statusEmptyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="没有数据"
+        android:textColor="@color/normalFontColor"
+        android:visibility="invisible" />
+</FrameLayout>

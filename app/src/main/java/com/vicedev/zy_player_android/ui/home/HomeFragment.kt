@@ -58,6 +58,10 @@ class HomeFragment : BaseFragment() {
             adapter = filmAdapter
         }
 
+        statusView.failRetryClickListener = {
+            loadData(true)
+        }
+
     }
 
     override fun initListener() {
@@ -70,16 +74,27 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun loadData(init: Boolean) {
-        curPage = if (init) 1 else (++curPage)
+        if (init) {
+            curPage = 1
+            statusView.setLoadingStatus()
+        } else {
+            ++curPage
+        }
         NetLoader.filmGet(curKey, curId, curPage, object : CommonCallback<FilmModel?> {
             override fun onResult(t: FilmModel?) {
                 if (init) {
                     filmList.clear()
                 }
                 t?.let {
-                    filmList.addAll(it.filmModelItemList)
+                    if (it.filmModelItemList.isNullOrEmpty()) {
+                        statusView.setEmptyStatus()
+                    } else {
+                        filmList.addAll(it.filmModelItemList)
+                        statusView.setSuccessStatus()
+                    }
                 } ?: let {
                     curPage--
+                    statusView.setFailStatus()
                 }
                 filmAdapter.notifyDataSetChanged()
                 if (filmAdapter.loadMoreModule.isLoading) {

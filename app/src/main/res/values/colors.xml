@@ -6,4 +6,6 @@
 
     <color name="colorContainerBg">#F5F5F5</color>
     <color name="colorMain">#FFFFFF</color>
+
+    <color name="normalFontColor">#323232</color>
 </resources>
