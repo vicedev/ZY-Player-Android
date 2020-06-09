@@ -10,33 +10,21 @@ import org.jsoup.Jsoup
  */
 object DataParser {
     /**
-     * 最新数据
+     * 最新数据解析
      */
     fun parseFilmGet(key: String, data: String, type: Int): FilmModel? {
         return when (type) {
-            0 -> parseFilmGetTypeZro(
-                key,
-                data
-            )
-            1 -> parseFilmGetTypeOne(
-                key,
-                data
-            )
-            2 -> parseFilmGetTypeTwo(
-                key,
-                data
-            )
-            3 -> parseFilmGetTypeThree(
-                key,
-                data
-            )
+            0 -> parseFilmGetTypeZro(key, data)
+            1 -> parseFilmGetTypeOne(key, data)
+            2 -> parseFilmGetTypeTwo(key, data)
+            3 -> parseFilmGetTypeThree(key, data)
             else -> null
         }
     }
 
     private fun parseFilmGetTypeZro(key: String, data: String): FilmModel? {
         try {
-            val filmModelItemList = ArrayList<FilmModelItem>();
+            val filmModelItemList = ArrayList<FilmModelItem>()
             val doc = Jsoup.parse(data)
             val elements = doc.select(".xing_vb li")
             for (i in 1 until elements.size - 1) {
@@ -58,14 +46,73 @@ object DataParser {
     }
 
     private fun parseFilmGetTypeOne(key: String, data: String): FilmModel? {
+        try {
+            val filmModelItemList = ArrayList<FilmModelItem>()
+            val doc = Jsoup.parse(data)
+            val elements = doc.select(".videoContent li")
+            for (element in elements) {
+                val name = element.selectFirst(".videoName").text()
+                val type = element.selectFirst(".category").text()
+                val time = element.selectFirst(".time").text()
+                val detail = key + element.select(".address").attr("href")
+                filmModelItemList.add(FilmModelItem(key, name, type, time, detail))
+            }
+            val update = doc.selectFirst(".header_list li span").text().toInt()
+            val select = doc.select(".pagination li")
+            val total = select[select.size - 2].text().toInt()
+            return FilmModel(filmModelItemList, update, total)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         return null
     }
 
     private fun parseFilmGetTypeTwo(key: String, data: String): FilmModel? {
+        try {
+            val filmModelItemList = ArrayList<FilmModelItem>()
+            val doc = Jsoup.parse(data)
+            val elements = doc.select(".nr")
+            println(elements.size)
+            for (element in elements) {
+                val name = element.selectFirst(".name").text()
+                val type = element.selectFirst(".btn_span").text()
+                val time = element.selectFirst(".hours").text()
+                val detail = key + element.select(".name").attr("href")
+                filmModelItemList.add(FilmModelItem(key, name, type, time, detail))
+            }
+            val update = doc.selectFirst(".kfs em").text().toInt()
+            val t =
+                doc.selectFirst(".pag2").text().split("条").toTypedArray()[0].split("共")
+                    .toTypedArray()[1]
+            val total = t.toInt()
+            return FilmModel(filmModelItemList, update, total)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         return null
     }
 
     private fun parseFilmGetTypeThree(key: String, data: String): FilmModel? {
+        try {
+            val filmModelItemList = ArrayList<FilmModelItem>()
+            val doc = Jsoup.parse(data)
+            val elements = doc.select(".xing_vb li")
+            for (i in 1 until elements.size - 1) {
+                val element = elements[i]
+                val name = element.child(1).text()
+                val type = element.child(2).text()
+                val time = element.child(3).text()
+                val detail = key + element.child(1).selectFirst("a").attr("href")
+                filmModelItemList.add(FilmModelItem(key, name, type, time, detail))
+            }
+            val update = doc.select(".xing_top_right li strong")[0].text().toInt()
+            val total =
+                doc.select(".pages")[0].text().split("条").toTypedArray()[0].split("共")
+                    .toTypedArray()[1].toInt()
+            return FilmModel(filmModelItemList, update, total)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         return null
     }
 
@@ -75,18 +122,9 @@ object DataParser {
      */
     fun parseSearchGet(key: String, data: String, type: Int): FilmModel? {
         return when (type) {
-            0 -> searchGetTypeZro(
-                key,
-                data
-            )
-            1 -> searchGetTypeOne(
-                key,
-                data
-            )
-            3 -> searchGetTypeThree(
-                key,
-                data
-            )
+            0 -> searchGetTypeZro(key, data)
+            1 -> searchGetTypeOne(key, data)
+            3 -> searchGetTypeThree(key, data)
             else -> null
         }
     }

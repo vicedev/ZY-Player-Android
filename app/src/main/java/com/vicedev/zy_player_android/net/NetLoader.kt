@@ -15,6 +15,9 @@ const val TAG_FILM_GET = "tag_film_get"
 
 object NetLoader {
 
+    /**
+     * 最新数据
+     */
     fun filmGet(
         key: String,
         id: Int = 0,
@@ -53,6 +56,9 @@ object NetLoader {
             })
     }
 
+    /**
+     * 搜索数据
+     */
     fun searchGet(
         key: String,
         keywords: String,

@@ -37,6 +37,7 @@ class HomeFragment : BaseFragment() {
 
     override fun initTitleBar(titleBar: CommonTitleBar?) {
         titleBar?.run {
+            centerSearchEditText.hint = "输入搜索内容"
             setListener { v, action, extra ->
                 when (action) {
                     CommonTitleBar.ACTION_SEARCH_DELETE -> {

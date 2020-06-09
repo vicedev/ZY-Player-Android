@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.setting.SettingFragment">
 
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
@@ -11,4 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:centerType="textView" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="待开发"
+        android:textColor="@color/normalFontColor"
+        android:textSize="16sp" />
 </LinearLayout>
