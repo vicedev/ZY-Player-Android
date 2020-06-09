@@ -1,5 +1,6 @@
 package com.vicedev.zy_player_android.ui.home
 
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.KeyboardUtils
 import com.blankj.utilcode.util.StringUtils
@@ -43,7 +44,7 @@ class HomeFragment : BaseFragment() {
                     }
                 }
                 if (extra != null) {
-                    keywords = extra
+                    //按下键盘搜索按钮
                     loadData(true)
                     KeyboardUtils.hideSoftInput(requireActivity())
                 }
@@ -67,10 +68,21 @@ class HomeFragment : BaseFragment() {
 
     override fun initListener() {
         super.initListener()
+        //搜索参数选择
         searchSelectView.onSelectListener = { key, id ->
             curKey = key
             curId = id
             loadData(true)
+        }
+
+        //监听搜索框变化
+        titleBar!!.centerSearchEditText.addTextChangedListener {
+            keywords = it.toString()
+            if (keywords.isBlank()) {
+                searchSelectView.showAll()
+            } else {
+                searchSelectView.onlyShowSite()
+            }
         }
     }
 

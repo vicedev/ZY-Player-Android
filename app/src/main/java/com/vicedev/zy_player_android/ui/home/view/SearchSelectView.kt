@@ -3,7 +3,7 @@ package com.vicedev.zy_player_android.ui.home.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import android.widget.LinearLayout
+import android.widget.FrameLayout
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.common.*
 import kotlinx.android.synthetic.main.search_select_view.view.*
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.search_select_view.view.*
 
 class SearchSelectView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
+) : FrameLayout(context, attrs, defStyleAttr) {
 
     var onSelectListener: ((key: String, id: Int) -> Unit)? = null
 
@@ -27,8 +27,17 @@ class SearchSelectView @JvmOverloads constructor(
         setSpinnerData()
     }
 
+    fun showAll() {
+        vMask.gone()
+    }
+
+    fun onlyShowSite() {
+        vMask.visible()
+    }
+
     private fun setSpinnerData() {
         val config = ConfigManager.config
+        vMask.gone()
         setSpinner1Data(config)
     }
 

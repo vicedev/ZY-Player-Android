@@ -8,20 +8,20 @@ import androidx.core.view.isVisible
  * @date 2020/6/8 18:14
  */
 
-fun View.visible() {
-    if (!isVisible) {
-        visibility = View.VISIBLE
+fun View?.visible() {
+    this?.run {
+        if (!isVisible) visibility = View.VISIBLE
     }
 }
 
-fun View.invisible() {
-    if (isVisible) {
-        visibility = View.INVISIBLE
+fun View?.invisible() {
+    this?.run {
+        if (isVisible) visibility = View.INVISIBLE
     }
 }
 
-fun View.gone() {
-    if (isVisible) {
-        visibility = View.GONE
+fun View?.gone() {
+    this?.run {
+        if (isVisible) visibility = View.GONE
     }
 }
