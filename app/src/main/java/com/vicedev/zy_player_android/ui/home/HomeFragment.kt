@@ -1,0 +1,71 @@
+package com.vicedev.zy_player_android.ui.home
+
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.blankj.utilcode.util.KeyboardUtils
+import com.blankj.utilcode.util.ToastUtils
+import com.vicedev.zy_player_android.R
+import com.vicedev.zy_player_android.common.CommonCallback
+import com.vicedev.zy_player_android.net.NetLoader
+import com.vicedev.zy_player_android.ui.BaseFragment
+import com.vicedev.zy_player_android.ui.home.adapter.FilmListAdapter
+import com.vicedev.zy_player_android.ui.home.model.FilmModel
+import com.vicedev.zy_player_android.ui.home.model.FilmModelItem
+import com.wuhenzhizao.titlebar.widget.CommonTitleBar
+import kotlinx.android.synthetic.main.fragment_home.*
+
+class HomeFragment : BaseFragment() {
+
+    private val filmAdapter by lazy { FilmListAdapter(filmList) }
+    private val filmList = ArrayList<FilmModelItem>()
+
+    override fun getLayoutId(): Int = R.layout.fragment_home
+    override fun initTitleBar(titleBar: CommonTitleBar?) {
+        titleBar?.run {
+            setListener { v, action, extra ->
+                when (action) {
+                    CommonTitleBar.ACTION_SEARCH_DELETE -> {
+                        //删除按钮
+                        ToastUtils.showShort("删除")
+                    }
+                }
+                if (extra != null) {
+                    ToastUtils.showShort(extra)
+                    KeyboardUtils.hideSoftInput(requireActivity())
+                }
+            }
+        }
+    }
+
+    override fun initView() {
+        super.initView()
+
+        rvMovies.run {
+            layoutManager = LinearLayoutManager(requireActivity())
+            adapter = filmAdapter
+        }
+
+    }
+
+    override fun initListener() {
+        super.initListener()
+        searchSelectView.onSelectListener = { key, id, page ->
+            NetLoader.filmGet(key, id, page, object : CommonCallback<FilmModel?> {
+                override fun onResult(t: FilmModel?) {
+                    t?.let {
+                        filmList.clear()
+                        filmList.addAll(it.filmModelItemList)
+                    } ?: let {
+                        filmList.clear()
+                    }
+                    filmAdapter.notifyDataSetChanged()
+                }
+            })
+        }
+    }
+
+    override fun initData() {
+        super.initData()
+        //设置搜索选择视图的数据，会回调选择监听
+        searchSelectView.initData()
+    }
+}
