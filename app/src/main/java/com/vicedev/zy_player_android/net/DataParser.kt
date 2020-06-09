@@ -151,6 +151,22 @@ object DataParser {
     }
 
     private fun searchGetTypeOne(key: String, data: String): FilmModel? {
+        try {
+            val filmModelItemList = ArrayList<FilmModelItem>();
+            val doc = Jsoup.parse(data)
+            val elements = doc.select(".videoContent li")
+            for (element in elements) {
+                val name = element.selectFirst(".videoName").text()
+                val type = element.selectFirst(".category").text()
+                val time = element.selectFirst(".time").text()
+                val detail = key + element.selectFirst(".address").attr("href")
+                filmModelItemList.add(FilmModelItem(key, name, type, time, detail))
+            }
+            val total = elements.size
+            return FilmModel(filmModelItemList, -1, total)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         return null
     }
 

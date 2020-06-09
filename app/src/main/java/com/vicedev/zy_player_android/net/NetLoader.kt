@@ -1,5 +1,6 @@
 package com.vicedev.zy_player_android.net
 
+import com.blankj.utilcode.util.ToastUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
@@ -66,7 +67,12 @@ object NetLoader {
         callback: CommonCallback<FilmModel?>
     ) {
         val configItem = ConfigManager.configMap[key]
-        val url = if (configItem!!.type == 0) {
+        if (configItem!!.search.isBlank()) {
+            ToastUtils.showShort("该视频源不支持搜索")
+            callback.onResult(null)
+            return
+        }
+        val url = if (configItem.type == 0) {
             configItem.search.replace("{page}", page.toString()).replace("{keywords}", keywords)
         } else {
             configItem.search.replace("{keywords}", keywords)

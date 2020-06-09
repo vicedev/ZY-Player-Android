@@ -109,6 +109,9 @@ class HomeFragment : BaseFragment() {
                         else -> {
                             filmList.addAll(t.filmModelItemList)
                             statusView.setSuccessStatus()
+                            if (t.total > 0 && t.total <= filmList.size) {
+                                filmAdapter.loadMoreModule.isEnableLoadMore = false
+                            }
                         }
                     }
                 } else {
@@ -122,7 +125,11 @@ class HomeFragment : BaseFragment() {
                         }
                         else -> {
                             filmList.addAll(t.filmModelItemList)
-                            filmAdapter.loadMoreModule.loadMoreComplete()
+                            if (t.total > 0 && t.total <= filmList.size) {
+                                filmAdapter.loadMoreModule.isEnableLoadMore = false
+                            } else {
+                                filmAdapter.loadMoreModule.loadMoreComplete()
+                            }
                         }
                     }
                 }
