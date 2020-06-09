@@ -1,10 +1,27 @@
 package com.vicedev.zy_player_android.ui
 
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
 /**
  * @author vicedev1001@gmail.com
  * @date 2020/6/8 16:33
  */
-open class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(getLayoutId())
+
+        initView()
+        initListener()
+    }
+
+    open fun initView() {
+    }
+
+    open fun initListener() {
+    }
+
+    abstract fun getLayoutId(): Int
 }
