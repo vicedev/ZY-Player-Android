@@ -2,7 +2,7 @@ package com.vicedev.zy_player_android.ui.home
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.KeyboardUtils
-import com.blankj.utilcode.util.ToastUtils
+import com.blankj.utilcode.util.StringUtils
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.common.CommonCallback
 import com.vicedev.zy_player_android.net.NetLoader
@@ -18,6 +18,7 @@ class HomeFragment : BaseFragment() {
     private var curPage: Int = 1
     private var curKey: String = ""
     private var curId: Int = 0
+    private var keywords: String = ""
 
     private val filmAdapter by lazy {
         FilmListAdapter(filmList).apply {
@@ -39,11 +40,11 @@ class HomeFragment : BaseFragment() {
                 when (action) {
                     CommonTitleBar.ACTION_SEARCH_DELETE -> {
                         //删除按钮
-                        ToastUtils.showShort("删除")
                     }
                 }
                 if (extra != null) {
-                    ToastUtils.showShort(extra)
+                    keywords = extra
+                    loadData(true)
                     KeyboardUtils.hideSoftInput(requireActivity())
                 }
             }
@@ -80,28 +81,49 @@ class HomeFragment : BaseFragment() {
         } else {
             ++curPage
         }
-        NetLoader.filmGet(curKey, curId, curPage, object : CommonCallback<FilmModel?> {
+        loadDataByType(object : CommonCallback<FilmModel?> {
             override fun onResult(t: FilmModel?) {
                 if (init) {
+                    filmAdapter.loadMoreModule.isEnableLoadMore = true
                     filmList.clear()
-                }
-                t?.let {
-                    if (it.filmModelItemList.isNullOrEmpty()) {
-                        statusView.setEmptyStatus()
-                    } else {
-                        filmList.addAll(it.filmModelItemList)
-                        statusView.setSuccessStatus()
+                    when {
+                        t == null -> {
+                            statusView.setFailStatus()
+                        }
+                        t.filmModelItemList.isNullOrEmpty() -> {
+                            statusView.setEmptyStatus()
+                        }
+                        else -> {
+                            filmList.addAll(t.filmModelItemList)
+                            statusView.setSuccessStatus()
+                        }
                     }
-                } ?: let {
-                    curPage--
-                    statusView.setFailStatus()
+                } else {
+                    when {
+                        t == null -> {
+                            curPage--
+                            filmAdapter.loadMoreModule.loadMoreFail()
+                        }
+                        t.filmModelItemList.isNullOrEmpty() -> {
+                            filmAdapter.loadMoreModule.isEnableLoadMore = false
+                        }
+                        else -> {
+                            filmList.addAll(t.filmModelItemList)
+                            filmAdapter.loadMoreModule.loadMoreComplete()
+                        }
+                    }
                 }
                 filmAdapter.notifyDataSetChanged()
-                if (filmAdapter.loadMoreModule.isLoading) {
-                    filmAdapter.loadMoreModule.loadMoreComplete()
-                }
             }
         })
+    }
+
+    private fun loadDataByType(callback: CommonCallback<FilmModel?>) {
+        if (!StringUtils.isEmpty(titleBar!!.centerSearchEditText.text)) {
+            NetLoader.searchGet(curKey, keywords, curPage, callback)
+        } else {
+            NetLoader.filmGet(curKey, curId, curPage, callback)
+        }
     }
 
     override fun initData() {

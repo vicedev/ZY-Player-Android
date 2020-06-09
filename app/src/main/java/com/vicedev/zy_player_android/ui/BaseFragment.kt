@@ -15,6 +15,7 @@ import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 abstract class BaseFragment : Fragment() {
 
     lateinit var rootView: ViewGroup
+    var titleBar: CommonTitleBar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +34,8 @@ abstract class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initTitleBar(view.findViewById(R.id.title_bar) as? CommonTitleBar)
+        titleBar = view.findViewById(R.id.title_bar) as? CommonTitleBar
+        initTitleBar(titleBar)
         initView()
         initListener()
         initData()
