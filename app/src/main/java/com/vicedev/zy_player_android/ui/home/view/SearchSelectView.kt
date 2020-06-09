@@ -17,7 +17,7 @@ class SearchSelectView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    var onSelectListener: ((key: String, id: Int, page: Int) -> Unit)? = null
+    var onSelectListener: ((key: String, id: Int) -> Unit)? = null
 
     init {
         View.inflate(context, R.layout.search_select_view, this)
@@ -60,7 +60,7 @@ class SearchSelectView @JvmOverloads constructor(
         spinner3.setOnSpinnerItemSelectedListener { parent, view, position, id ->
 //            LogUtils.d(jointUrl(configItem, children[position].id))
 //            NetLoader.filmGet(configItem.key, children[position].id)
-            onSelectListener?.invoke(configItem.key, children[position].id, 1)
+            onSelectListener?.invoke(configItem.key, children[position].id)
         }
         if (list.size == 1) {
             spinner3.invisible()
@@ -69,7 +69,7 @@ class SearchSelectView @JvmOverloads constructor(
         }
 //        LogUtils.d(jointUrl(configItem, children[0].id))
 //        NetLoader.filmGet(configItem.key, children[0].id)
-        onSelectListener?.invoke(configItem.key, children[0].id, 1)
+        onSelectListener?.invoke(configItem.key, children[0].id)
     }
 
     private fun jointUrl(configItem: ConfigItem, id: Int): String {

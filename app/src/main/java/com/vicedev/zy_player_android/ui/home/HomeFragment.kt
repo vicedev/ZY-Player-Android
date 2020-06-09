@@ -15,10 +15,24 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : BaseFragment() {
 
-    private val filmAdapter by lazy { FilmListAdapter(filmList) }
+    private var curPage: Int = 1
+    private var curKey: String = ""
+    private var curId: Int = 0
+
+    private val filmAdapter by lazy {
+        FilmListAdapter(filmList).apply {
+            loadMoreModule.run {
+                isAutoLoadMore = true
+                setOnLoadMoreListener {
+                    loadData(false)
+                }
+            }
+        }
+    }
     private val filmList = ArrayList<FilmModelItem>()
 
     override fun getLayoutId(): Int = R.layout.fragment_home
+
     override fun initTitleBar(titleBar: CommonTitleBar?) {
         titleBar?.run {
             setListener { v, action, extra ->
@@ -48,19 +62,31 @@ class HomeFragment : BaseFragment() {
 
     override fun initListener() {
         super.initListener()
-        searchSelectView.onSelectListener = { key, id, page ->
-            NetLoader.filmGet(key, id, page, object : CommonCallback<FilmModel?> {
-                override fun onResult(t: FilmModel?) {
-                    t?.let {
-                        filmList.clear()
-                        filmList.addAll(it.filmModelItemList)
-                    } ?: let {
-                        filmList.clear()
-                    }
-                    filmAdapter.notifyDataSetChanged()
-                }
-            })
+        searchSelectView.onSelectListener = { key, id ->
+            curKey = key
+            curId = id
+            loadData(true)
         }
+    }
+
+    private fun loadData(init: Boolean) {
+        curPage = if (init) 1 else (++curPage)
+        NetLoader.filmGet(curKey, curId, curPage, object : CommonCallback<FilmModel?> {
+            override fun onResult(t: FilmModel?) {
+                if (init) {
+                    filmList.clear()
+                }
+                t?.let {
+                    filmList.addAll(it.filmModelItemList)
+                } ?: let {
+                    curPage--
+                }
+                filmAdapter.notifyDataSetChanged()
+                if (filmAdapter.loadMoreModule.isLoading) {
+                    filmAdapter.loadMoreModule.loadMoreComplete()
+                }
+            }
+        })
     }
 
     override fun initData() {
