@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_film_detail.*
  */
 
 class FilmDetailFragment : BaseFragment() {
-    private var videoController: VideoController? = null
+    private val videoController by lazy { VideoController() }
 
     private val key by lazy { activity?.intent?.getStringExtra(KEY) }
     private val detailUrl by lazy { activity?.intent?.getStringExtra(DETAIL_URL) }
@@ -41,13 +41,16 @@ class FilmDetailFragment : BaseFragment() {
         statusView.failRetryClickListener = {
             initData()
         }
+
+        //初始化视频控制
+        videoController.init(requireActivity(), videoPlayer)
     }
 
     override fun initListener() {
         super.initListener()
         //选集
         spinner.setOnSpinnerItemSelectedListener { parent, view, position, id ->
-            videoController?.play(m3u8List?.get(position))
+            videoController.play(m3u8List?.get(position))
         }
     }
 
@@ -82,17 +85,21 @@ class FilmDetailFragment : BaseFragment() {
             return
         }
 
-        if (videoController == null) {
-            videoController = VideoController()
-        }
-        videoController?.run {
-            init(requireActivity(), videoPlayer)
+        videoController.run {
             //进来播放第一个
             play(m3u8List!![0])
         }
 
         //选集
-        spinner.attachDataSource(m3u8List!!.map { it.name })
+        if (m3u8List!!.size == 1) {
+            spinner.run {
+                text = m3u8List!![0].name
+                hideArrow()
+                isClickable = false
+            }
+        } else {
+            spinner.attachDataSource(m3u8List!!.map { it.name })
+        }
 
         //底下数据
         tvName.text = t.title
@@ -102,26 +109,26 @@ class FilmDetailFragment : BaseFragment() {
 
     override fun onPause() {
         super.onPause()
-        videoController?.onPause()
+        videoController.onPause()
     }
 
     override fun onResume() {
         super.onResume()
-        videoController?.onResume()
+        videoController.onResume()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        videoController?.onDestroy()
+        videoController.onDestroy()
     }
 
     override fun onBackPressed(): Boolean {
-        return videoController?.onBackPressed() ?: false
+        return videoController.onBackPressed()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        videoController?.onConfigurationChanged(newConfig)
+        videoController.onConfigurationChanged(newConfig)
     }
 
 }

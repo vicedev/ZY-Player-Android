@@ -8,6 +8,7 @@ import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import com.vicedev.zy_player_android.common.gone
+import com.vicedev.zy_player_android.common.visible
 import com.vicedev.zy_player_android.ui.detail.model.FilmItemInfo
 
 /**
@@ -42,7 +43,12 @@ class VideoController {
         //增加title
         videoPlayer.titleTextView.gone()
         //设置返回键
-        videoPlayer.backButton.gone()
+        videoPlayer.backButton.run {
+            setOnClickListener {
+                onBackPressed()
+            }
+            visible()
+        }
         //外部辅助的旋转，帮助全屏
         orientationUtils = OrientationUtils(activity, videoPlayer).apply {
             //初始化不打开外部的旋转
@@ -74,7 +80,8 @@ class VideoController {
             })
             .setLockClickListener { view, lock ->
                 orientationUtils?.isEnable = !lock
-            }.build(videoPlayer)
+            }
+            .build(videoPlayer)
 
         videoPlayer.fullscreenButton
             .setOnClickListener { //直接横屏
@@ -82,8 +89,6 @@ class VideoController {
                 //第一个true是否需要隐藏actionbar，第二个true是否需要隐藏statusbar
                 videoPlayer.startWindowFullscreen(activity, true, true)
             }
-
-        videoPlayer.startPlayLogic()
     }
 
 
@@ -119,7 +124,8 @@ class VideoController {
         if (GSYVideoManager.backFromWindowFull(activity)) {
             return true
         }
-        return false
+        activity.finish()
+        return true
     }
 
     fun onConfigurationChanged(newConfig: Configuration) {

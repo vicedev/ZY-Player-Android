@@ -161,3 +161,7 @@
 #okio
 -dontwarn okio.**
 -keep class okio.**{*;}
+
+#xpopup
+-dontwarn com.lxj.xpopup.widget.**
+-keep class com.lxj.xpopup.widget.**{*;}

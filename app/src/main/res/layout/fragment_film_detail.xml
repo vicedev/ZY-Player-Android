@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
     <!--只是用来使状态栏变白-->
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
@@ -35,43 +36,45 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/normalFontColor"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 tools:text="大内密探" />
 
-            <ScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="none">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="正在播放："
-                            android:textColor="@color/normalFontColor"
-                            android:textSize="14sp" />
-
-                        <org.angmarch.views.NiceSpinner
-                            android:id="@+id/spinner"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:lines="1" />
-                    </LinearLayout>
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="简介："
+                        android:text="正在播放："
                         android:textColor="@color/normalFontColor"
                         android:textSize="14sp" />
+
+                    <org.angmarch.views.NiceSpinner
+                        android:id="@+id/spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lines="1" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="简介："
+                    android:textColor="@color/normalFontColor"
+                    android:textSize="14sp" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none">
 
                     <TextView
                         android:id="@+id/tvDesc"
@@ -79,10 +82,10 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/minorFontColor"
                         android:textSize="14sp"
-                        android:layout_marginTop="10dp"
                         tools:text="大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探" />
-                </LinearLayout>
-            </ScrollView>
+
+                </ScrollView>
+            </LinearLayout>
         </LinearLayout>
 
         <com.vicedev.zy_player_android.widgets.StatusView

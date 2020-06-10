@@ -190,9 +190,9 @@ object DataParser {
     fun parseDetailGet(key: String, data: String, type: Int): FilmDetailModel? {
         return when (type) {
             0 -> detailGetTypeZro(key, data)
-            1 -> null
-            2 -> null
-            3 -> null
+            1 -> detailGetTypeOne(key, data)
+            2 -> detailGetTypeTwo(key, data)
+            3 -> detailGetTypeThree(key, data)
             else -> null
         }
     }
@@ -201,8 +201,7 @@ object DataParser {
     private fun detailGetTypeZro(key: String, data: String): FilmDetailModel? {
         try {
             val doc = Jsoup.parse(data)
-            val vodBox = doc.select(".vodBox")
-            val info = vodBox.text()
+            val info = doc.select(".vodBox").html()
             val title = doc.select(".vodh h2").text()
             val index = doc.select(".vodh span").text()
             val name = title + index
@@ -212,7 +211,6 @@ object DataParser {
                 val k = element.text()
                 if (k.contains("剧情介绍")) {
                     desc = element.select(".vodplayinfo").text()
-                    break
                 }
             }
             val vodLi = doc.select(".ibox .vodplayinfo li")
@@ -222,7 +220,7 @@ object DataParser {
                 val text = element.text()
                 if (text.contains(".m3u8")) {
                     val splitm3u8 = text.split("$")
-                    m3u8List.add(FilmItemInfo(splitm3u8[0], splitm3u8[1]))
+                    m3u8List.add(FilmItemInfo(title + "  " + splitm3u8[0], splitm3u8[1]))
                 } else if (text.contains(".mp4")) {
                     val splitmp4 = text.split("$")
                     mp4List.add(FilmItemInfo(splitmp4[0], splitmp4[1]))
@@ -234,5 +232,101 @@ object DataParser {
         }
         return null
     }
+
+    private fun detailGetTypeOne(key: String, data: String): FilmDetailModel? {
+        try {
+            val doc = Jsoup.parse(data)
+            val title =
+                doc.selectFirst(".whitetitle").text().split("：").toTypedArray()[1]
+            val info = doc.selectFirst(".white").html()
+            val vodInfo = doc.select(".white")
+            var desc = ""
+            for (element in vodInfo) {
+                val k = element.text()
+                if (k.contains("剧情介绍")) {
+                    desc = element.selectFirst("div").text()
+                }
+            }
+            val vodLi = doc.select(".playlist li #m3u8")
+
+            val m3u8List = ArrayList<FilmItemInfo>()
+            val mp4List = ArrayList<FilmItemInfo>()
+            for (element in vodLi) {
+                val text = element.`val`()
+                if (text.contains(".m3u8")) {
+                    val splitm3u8 = text.split("$")
+                    m3u8List.add(FilmItemInfo(title + "  " + splitm3u8[0], splitm3u8[1]))
+                } else if (text.contains(".mp4")) {
+                    val splitmp4 = text.split("$")
+                    mp4List.add(FilmItemInfo(splitmp4[0], splitmp4[1]))
+                }
+            }
+            return FilmDetailModel(key, title, desc, m3u8List, mp4List)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
+    private fun detailGetTypeTwo(key: String, data: String): FilmDetailModel? {
+        try {
+            val doc = Jsoup.parse(data)
+            val title = doc.selectFirst(".vodh h2").text()
+            val info = doc.selectFirst(".vodBox").html()
+            val desc = doc.selectFirst(".vodplayinfo").text()
+            val vodLi = doc.select(".vodplayinfo li")
+
+            val m3u8List = ArrayList<FilmItemInfo>()
+            val mp4List = ArrayList<FilmItemInfo>()
+            for (element in vodLi) {
+                val text = element.text()
+                if (text.contains(".m3u8")) {
+                    val splitm3u8 = text.split("$")
+                    m3u8List.add(FilmItemInfo(title + "  " + splitm3u8[0], splitm3u8[1]))
+                } else if (text.contains(".mp4")) {
+                    val splitmp4 = text.split("$")
+                    mp4List.add(FilmItemInfo(splitmp4[0], splitmp4[1]))
+                }
+            }
+            return FilmDetailModel(key, title, desc, m3u8List, mp4List)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
+    private fun detailGetTypeThree(key: String, data: String): FilmDetailModel? {
+        try {
+            val doc = Jsoup.parse(data)
+            val title = doc.selectFirst(".vodh h2").text()
+            val info = doc.selectFirst(".vodBox").html()
+            val vodInfo = doc.select(".playBox")
+            var desc = ""
+            for (element in vodInfo) {
+                val k = element.text()
+                if (k.contains("剧情介绍")) {
+                    desc = element.selectFirst(".vodplayinfo").text()
+                }
+            }
+            val vodLi = doc.select(".ibox .vodplayinfo li")
+            val m3u8List = ArrayList<FilmItemInfo>()
+            val mp4List = ArrayList<FilmItemInfo>()
+            for (element in vodLi) {
+                val text = element.text()
+                if (text.contains(".m3u8")) {
+                    val splitm3u8 = text.split("$")
+                    m3u8List.add(0, FilmItemInfo(title + "  " + splitm3u8[0], splitm3u8[1]))
+                } else if (text.contains(".mp4")) {
+                    val splitmp4 = text.split("$")
+                    mp4List.add(0, FilmItemInfo(splitmp4[0], splitmp4[1]))
+                }
+            }
+            return FilmDetailModel(key, title, desc, m3u8List, mp4List)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
 
 }

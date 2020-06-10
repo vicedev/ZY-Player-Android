@@ -19,11 +19,14 @@ class FilmListAdapter(data: MutableList<FilmModelItem>) :
     ), LoadMoreModule {
     override fun convert(holder: BaseViewHolder, item: FilmModelItem) {
         holder.setText(R.id.tvFilm, item.name)
+        holder.setText(R.id.tvType, item.type)
         holder.itemView.setOnClickListener {
-            context.startActivity(Intent(context, FilmDetailActivity::class.java).apply {
-                putExtra(FilmDetailFragment.KEY, item.site)
-                putExtra(FilmDetailFragment.DETAIL_URL, item.detail)
-            })
+            context.startActivity(
+                Intent(context, FilmDetailActivity::class.java).apply {
+                    putExtra(FilmDetailFragment.KEY, item.site)
+                    putExtra(FilmDetailFragment.DETAIL_URL, item.detail)
+                }
+            )
         }
     }
 }
