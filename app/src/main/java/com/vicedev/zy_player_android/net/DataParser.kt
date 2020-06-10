@@ -1,5 +1,6 @@
 package com.vicedev.zy_player_android.net
 
+import com.vicedev.zy_player_android.ui.detail.model.FilmDetailModel
 import com.vicedev.zy_player_android.ui.home.model.FilmModel
 import com.vicedev.zy_player_android.ui.home.model.FilmModelItem
 import org.jsoup.Jsoup
@@ -175,7 +176,21 @@ object DataParser {
     }
 
 
-    private fun detailGetTypeZro(key: String, data: String) {
+    /**
+     * 详情解析
+     */
+    fun parseDetailGet(key: String, data: String, type: Int): FilmDetailModel? {
+        return when (type) {
+            0 -> null
+            1 -> null
+            2 -> null
+            3 -> null
+            else -> null
+        }
+    }
+
+
+    private fun detailGetTypeZro(key: String, data: String): FilmDetailModel? {
         try {
             val doc = Jsoup.parse(data)
             val vodBox = doc.select(".vodBox")
@@ -189,11 +204,10 @@ object DataParser {
                 val k = element.text()
                 if (k.contains("剧情介绍")) {
                     desc = element.select(".vodplayinfo").text()
+                    break
                 }
             }
             val vodLi = doc.select(".ibox .vodplayinfo li")
-            println(name)
-            println(desc)
             val m3u8List = ArrayList<String>()
             val mp4List = ArrayList<String>()
             for (element in vodLi) {
@@ -204,11 +218,11 @@ object DataParser {
                     mp4List.add(text)
                 }
             }
-            println(m3u8List)
-            println(mp4List)
+            return FilmDetailModel(key, title, desc, m3u8List, mp4List)
         } catch (e: Exception) {
             e.printStackTrace()
         }
+        return null
     }
 
 }

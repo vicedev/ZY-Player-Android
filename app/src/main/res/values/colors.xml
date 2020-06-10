@@ -8,4 +8,5 @@
     <color name="colorMain">#FFFFFF</color>
 
     <color name="normalFontColor">#323232</color>
+    <color name="minorFontColor">#B2B2B2</color>
 </resources>

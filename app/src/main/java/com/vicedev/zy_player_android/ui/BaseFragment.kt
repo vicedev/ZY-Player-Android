@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.vicedev.zy_player_android.R
+import com.vicedev.zy_player_android.common.BackPressedCall
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 
 /**
  * @author vicedev1001@gmail.com
  * @date 2020/6/8 15:16
  */
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment(), BackPressedCall {
 
     lateinit var rootView: ViewGroup
     var titleBar: CommonTitleBar? = null
@@ -46,4 +47,6 @@ abstract class BaseFragment : Fragment() {
     open fun initView() {}
     open fun initListener() {}
     open fun initData() {}
+
+    override fun onBackPressed(): Boolean = false
 }

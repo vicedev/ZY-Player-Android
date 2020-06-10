@@ -25,7 +25,8 @@
 
         <activity
             android:name=".ui.detail.FilmDetailActivity"
-            android:launchMode="singleTask"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
     </application>
 

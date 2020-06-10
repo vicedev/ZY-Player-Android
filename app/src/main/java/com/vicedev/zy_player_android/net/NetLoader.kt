@@ -13,6 +13,7 @@ import com.vicedev.zy_player_android.ui.home.model.FilmModel
  * @date 2020/6/8 23:48
  */
 const val TAG_FILM_GET = "tag_film_get"
+const val TAG_FILM_DETAIL_GET = "tag_film_detail_get"
 
 object NetLoader {
 
@@ -101,6 +102,11 @@ object NetLoader {
                 }
             })
     }
+
+    fun filmDetailGet(){
+
+    }
+
 
     private fun cancel(tag: Any) {
         OkGo.cancelTag(OkGo.getInstance().okHttpClient, tag)
