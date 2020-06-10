@@ -23,6 +23,8 @@ class VideoController {
     private var isPlay = false
     private var isPause = false
 
+    var curFilmItemInfo: FilmItemInfo? = null
+
     //外部辅助的旋转，帮助全屏
     private var orientationUtils: OrientationUtils? = null
 
@@ -93,6 +95,7 @@ class VideoController {
 
 
     fun play(filmItemInfo: FilmItemInfo?) {
+        curFilmItemInfo = filmItemInfo
         filmItemInfo?.let {
             videoOptionBuilder
                 .setUrl(it.videoUrl)

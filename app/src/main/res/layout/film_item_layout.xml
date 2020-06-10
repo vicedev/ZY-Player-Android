@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <View
-        style="@style/divider"
+        style="@style/Divider"
         android:layout_marginLeft="12dp" />
 
     <LinearLayout

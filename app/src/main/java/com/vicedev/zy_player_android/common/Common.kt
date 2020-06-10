@@ -25,3 +25,7 @@ fun View?.gone() {
         if (isVisible) visibility = View.GONE
     }
 }
+
+fun String?.textOrDefault(default: String = ""): String {
+    return if (isNullOrBlank()) default else this!!
+}

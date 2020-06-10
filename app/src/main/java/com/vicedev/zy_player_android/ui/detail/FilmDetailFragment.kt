@@ -1,13 +1,16 @@
 package com.vicedev.zy_player_android.ui.detail
 
 import android.content.res.Configuration
+import com.blankj.utilcode.util.ToastUtils
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.common.CommonCallback
+import com.vicedev.zy_player_android.common.textOrDefault
 import com.vicedev.zy_player_android.net.NetLoader
 import com.vicedev.zy_player_android.ui.BaseFragment
 import com.vicedev.zy_player_android.ui.detail.controller.VideoController
 import com.vicedev.zy_player_android.ui.detail.model.FilmDetailModel
 import com.vicedev.zy_player_android.ui.detail.model.FilmItemInfo
+import com.vicedev.zy_player_android.utils.Utils
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.fragment_film_detail.*
 
@@ -51,6 +54,25 @@ class FilmDetailFragment : BaseFragment() {
         //选集
         spinner.setOnSpinnerItemSelectedListener { parent, view, position, id ->
             videoController.play(m3u8List?.get(position))
+        }
+        //网页播放
+        ivWebPlay.setOnClickListener {
+            Utils.openBrowser(
+                requireActivity(),
+                "http://zyplayer.fun/player/player.html?url=${videoController.curFilmItemInfo?.videoUrl.textOrDefault()}&title=${videoController.curFilmItemInfo?.name}"
+            )
+        }
+        //收藏
+        ivCollect.setOnClickListener {
+            ToastUtils.showShort("暂时不支持收藏")
+        }
+        //分享
+        ivShare.setOnClickListener {
+            ToastUtils.showShort("暂时不支持分享")
+        }
+        //下载
+        ivDownload.setOnClickListener {
+
         }
     }
 

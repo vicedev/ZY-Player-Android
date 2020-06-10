@@ -30,10 +30,73 @@
             android:orientation="vertical"
             android:padding="12dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/ivWebPlay"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/web_play" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/ivCollect"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/film_collect" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/ivShare"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/film_share" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/ivDownload"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/film_download" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <View
+                style="@style/Divider"
+                android:layout_marginTop="12dp" />
+
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:textColor="@color/normalFontColor"
                 android:textSize="16sp"
                 android:textStyle="bold"

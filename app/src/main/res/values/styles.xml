@@ -8,10 +8,21 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="divider">
+    <style name="Divider">
         <item name="android:background">@color/dividerColor</item>
-        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1px</item>
+    </style>
+
+    <style name="GuideTheme" parent="FullScreen">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="FullScreen" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>//无标题
+        <item name="android:windowActionBar">false</item>//无ActionBar
+        <item name="android:windowFullscreen">true</item>//全屏即无通知栏
+        <item name="android:windowContentOverlay">@null</item>//是否有遮盖
     </style>
 
 </resources>
