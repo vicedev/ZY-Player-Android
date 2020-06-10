@@ -72,7 +72,7 @@ class FilmDetailFragment : BaseFragment() {
         }
         //下载
         ivDownload.setOnClickListener {
-
+            ToastUtils.showShort("暂时不支持下载")
         }
     }
 

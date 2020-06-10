@@ -13,11 +13,46 @@
         android:layout_height="wrap_content"
         app:centerType="textView" />
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/logo" />
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="待开发"
+        android:padding="12dp"
+        android:text="ZY-Player-Android created by vicedev"
         android:textColor="@color/normalFontColor"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
+
+
+    <TextView
+        android:id="@+id/tvStar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#ffffff"
+        android:padding="12dp"
+        android:text="赏个star"
+        android:textColor="@color/normalFontColor"
+        android:textSize="14sp" />
+
+    <View
+        style="@style/Divider"
+        android:layout_marginLeft="12dp" />
+
+    <TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:padding="12dp"
+        android:text="版本 v1.0.0"
+        android:textColor="@color/normalFontColor"
+        android:textSize="14sp" />
 </LinearLayout>
