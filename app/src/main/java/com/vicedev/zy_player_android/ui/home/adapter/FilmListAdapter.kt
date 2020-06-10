@@ -6,6 +6,7 @@ import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.ui.detail.FilmDetailActivity
+import com.vicedev.zy_player_android.ui.detail.FilmDetailFragment
 import com.vicedev.zy_player_android.ui.home.model.FilmModelItem
 
 /**
@@ -19,7 +20,10 @@ class FilmListAdapter(data: MutableList<FilmModelItem>) :
     override fun convert(holder: BaseViewHolder, item: FilmModelItem) {
         holder.setText(R.id.tvFilm, item.name)
         holder.itemView.setOnClickListener {
-            context.startActivity(Intent(context, FilmDetailActivity::class.java))
+            context.startActivity(Intent(context, FilmDetailActivity::class.java).apply {
+                putExtra(FilmDetailFragment.KEY, item.site)
+                putExtra(FilmDetailFragment.DETAIL_URL, item.detail)
+            })
         }
     }
 }

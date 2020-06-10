@@ -62,7 +62,8 @@
                         <org.angmarch.views.NiceSpinner
                             android:id="@+id/spinner"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:lines="1" />
                     </LinearLayout>
 
                     <TextView
@@ -78,6 +79,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/minorFontColor"
                         android:textSize="14sp"
+                        android:layout_marginTop="10dp"
                         tools:text="大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探" />
                 </LinearLayout>
             </ScrollView>

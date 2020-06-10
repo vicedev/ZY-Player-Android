@@ -9,6 +9,11 @@ data class FilmDetailModel(
     val site: String,
     val title: String,
     val desc: String,
-    val m3u8List: ArrayList<String>,
-    val mp4List: ArrayList<String>
+    val m3u8List: ArrayList<FilmItemInfo>,
+    val mp4List: ArrayList<FilmItemInfo>
+)
+
+data class FilmItemInfo(
+    val name: String,
+    val videoUrl: String
 )

@@ -8,7 +8,7 @@ import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import com.vicedev.zy_player_android.common.gone
-import com.vicedev.zy_player_android.ui.detail.model.FilmDetailModel
+import com.vicedev.zy_player_android.ui.detail.model.FilmItemInfo
 
 /**
  * @author vicedev1001@gmail.com
@@ -16,8 +16,8 @@ import com.vicedev.zy_player_android.ui.detail.model.FilmDetailModel
  */
 class VideoController {
     private lateinit var videoPlayer: StandardGSYVideoPlayer
-    private lateinit var filmDetail: FilmDetailModel
     private lateinit var activity: Activity
+    private lateinit var videoOptionBuilder: GSYVideoOptionBuilder
 
     private var isPlay = false
     private var isPause = false
@@ -25,11 +25,11 @@ class VideoController {
     //外部辅助的旋转，帮助全屏
     private var orientationUtils: OrientationUtils? = null
 
-    fun init(activity: Activity, videoPlayer: StandardGSYVideoPlayer, filmDetail: FilmDetailModel) {
+    fun init(activity: Activity, videoPlayer: StandardGSYVideoPlayer) {
         this.videoPlayer = videoPlayer
-        this.filmDetail = filmDetail
         this.activity = activity
 
+        //初始化视频播放器
         initVideoPlayer()
     }
 
@@ -49,12 +49,8 @@ class VideoController {
             isEnable = true
         }
 
-        val m3u8List = filmDetail.m3u8List
-        if (m3u8List.isNullOrEmpty()) {
-            return
-        }
-
-        GSYVideoOptionBuilder()
+        videoOptionBuilder = GSYVideoOptionBuilder()
+        videoOptionBuilder
 //            .setThumbImageView(imageView)
             .setIsTouchWiget(true)
             .setRotateViewAuto(false)
@@ -62,9 +58,7 @@ class VideoController {
             .setAutoFullWithSize(false)
             .setShowFullAnimation(false)
             .setNeedLockFull(true)
-            .setUrl(m3u8List[0])
             .setCacheWithPlay(false)
-            .setVideoTitle(filmDetail.title)
             .setVideoAllCallBack(object : GSYSampleCallBack() {
                 override fun onPrepared(url: String, vararg objects: Any) {
                     super.onPrepared(url, *objects)
@@ -89,6 +83,17 @@ class VideoController {
                 videoPlayer.startWindowFullscreen(activity, true, true)
             }
 
+        videoPlayer.startPlayLogic()
+    }
+
+
+    fun play(filmItemInfo: FilmItemInfo?) {
+        filmItemInfo?.let {
+            videoOptionBuilder
+                .setUrl(it.videoUrl)
+                .setVideoTitle(it.name)
+                .build(videoPlayer)
+        }
         videoPlayer.startPlayLogic()
     }
 

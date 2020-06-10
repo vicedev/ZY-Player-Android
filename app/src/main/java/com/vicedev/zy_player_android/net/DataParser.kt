@@ -1,6 +1,8 @@
 package com.vicedev.zy_player_android.net
 
+import com.vicedev.zy_player_android.common.ConfigManager
 import com.vicedev.zy_player_android.ui.detail.model.FilmDetailModel
+import com.vicedev.zy_player_android.ui.detail.model.FilmItemInfo
 import com.vicedev.zy_player_android.ui.home.model.FilmModel
 import com.vicedev.zy_player_android.ui.home.model.FilmModelItem
 import org.jsoup.Jsoup
@@ -33,7 +35,8 @@ object DataParser {
                 val name = element.child(1).text()
                 val type = element.child(2).text()
                 val time = element.child(3).text()
-                val detail = key + element.child(1).selectFirst("a").attr("href")
+                val detail = ConfigManager.configMap[key]?.url + element.child(1).selectFirst("a")
+                    .attr("href")
                 filmModelItemList.add(FilmModelItem(key, name, type, time, detail))
             }
             val update = doc.select(".xing_top_right li strong")[0].text().toInt()
@@ -55,7 +58,8 @@ object DataParser {
                 val name = element.selectFirst(".videoName").text()
                 val type = element.selectFirst(".category").text()
                 val time = element.selectFirst(".time").text()
-                val detail = key + element.select(".address").attr("href")
+                val detail =
+                    ConfigManager.configMap[key]?.url + element.select(".address").attr("href")
                 filmModelItemList.add(FilmModelItem(key, name, type, time, detail))
             }
             val update = doc.selectFirst(".header_list li span").text().toInt()
@@ -78,7 +82,8 @@ object DataParser {
                 val name = element.selectFirst(".name").text()
                 val type = element.selectFirst(".btn_span").text()
                 val time = element.selectFirst(".hours").text()
-                val detail = key + element.select(".name").attr("href")
+                val detail =
+                    ConfigManager.configMap[key]?.url + element.select(".name").attr("href")
                 filmModelItemList.add(FilmModelItem(key, name, type, time, detail))
             }
             val update = doc.selectFirst(".kfs em").text().toInt()
@@ -103,7 +108,8 @@ object DataParser {
                 val name = element.child(1).text()
                 val type = element.child(2).text()
                 val time = element.child(3).text()
-                val detail = key + element.child(1).selectFirst("a").attr("href")
+                val detail = ConfigManager.configMap[key]?.url + element.child(1).selectFirst("a")
+                    .attr("href")
                 filmModelItemList.add(FilmModelItem(key, name, type, time, detail))
             }
             val update = doc.select(".xing_top_right li strong")[0].text().toInt()
@@ -140,7 +146,8 @@ object DataParser {
                 val name = element.child(1).text()
                 val type = element.child(2).text()
                 val time = element.child(3).text()
-                val detail = key + element.child(1).selectFirst("a").attr("href")
+                val detail = ConfigManager.configMap[key]?.url + element.child(1).selectFirst("a")
+                    .attr("href")
                 filmModelItemList.add(FilmModelItem(key, name, type, time, detail))
             }
             val total = doc.select(".nvc dd").text().replace("[^0-9]".toRegex(), "").toInt()
@@ -160,7 +167,8 @@ object DataParser {
                 val name = element.selectFirst(".videoName").text()
                 val type = element.selectFirst(".category").text()
                 val time = element.selectFirst(".time").text()
-                val detail = key + element.selectFirst(".address").attr("href")
+                val detail =
+                    ConfigManager.configMap[key]?.url + element.selectFirst(".address").attr("href")
                 filmModelItemList.add(FilmModelItem(key, name, type, time, detail))
             }
             val total = elements.size
@@ -181,7 +189,7 @@ object DataParser {
      */
     fun parseDetailGet(key: String, data: String, type: Int): FilmDetailModel? {
         return when (type) {
-            0 -> null
+            0 -> detailGetTypeZro(key, data)
             1 -> null
             2 -> null
             3 -> null
@@ -208,14 +216,16 @@ object DataParser {
                 }
             }
             val vodLi = doc.select(".ibox .vodplayinfo li")
-            val m3u8List = ArrayList<String>()
-            val mp4List = ArrayList<String>()
+            val m3u8List = ArrayList<FilmItemInfo>()
+            val mp4List = ArrayList<FilmItemInfo>()
             for (element in vodLi) {
                 val text = element.text()
                 if (text.contains(".m3u8")) {
-                    m3u8List.add(text)
+                    val splitm3u8 = text.split("$")
+                    m3u8List.add(FilmItemInfo(splitm3u8[0], splitm3u8[1]))
                 } else if (text.contains(".mp4")) {
-                    mp4List.add(text)
+                    val splitmp4 = text.split("$")
+                    mp4List.add(FilmItemInfo(splitmp4[0], splitmp4[1]))
                 }
             }
             return FilmDetailModel(key, title, desc, m3u8List, mp4List)

@@ -6,6 +6,7 @@ import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
 import com.vicedev.zy_player_android.common.CommonCallback
 import com.vicedev.zy_player_android.common.ConfigManager
+import com.vicedev.zy_player_android.ui.detail.model.FilmDetailModel
 import com.vicedev.zy_player_android.ui.home.model.FilmModel
 
 /**
@@ -103,8 +104,42 @@ object NetLoader {
             })
     }
 
-    fun filmDetailGet(){
+    /**
+     * 详情页
+     */
+    fun filmDetailGet(
+        key: String,
+        detailUrl: String,
+        callback: CommonCallback<FilmDetailModel?>
+    ) {
+        val configItem = ConfigManager.configMap[key]
+        if (configItem==null){
+            callback.onResult(null)
+            return
+        }
+        cancel(TAG_FILM_DETAIL_GET)
+        OkGo.get<String>(detailUrl)
+            .tag(TAG_FILM_DETAIL_GET)
+            .execute(object : StringCallback() {
+                override fun onSuccess(response: Response<String>?) {
+                    callback.onResult(
+                        DataParser.parseDetailGet(
+                            key,
+                            response?.body() ?: "",
+                            configItem.type
+                        )
+                    )
+                }
 
+                override fun onError(response: Response<String>?) {
+                    super.onError(response)
+                    callback.onResult(null)
+                }
+
+                override fun onFinish() {
+
+                }
+            })
     }
 
 
