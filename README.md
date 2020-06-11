@@ -2,6 +2,8 @@
 
 基于[ZY-Player](https://github.com/Hunlongyu/ZY-Player)开发的Android版本视频播放器，免费无广告
 
+[最新版点我下载](./release/ZY-Player-Android-1.0.0.apk)
+
 ### 截图
 
 |           首页（搜索）            |              详情页               |
