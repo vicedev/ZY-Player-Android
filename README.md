@@ -6,7 +6,7 @@
 
 |           首页（搜索）            |              详情页               |
 | :-------------------------------: | :-------------------------------: |
-| ![home](./images/image1.JPG)     | ![detail](./images/image2.JPG) |
+| ![home](./images/image1.jpg)  | ![detail](./images/image2.jpg) |
 
 ### TODO 
 
