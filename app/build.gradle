@@ -93,7 +93,7 @@ android.applicationVariants.all { variant ->
         def outputFile = apkData.outputFileName
         if (outputFile != null && outputFile.endsWith('.apk')) {
             //这里修改apk文件名
-            def fileName = outputFile.replace("app-", "ZY-Player-Android-").replace(".apk", "-${versionName}" + ".apk")
+            def fileName = outputFile.replace("app-release", "ZY-Player-Android").replace(".apk", "-${versionName}" + ".apk")
             apkData.outputFileName = fileName
         }
 
