@@ -16,9 +16,19 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file("zykey.jks")
+            storePassword "666666"
+            keyAlias "zyandroid"
+            keyPassword "666666"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -74,4 +84,18 @@ dependencies {
     implementation 'com.lzy.net:okgo:3.0.4'
 
     implementation 'com.lxj:xpopup:1.8.12'
+}
+
+android.applicationVariants.all { variant ->
+
+    variant.getPackageApplication().outputScope.apkDatas.forEach { apkData ->
+
+        def outputFile = apkData.outputFileName
+        if (outputFile != null && outputFile.endsWith('.apk')) {
+            //这里修改apk文件名
+            def fileName = outputFile.replace("app-", "ZY-Player-Android-").replace(".apk", "-${versionName}" + ".apk")
+            apkData.outputFileName = fileName
+        }
+
+    }
 }

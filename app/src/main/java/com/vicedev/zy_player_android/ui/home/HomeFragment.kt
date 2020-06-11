@@ -78,7 +78,7 @@ class HomeFragment : BaseFragment() {
 
         //监听搜索框变化
         titleBar!!.centerSearchEditText.addTextChangedListener {
-            keywords = it.toString()
+            keywords = it?.toString() ?: ""
             if (keywords.isBlank()) {
                 searchSelectView.showAll()
             } else {
