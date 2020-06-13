@@ -1,5 +1,6 @@
 package com.vicedev.zy_player_android.net
 
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
@@ -39,7 +40,8 @@ object NetLoader {
             .tag(TAG_FILM_GET)
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>?) {
-                    callback.onResult(
+                    onNetworkResult(
+                        callback,
                         DataParser.parseFilmGet(
                             key,
                             response?.body() ?: "",
@@ -50,7 +52,7 @@ object NetLoader {
 
                 override fun onError(response: Response<String>?) {
                     super.onError(response)
-                    callback.onResult(null)
+                    onNetworkResult(callback, null)
                 }
 
                 override fun onFinish() {
@@ -71,7 +73,7 @@ object NetLoader {
         val configItem = ConfigManager.configMap[key]
         if (configItem!!.search.isBlank()) {
             ToastUtils.showShort("该视频源不支持搜索")
-            callback.onResult(null)
+            onNetworkResult(callback, null)
             return
         }
         val url = if (configItem.type == 0) {
@@ -84,8 +86,48 @@ object NetLoader {
             .tag(TAG_FILM_GET)
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>?) {
-                    callback.onResult(
+                    onNetworkResult(
+                        callback,
                         DataParser.parseSearchGet(
+                            key,
+                            response?.body() ?: "",
+                            configItem.type
+                        )
+                    )
+                }
+
+                override fun onError(response: Response<String>?) {
+                    super.onError(response)
+                    onNetworkResult(callback, null)
+                }
+
+                override fun onFinish() {
+
+                }
+            })
+    }
+
+    /**
+     * 详情页
+     */
+    fun filmDetailGet(
+        key: String,
+        detailUrl: String,
+        callback: CommonCallback<FilmDetailModel?>
+    ) {
+        val configItem = ConfigManager.configMap[key]
+        if (configItem == null) {
+            callback.onResult(null)
+            return
+        }
+        cancel(TAG_FILM_DETAIL_GET)
+        OkGo.get<String>(detailUrl)
+            .tag(TAG_FILM_DETAIL_GET)
+            .execute(object : StringCallback() {
+                override fun onSuccess(response: Response<String>?) {
+                    onNetworkResult(
+                        callback,
+                        DataParser.parseDetailGet(
                             key,
                             response?.body() ?: "",
                             configItem.type
@@ -104,42 +146,13 @@ object NetLoader {
             })
     }
 
-    /**
-     * 详情页
-     */
-    fun filmDetailGet(
-        key: String,
-        detailUrl: String,
-        callback: CommonCallback<FilmDetailModel?>
-    ) {
-        val configItem = ConfigManager.configMap[key]
-        if (configItem==null){
-            callback.onResult(null)
-            return
+    private fun <T> onNetworkResult(callback: CommonCallback<T?>?, t: T?) {
+        try {
+            callback?.onResult(t)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            LogUtils.e(e.toString())
         }
-        cancel(TAG_FILM_DETAIL_GET)
-        OkGo.get<String>(detailUrl)
-            .tag(TAG_FILM_DETAIL_GET)
-            .execute(object : StringCallback() {
-                override fun onSuccess(response: Response<String>?) {
-                    callback.onResult(
-                        DataParser.parseDetailGet(
-                            key,
-                            response?.body() ?: "",
-                            configItem.type
-                        )
-                    )
-                }
-
-                override fun onError(response: Response<String>?) {
-                    super.onError(response)
-                    callback.onResult(null)
-                }
-
-                override fun onFinish() {
-
-                }
-            })
     }
 
 
