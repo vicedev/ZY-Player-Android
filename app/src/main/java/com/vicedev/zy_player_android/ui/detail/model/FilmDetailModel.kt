@@ -14,6 +14,9 @@ data class FilmDetailModel(
 )
 
 data class FilmItemInfo(
+    //真实剧名
+    val videoName: String,
+    //第x集
     val name: String,
     val videoUrl: String
 )

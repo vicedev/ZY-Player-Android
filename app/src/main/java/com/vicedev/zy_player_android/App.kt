@@ -2,6 +2,7 @@ package com.vicedev.zy_player_android
 
 import android.app.Application
 import com.lzy.okgo.OkGo
+import com.tencent.bugly.Bugly
 import com.vicedev.zy_player_android.common.ConfigManager
 
 /**
@@ -29,5 +30,17 @@ class App : Application() {
 //            .setRetryCount(3)                               //全局统一超时重连次数，默认为三次，那么最差的情况会请求4次(一次原始请求，三次重连请求)，不需要可以设置为0
 //            .addCommonHeaders(headers)                      //全局公共头
 //            .addCommonParams(params);                       //全局公共参数
+
+        //Bugly初始化
+//        第三个参数为SDK调试模式开关，调试模式的行为特性如下：
+//        输出详细的Bugly SDK的Log；
+//        每一条Crash都会被立即上报；
+//        自定义日志将会在Logcat中输出。
+//        建议在测试阶段建议设置成true，发布时设置为false。
+        Bugly.init(
+            appContext,
+            "21826c98fb",
+            BuildConfig.DEBUG
+        )
     }
 }

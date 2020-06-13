@@ -70,6 +70,15 @@
 -keep public class * extends android.support.v7.**
 -keep public class * extends android.support.annotation.**
 
+#Androidx相关
+-keep class com.google.android.material.** {*;}
+-keep class androidx.** {*;}
+-keep public class * extends androidx.**
+-keep interface androidx.** {*;}
+-dontwarn com.google.android.material.**
+-dontnote com.google.android.material.**
+-dontwarn androidx.**
+
 # 保留R下面的资源
 -keep class **.R$* {*;}
 
@@ -165,3 +174,7 @@
 #xpopup
 -dontwarn com.lxj.xpopup.widget.**
 -keep class com.lxj.xpopup.widget.**{*;}
+
+#Bugly
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}

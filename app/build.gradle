@@ -84,6 +84,9 @@ dependencies {
     implementation 'com.lzy.net:okgo:3.0.4'
 
     implementation 'com.lxj:xpopup:1.8.12'
+
+    implementation 'com.tencent.bugly:crashreport_upgrade:1.4.5'
+    implementation 'com.tencent.bugly:nativecrashreport:3.7.1'
 }
 
 android.applicationVariants.all { variant ->

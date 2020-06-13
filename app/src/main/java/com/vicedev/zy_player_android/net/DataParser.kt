@@ -220,10 +220,10 @@ object DataParser {
                 val text = element.text()
                 if (text.contains(".m3u8")) {
                     val splitm3u8 = text.split("$")
-                    m3u8List.add(FilmItemInfo(title + "  " + splitm3u8[0], splitm3u8[1]))
+                    m3u8List.add(FilmItemInfo(title, splitm3u8[0], splitm3u8[1]))
                 } else if (text.contains(".mp4")) {
                     val splitmp4 = text.split("$")
-                    mp4List.add(FilmItemInfo(splitmp4[0], splitmp4[1]))
+                    mp4List.add(FilmItemInfo(title, splitmp4[0], splitmp4[1]))
                 }
             }
             return FilmDetailModel(key, title, desc, m3u8List, mp4List)
@@ -255,10 +255,10 @@ object DataParser {
                 val text = element.`val`()
                 if (text.contains(".m3u8")) {
                     val splitm3u8 = text.split("$")
-                    m3u8List.add(FilmItemInfo(title + "  " + splitm3u8[0], splitm3u8[1]))
+                    m3u8List.add(FilmItemInfo(title, splitm3u8[0], splitm3u8[1]))
                 } else if (text.contains(".mp4")) {
                     val splitmp4 = text.split("$")
-                    mp4List.add(FilmItemInfo(splitmp4[0], splitmp4[1]))
+                    mp4List.add(FilmItemInfo(title, splitmp4[0], splitmp4[1]))
                 }
             }
             return FilmDetailModel(key, title, desc, m3u8List, mp4List)
@@ -282,10 +282,10 @@ object DataParser {
                 val text = element.text()
                 if (text.contains(".m3u8")) {
                     val splitm3u8 = text.split("$")
-                    m3u8List.add(FilmItemInfo(title + "  " + splitm3u8[0], splitm3u8[1]))
+                    m3u8List.add(FilmItemInfo(title, splitm3u8[0], splitm3u8[1]))
                 } else if (text.contains(".mp4")) {
                     val splitmp4 = text.split("$")
-                    mp4List.add(FilmItemInfo(splitmp4[0], splitmp4[1]))
+                    mp4List.add(FilmItemInfo(title, splitmp4[0], splitmp4[1]))
                 }
             }
             return FilmDetailModel(key, title, desc, m3u8List, mp4List)
@@ -315,10 +315,10 @@ object DataParser {
                 val text = element.text()
                 if (text.contains(".m3u8")) {
                     val splitm3u8 = text.split("$")
-                    m3u8List.add(0, FilmItemInfo(title + "  " + splitm3u8[0], splitm3u8[1]))
+                    m3u8List.add(0, FilmItemInfo(title, splitm3u8[0], splitm3u8[1]))
                 } else if (text.contains(".mp4")) {
                     val splitmp4 = text.split("$")
-                    mp4List.add(0, FilmItemInfo(splitmp4[0], splitmp4[1]))
+                    mp4List.add(0, FilmItemInfo(title, splitmp4[0], splitmp4[1]))
                 }
             }
             return FilmDetailModel(key, title, desc, m3u8List, mp4List)
