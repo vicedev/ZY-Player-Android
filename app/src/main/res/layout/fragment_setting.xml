@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:padding="12dp"
-        android:text="版本 v1.0.0"
+        tools:text="版本 v1.0.0"
         android:textColor="@color/normalFontColor"
         android:textSize="14sp" />
 </LinearLayout>

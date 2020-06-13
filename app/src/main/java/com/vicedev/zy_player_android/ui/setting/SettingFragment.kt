@@ -1,5 +1,6 @@
 package com.vicedev.zy_player_android.ui.setting
 
+import com.blankj.utilcode.util.AppUtils
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.ui.BaseFragment
 import com.vicedev.zy_player_android.utils.Utils
@@ -13,6 +14,11 @@ class SettingFragment : BaseFragment() {
         titleBar?.run {
             centerTextView.text = "设置"
         }
+    }
+
+    override fun initView() {
+        super.initView()
+        tvVersion.text = "版本 ${AppUtils.getAppVersionName()}"
     }
 
     override fun initListener() {
