@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+
+    <ImageView
+        android:id="@+id/ivDownload"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentRight="true"
+        android:padding="12dp"
+        android:src="@drawable/dialog_film_download" />
+
+    <TextView
+        android:id="@+id/tvFilm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/ivDownload"
+        android:layout_alignBottom="@id/ivDownload"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/ivDownload"
+        android:layout_weight="7"
+        android:gravity="center_vertical"
+        android:paddingLeft="12dp"
+        android:singleLine="true"
+        android:textColor="@color/normalFontColor"
+        android:textSize="14sp"
+        tools:text="是大家还是觉得时间的还是觉得是大家还是觉得时间的还是觉得是大家还是觉得时间的还是觉得" />
+
+    <View
+        style="@style/Divider"
+        android:layout_alignBottom="@id/ivDownload"
+        android:layout_marginLeft="12dp" />
+</RelativeLayout>

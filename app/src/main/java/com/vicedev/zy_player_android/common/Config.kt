@@ -1,7 +1,7 @@
 package com.vicedev.zy_player_android.common
 
 import com.blankj.utilcode.util.GsonUtils
-import com.vicedev.zy_player_android.App
+import com.blankj.utilcode.util.ResourceUtils
 
 /**
  * @author vicedev1001@gmail.com
@@ -33,13 +33,7 @@ data class Children(
 
 object ConfigManager {
     val config: Config by lazy {
-        val open = App.appContext.assets.open("config.txt");
-        val size = open.available()
-        val byteArray = ByteArray(size)
-        open.read(byteArray)
-        open.close()
-        val json = String(byteArray, Charsets.UTF_8)
-        GsonUtils.fromJson(json, Config::class.java)
+        GsonUtils.fromJson(ResourceUtils.readAssets2String("config.txt"), Config::class.java)
     }
     val configMap: HashMap<String, ConfigItem> by lazy {
         val hashMap = hashMapOf<String, ConfigItem>()

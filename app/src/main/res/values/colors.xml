@@ -10,4 +10,8 @@
     <color name="normalFontColor">#323232</color>
     <color name="minorFontColor">#B2B2B2</color>
     <color name="dividerColor">#E8E8E8</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
+
 </resources>

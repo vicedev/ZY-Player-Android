@@ -10,6 +10,7 @@ import com.vicedev.zy_player_android.ui.BaseFragment
 import com.vicedev.zy_player_android.ui.detail.controller.VideoController
 import com.vicedev.zy_player_android.ui.detail.model.FilmDetailModel
 import com.vicedev.zy_player_android.ui.detail.model.FilmItemInfo
+import com.vicedev.zy_player_android.ui.detail.view.DetailFilmDownloadDialog
 import com.vicedev.zy_player_android.utils.Utils
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.fragment_film_detail.*
@@ -72,7 +73,7 @@ class FilmDetailFragment : BaseFragment() {
         }
         //下载
         ivDownload.setOnClickListener {
-            ToastUtils.showShort("暂时不支持下载")
+            DetailFilmDownloadDialog().show(mp4List, childFragmentManager)
         }
     }
 
