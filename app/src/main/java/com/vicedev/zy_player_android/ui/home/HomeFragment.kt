@@ -6,11 +6,14 @@ import com.blankj.utilcode.util.KeyboardUtils
 import com.blankj.utilcode.util.StringUtils
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.common.CommonCallback
+import com.vicedev.zy_player_android.common.ConfigManager
+import com.vicedev.zy_player_android.common.textOrDefault
 import com.vicedev.zy_player_android.net.NetLoader
 import com.vicedev.zy_player_android.ui.BaseFragment
 import com.vicedev.zy_player_android.ui.home.adapter.FilmListAdapter
 import com.vicedev.zy_player_android.ui.home.model.FilmModel
 import com.vicedev.zy_player_android.ui.home.model.FilmModelItem
+import com.vicedev.zy_player_android.utils.Utils
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -62,8 +65,13 @@ class HomeFragment : BaseFragment() {
             adapter = filmAdapter
         }
 
-        statusView.failRetryClickListener = {
-            loadData(true)
+        statusView.run {
+            failRetryClickListener = {
+                loadData(true)
+            }
+            toWebClickListener = {
+                Utils.openBrowser(requireActivity(), ConfigManager.configMap[curKey]?.url.textOrDefault())
+            }
         }
 
     }

@@ -21,6 +21,8 @@ class StatusView @JvmOverloads constructor(
 
     var failRetryClickListener: (() -> Unit)? = null
 
+    var toWebClickListener: (() -> Unit)? = null
+
     init {
 
         View.inflate(context, R.layout.status_view_layout, this)
@@ -29,6 +31,10 @@ class StatusView @JvmOverloads constructor(
             if (statusFailView.isVisible) {
                 failRetryClickListener?.invoke()
             }
+        }
+
+        tvToWeb.setOnClickListener {
+            toWebClickListener?.invoke()
         }
 
         gone()

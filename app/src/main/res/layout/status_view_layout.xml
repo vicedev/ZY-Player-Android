@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
@@ -25,16 +24,35 @@
     </LinearLayout>
     <!--加载失败-->
 
-    <TextView
+    <RelativeLayout
         android:id="@+id/statusFailView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="加载失败，点击重试"
-        android:textColor="@color/normalFontColor"
-        android:visibility="invisible" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="加载失败，点击重试"
+            android:textColor="@color/normalFontColor" />
+
+        <TextView
+            android:id="@+id/tvToWeb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="加载不出来？点这里"
+            android:textColor="@color/minorFontColor" />
+
+    </RelativeLayout>
+
+    <!--没数据-->
     <TextView
         android:id="@+id/statusEmptyView"
         android:layout_width="wrap_content"
