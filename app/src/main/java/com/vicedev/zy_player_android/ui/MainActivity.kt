@@ -8,6 +8,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.ui.collect.CollectFragment
 import com.vicedev.zy_player_android.ui.home.HomeFragment
+import com.vicedev.zy_player_android.ui.home.NewHomeFragment
 import com.vicedev.zy_player_android.ui.setting.SettingFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -21,7 +22,7 @@ class MainActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
-        fragmentArray.put(R.id.navigation_home, HomeFragment())
+        fragmentArray.put(R.id.navigation_home, NewHomeFragment())
         fragmentArray.put(R.id.navigation_collect, CollectFragment())
         fragmentArray.put(R.id.navigation_setting, SettingFragment())
         supportFragmentManager

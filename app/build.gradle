@@ -10,8 +10,8 @@ android {
         applicationId "com.vicedev.zy_player_android"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 4
+        versionName "2.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -87,6 +87,8 @@ dependencies {
 
     implementation 'com.tencent.bugly:crashreport_upgrade:1.4.5'
     implementation 'com.tencent.bugly:nativecrashreport:3.7.1'
+
+    implementation 'com.github.smart-fun:XmlToJson:1.4.5'
 }
 
 android.applicationVariants.all { variant ->
