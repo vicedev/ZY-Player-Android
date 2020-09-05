@@ -8,6 +8,7 @@ import com.vicedev.zy_player_android.sources.BaseSource
 import com.vicedev.zy_player_android.sources.OKZYWSource
 import com.vicedev.zy_player_android.sources.bean.Classify
 import com.vicedev.zy_player_android.ui.BaseFragment
+import com.vicedev.zy_player_android.ui.channel.HomeChannelFragment
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.fragment_home.statusView
 import kotlinx.android.synthetic.main.fragment_home_new.*
@@ -66,7 +67,7 @@ class NewHomeFragment : BaseFragment() {
         BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
     ) {
         override fun getItem(position: Int): Fragment {
-            return HomeChannelFragment()
+            return HomeChannelFragment.instance(classifyList!![position].id.toString())
         }
 
         override fun getCount(): Int = classifyList?.size ?: 0

@@ -1,6 +1,7 @@
 package com.vicedev.zy_player_android.sources
 
 import com.vicedev.zy_player_android.sources.bean.Classify
+import com.vicedev.zy_player_android.sources.bean.HomeChannelData
 import com.vicedev.zy_player_android.sources.bean.HomeData
 import com.vicedev.zy_player_android.sources.bean.NewVideo
 import com.vicedev.zy_player_android.utils.Utils
@@ -13,11 +14,18 @@ import com.vicedev.zy_player_android.utils.Utils
 
 abstract class BaseSource {
 
-    var baseUrl: String? = null
-    var downloadBaseUrl: String? = null
+    abstract val baseUrl: String?
+    abstract val downloadBaseUrl: String?
 
     //请求首页数据
     abstract fun requestHomeData(callback: (t: HomeData?) -> Unit)
+
+    //请求频道列表数据
+    abstract fun requestHomeChannelData(
+        page: Int,
+        tid: String,
+        callback: (t: ArrayList<HomeChannelData>?) -> Unit
+    )
 
     //请求搜索数据
     abstract fun <T> requestSearchData(searchName: String, callback: (t: T?) -> Unit)
@@ -68,5 +76,29 @@ abstract class BaseSource {
         } catch (e: Exception) {
         }
         return null
+    }
+
+    fun parseHomeChannelData1(data: String?): ArrayList<HomeChannelData>? {
+        try {
+            if (data == null) return null
+            val jsonObject = Utils.xmlToJson(data)?.toJson()
+            val videoList = ArrayList<HomeChannelData>()
+            val videos =
+                jsonObject?.getJSONObject("rss")?.getJSONObject("list")!!.getJSONArray("video")
+            for (i in 0 until videos.length()) {
+                val json = videos.getJSONObject(i)
+                videoList.add(
+                    HomeChannelData(
+                        json.getString("id"),
+                        json.getString("name"),
+                        json.getString("pic")
+                    )
+                )
+            }
+            return videoList
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return arrayListOf()
     }
 }

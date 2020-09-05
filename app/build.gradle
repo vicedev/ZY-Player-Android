@@ -89,6 +89,9 @@ dependencies {
     implementation 'com.tencent.bugly:nativecrashreport:3.7.1'
 
     implementation 'com.github.smart-fun:XmlToJson:1.4.5'
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }
 
 android.applicationVariants.all { variant ->
