@@ -4,14 +4,18 @@ import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.ConvertUtils
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.vicedev.zy_player_android.common.BaseLoadMoreAdapter
+import com.vicedev.zy_player_android.common.ConfigManager
+import com.vicedev.zy_player_android.common.GridSpaceItemDecoration
 import com.vicedev.zy_player_android.common.textOrDefault
 import com.vicedev.zy_player_android.sources.BaseSource
 import com.vicedev.zy_player_android.sources.OKZYWSource
 import com.vicedev.zy_player_android.sources.bean.HomeChannelData
 import com.vicedev.zy_player_android.ui.BaseListFragment
 import com.vicedev.zy_player_android.ui.channel.adapter.HomeChannelAdapter
+import kotlinx.android.synthetic.main.base_list_fragment.*
 
 /**
  * @author vicedev
@@ -36,8 +40,15 @@ class HomeChannelFragment : BaseListFragment<HomeChannelData, BaseViewHolder>() 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        source = OKZYWSource()
+        source = ConfigManager.generateSource(ConfigManager.OKZYW)
         tid = arguments?.getString(TID).textOrDefault()
+    }
+
+    override fun initView() {
+        super.initView()
+        rvList.addItemDecoration(
+            GridSpaceItemDecoration(ConvertUtils.dp2px(12.0f), true)
+        )
     }
 
     override fun getListAdapter(): BaseLoadMoreAdapter<HomeChannelData, BaseViewHolder> {

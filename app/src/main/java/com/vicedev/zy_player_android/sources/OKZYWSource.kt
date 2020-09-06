@@ -3,6 +3,7 @@ package com.vicedev.zy_player_android.sources
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
+import com.vicedev.zy_player_android.common.ConfigManager
 import com.vicedev.zy_player_android.sources.bean.HomeChannelData
 import com.vicedev.zy_player_android.sources.bean.HomeData
 
@@ -12,9 +13,11 @@ import com.vicedev.zy_player_android.sources.bean.HomeData
  * @date 2020/9/2 21:47
  * @desc OK 资源网
  */
+
 class OKZYWSource(
-    override val baseUrl: String? = "http://cj.okzy.tv/inc/api.php",
-    override val downloadBaseUrl: String? = "http://cj.okzy.tv/inc/apidown.php"
+    override val baseUrl: String = "http://cj.okzy.tv/inc/api.php",
+    override val downloadBaseUrl: String = "http://cj.okzy.tv/inc/apidown.php",
+    override val name: String = "OK 资源网"
 ) : BaseSource() {
 
     override fun requestHomeData(callback: (t: HomeData?) -> Unit) {

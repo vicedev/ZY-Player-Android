@@ -1,5 +1,6 @@
 package com.vicedev.zy_player_android.ui
 
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -42,7 +43,19 @@ abstract class BaseListFragment<T, H : BaseViewHolder> : BaseFragment() {
         super.initView()
         rvList.run {
             adapter = listAdapter
-            layoutManager = getListLayoutManager()
+            layoutManager = getListLayoutManager().apply {
+                if (this is GridLayoutManager) {
+                    this.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                        override fun getSpanSize(position: Int): Int {
+                            if (position == listAdapter.loadMoreModule.loadMoreViewPosition) {
+                                return spanCount
+                            }
+                            return 1
+                        }
+
+                    }
+                }
+            }
         }
         statusView.failRetryClickListener = {
             initData()
@@ -66,13 +79,16 @@ abstract class BaseListFragment<T, H : BaseViewHolder> : BaseFragment() {
                         if (curPage == 1) {
                             listAdapter.setNewData(null)
                             statusView.setSuccessStatus()
+                        }else{
+                            listAdapter.loadMoreModule.loadMoreComplete()
                         }
                         listAdapter.addData(it)
                     } else {
                         if (curPage == 1) {
                             statusView.setEmptyStatus()
+                        } else {
+                            listAdapter.loadMoreModule.isEnableLoadMore = false
                         }
-                        listAdapter.loadMoreModule.isEnableLoadMore = false
                     }
                 } else {
                     if (curPage == 1) {

@@ -13,9 +13,9 @@ import com.vicedev.zy_player_android.utils.Utils
  */
 
 abstract class BaseSource {
-
-    abstract val baseUrl: String?
-    abstract val downloadBaseUrl: String?
+    abstract val name:String
+    abstract val baseUrl: String
+    abstract val downloadBaseUrl: String
 
     //请求首页数据
     abstract fun requestHomeData(callback: (t: HomeData?) -> Unit)

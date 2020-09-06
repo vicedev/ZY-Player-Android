@@ -28,7 +28,7 @@ class HomeChannelAdapter :
         Glide.with(context)
             .load(item.pic)
             .centerCrop()
-            .transform(CenterCrop(), RoundedCorners(ConvertUtils.dp2px(12.0f)))
+//            .transform(CenterCrop(), RoundedCorners(ConvertUtils.dp2px(12.0f)))
             .into(holder.getView(R.id.ivPiv))
     }
 
