@@ -1,9 +1,6 @@
 package com.vicedev.zy_player_android.sources
 
-import com.vicedev.zy_player_android.sources.bean.Classify
-import com.vicedev.zy_player_android.sources.bean.HomeChannelData
-import com.vicedev.zy_player_android.sources.bean.HomeData
-import com.vicedev.zy_player_android.sources.bean.NewVideo
+import com.vicedev.zy_player_android.sources.bean.*
 import com.vicedev.zy_player_android.utils.Utils
 
 /**
@@ -13,7 +10,7 @@ import com.vicedev.zy_player_android.utils.Utils
  */
 
 abstract class BaseSource {
-    abstract val name:String
+    abstract val name: String
     abstract val baseUrl: String
     abstract val downloadBaseUrl: String
 
@@ -28,7 +25,11 @@ abstract class BaseSource {
     )
 
     //请求搜索数据
-    abstract fun <T> requestSearchData(searchName: String, callback: (t: T?) -> Unit)
+    abstract fun requestSearchData(
+        searchWord: String,
+        page: Int,
+        callback: (t: ArrayList<SearchResultData>?) -> Unit
+    )
 
     //请求详情数据
     abstract fun <T> requestDetailData(id: String, callback: (t: T?) -> Unit)
@@ -92,6 +93,29 @@ abstract class BaseSource {
                         json.getString("id"),
                         json.getString("name"),
                         json.getString("pic")
+                    )
+                )
+            }
+            return videoList
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return arrayListOf()
+    }
+
+    fun parseSearchResultData1(data: String?): ArrayList<SearchResultData>? {
+        try {
+            if (data == null) return null
+            val jsonObject = Utils.xmlToJson(data)?.toJson()
+            val videoList = ArrayList<SearchResultData>()
+            val videos =
+                jsonObject?.getJSONObject("rss")?.getJSONObject("list")!!.getJSONArray("video")
+            for (i in 0 until videos.length()) {
+                val json = videos.getJSONObject(i)
+                videoList.add(
+                    SearchResultData(
+                        json.getString("name"),
+                        json.getString("type")
                     )
                 )
             }

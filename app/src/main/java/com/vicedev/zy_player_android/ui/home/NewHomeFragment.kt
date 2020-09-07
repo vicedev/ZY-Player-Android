@@ -14,6 +14,7 @@ import com.vicedev.zy_player_android.sources.BaseSource
 import com.vicedev.zy_player_android.sources.bean.Classify
 import com.vicedev.zy_player_android.ui.BaseFragment
 import com.vicedev.zy_player_android.ui.channel.HomeChannelFragment
+import com.vicedev.zy_player_android.ui.search.SearchActivity
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.fragment_home.statusView
 import kotlinx.android.synthetic.main.fragment_home_new.*
@@ -36,7 +37,7 @@ class NewHomeFragment : BaseFragment() {
             setListener { v, action, extra ->
                 when (action) {
                     CommonTitleBar.ACTION_SEARCH -> {
-                        ToastUtils.showShort("search click")
+                        SearchActivity.jump(requireActivity())
                     }
                 }
             }

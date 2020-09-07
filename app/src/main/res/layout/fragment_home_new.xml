@@ -17,11 +17,12 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_bar"
         app:tabBackground="@color/white"
+        app:tabIndicatorFullWidth="false"
         app:tabIndicatorColor="@color/normalFontColor"
         app:tabIndicatorHeight="2dp"
         app:tabMode="scrollable"
@@ -46,6 +47,7 @@
         android:layout_marginBottom="50dp"
         app:fabSize="mini"
         android:src="@drawable/exchange"
+        app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 

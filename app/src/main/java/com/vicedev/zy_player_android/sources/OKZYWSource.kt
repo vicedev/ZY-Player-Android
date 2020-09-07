@@ -3,9 +3,9 @@ package com.vicedev.zy_player_android.sources
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
-import com.vicedev.zy_player_android.common.ConfigManager
 import com.vicedev.zy_player_android.sources.bean.HomeChannelData
 import com.vicedev.zy_player_android.sources.bean.HomeData
+import com.vicedev.zy_player_android.sources.bean.SearchResultData
 
 /**
  * @author vicedev
@@ -52,8 +52,22 @@ class OKZYWSource(
             })
     }
 
+    override fun requestSearchData(
+        searchWord: String,
+        page: Int,
+        callback: (t: ArrayList<SearchResultData>?) -> Unit
+    ) {
+        OkGo.get<String>("$baseUrl?wd=$searchWord&pg=$page")
+            .execute(object : StringCallback() {
+                override fun onSuccess(response: Response<String>?) {
+                    callback.invoke(parseSearchResultData1(response?.body()))
+                }
 
-    override fun <T> requestSearchData(searchName: String, callback: (t: T?) -> Unit) {
+                override fun onError(response: Response<String>?) {
+                    super.onError(response)
+                    callback.invoke(null)
+                }
+            })
     }
 
     override fun <T> requestDetailData(id: String, callback: (t: T?) -> Unit) {
