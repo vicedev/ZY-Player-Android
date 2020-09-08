@@ -3,6 +3,7 @@ package com.vicedev.zy_player_android.sources
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.Response
+import com.vicedev.zy_player_android.sources.bean.DetailData
 import com.vicedev.zy_player_android.sources.bean.HomeChannelData
 import com.vicedev.zy_player_android.sources.bean.HomeData
 import com.vicedev.zy_player_android.sources.bean.SearchResultData
@@ -17,7 +18,7 @@ import com.vicedev.zy_player_android.sources.bean.SearchResultData
 class OKZYWSource(
     override val baseUrl: String = "http://cj.okzy.tv/inc/api.php",
     override val downloadBaseUrl: String = "http://cj.okzy.tv/inc/apidown.php",
-    override val name: String = "OK 资源网"
+    override val name: String = "OK 资源网", override val key: String = "okzy"
 ) : BaseSource() {
 
     override fun requestHomeData(callback: (t: HomeData?) -> Unit) {
@@ -70,7 +71,18 @@ class OKZYWSource(
             })
     }
 
-    override fun <T> requestDetailData(id: String, callback: (t: T?) -> Unit) {
+    override fun requestDetailData(id: String, callback: (t: DetailData?) -> Unit) {
+        OkGo.get<String>("$baseUrl?ac=videolist&ids=$id")
+            .execute(object : StringCallback() {
+                override fun onSuccess(response: Response<String>?) {
+                    callback.invoke(parseDetailData1(key, response?.body()))
+                }
+
+                override fun onError(response: Response<String>?) {
+                    super.onError(response)
+                    callback.invoke(null)
+                }
+            })
     }
 
 }

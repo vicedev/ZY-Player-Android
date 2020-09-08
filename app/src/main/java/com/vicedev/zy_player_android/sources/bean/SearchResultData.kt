@@ -8,6 +8,8 @@ package com.vicedev.zy_player_android.sources.bean
  */
 
 data class SearchResultData(
+    //视频id
+    val id: String?,
     //名字
     val name: String?,
     //类型，战争片

@@ -15,6 +15,7 @@ import com.vicedev.zy_player_android.sources.OKZYWSource
 import com.vicedev.zy_player_android.sources.bean.HomeChannelData
 import com.vicedev.zy_player_android.ui.BaseListFragment
 import com.vicedev.zy_player_android.ui.channel.adapter.HomeChannelAdapter
+import com.vicedev.zy_player_android.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.base_list_fragment.*
 
 /**
@@ -27,7 +28,7 @@ const val TID = "tid"
 
 class HomeChannelFragment : BaseListFragment<HomeChannelData, BaseViewHolder>() {
 
-    private var source: BaseSource? = null
+    private lateinit var source: BaseSource
     private lateinit var tid: String
 
     companion object {
@@ -52,7 +53,15 @@ class HomeChannelFragment : BaseListFragment<HomeChannelData, BaseViewHolder>() 
     }
 
     override fun getListAdapter(): BaseLoadMoreAdapter<HomeChannelData, BaseViewHolder> {
-        return HomeChannelAdapter()
+        return HomeChannelAdapter().apply {
+            setOnItemClickListener { adapter, view, position ->
+                DetailActivity.jump(
+                    requireActivity(),
+                    source.key,
+                    data[position].id.textOrDefault()
+                )
+            }
+        }
     }
 
     override fun getListLayoutManager(): RecyclerView.LayoutManager {
@@ -60,7 +69,7 @@ class HomeChannelFragment : BaseListFragment<HomeChannelData, BaseViewHolder>() 
     }
 
     override fun loadData(page: Int, callback: (list: ArrayList<HomeChannelData>?) -> Unit) {
-        source?.requestHomeChannelData(page, tid) {
+        source.requestHomeChannelData(page, tid) {
             callback.invoke(it)
         }
     }

@@ -37,6 +37,10 @@ class StatusView @JvmOverloads constructor(
             toWebClickListener?.invoke()
         }
 
+        if (toWebClickListener == null) {
+            tvToWeb.gone()
+        }
+
         gone()
     }
 

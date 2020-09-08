@@ -11,6 +11,7 @@ import com.vicedev.zy_player_android.common.textOrDefault
 import com.vicedev.zy_player_android.sources.BaseSource
 import com.vicedev.zy_player_android.sources.bean.SearchResultData
 import com.vicedev.zy_player_android.ui.BaseListFragment
+import com.vicedev.zy_player_android.ui.detail.DetailActivity
 import com.vicedev.zy_player_android.ui.search.adapter.SearchResultAdapter
 
 /**
@@ -22,6 +23,8 @@ import com.vicedev.zy_player_android.ui.search.adapter.SearchResultAdapter
 
 const val SOURCE_KEY = "source_key"
 const val SEARCH_WORD = "search_word"
+
+const val SEARCH_RESULT = "search_result"
 
 class SearchResultFragment : BaseListFragment<SearchResultData, BaseViewHolder>() {
 
@@ -43,7 +46,15 @@ class SearchResultFragment : BaseListFragment<SearchResultData, BaseViewHolder>(
     }
 
     override fun getListAdapter(): BaseLoadMoreAdapter<SearchResultData, BaseViewHolder> {
-        return SearchResultAdapter()
+        return SearchResultAdapter().apply {
+            setOnItemClickListener { adapter, view, position ->
+                DetailActivity.jump(
+                    requireActivity(),
+                    source.key,
+                    data[position].id.textOrDefault()
+                )
+            }
+        }
     }
 
     override fun getListLayoutManager(): RecyclerView.LayoutManager {

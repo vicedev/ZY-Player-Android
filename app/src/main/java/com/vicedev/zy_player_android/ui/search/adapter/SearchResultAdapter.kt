@@ -19,8 +19,8 @@ class SearchResultAdapter :
         R.layout.search_result_item_layout
     ), LoadMoreModule {
     override fun convert(holder: BaseViewHolder, item: SearchResultData) {
-        holder.setText(R.id.tvName,item.name.textOrDefault("--"))
-        holder.setText(R.id.tvType,item.type.textOrDefault("--"))
+        holder.setText(R.id.tvName, item.name.textOrDefault("--"))
+        holder.setText(R.id.tvType, item.type.textOrDefault("--"))
     }
 
 }

@@ -10,6 +10,7 @@ import com.vicedev.zy_player_android.utils.Utils
  */
 
 abstract class BaseSource {
+    abstract val key: String
     abstract val name: String
     abstract val baseUrl: String
     abstract val downloadBaseUrl: String
@@ -32,7 +33,7 @@ abstract class BaseSource {
     )
 
     //请求详情数据
-    abstract fun <T> requestDetailData(id: String, callback: (t: T?) -> Unit)
+    abstract fun requestDetailData(id: String, callback: (t: DetailData?) -> Unit)
 
 
     //以下为解析数据
@@ -114,6 +115,7 @@ abstract class BaseSource {
                 val json = videos.getJSONObject(i)
                 videoList.add(
                     SearchResultData(
+                        json.getString("id"),
                         json.getString("name"),
                         json.getString("type")
                     )
@@ -124,5 +126,38 @@ abstract class BaseSource {
             e.printStackTrace()
         }
         return arrayListOf()
+    }
+
+    fun parseDetailData1(sourceKey: String, data: String?): DetailData? {
+        try {
+            if (data == null) return null
+            val jsonObject = Utils.xmlToJson(data)?.toJson()
+            val videoInfo =
+                jsonObject?.getJSONObject("rss")?.getJSONObject("list")!!.getJSONObject("video")
+            return DetailData(
+                videoInfo.getString("id"),
+                videoInfo.getString("tid"),
+                videoInfo.getString("name"),
+                videoInfo.getString("type"),
+                videoInfo.getString("lang"),
+                videoInfo.getString("area"),
+                videoInfo.getString("pic"),
+                videoInfo.getString("year"),
+                videoInfo.getString("actor"),
+                videoInfo.getString("director"),
+                videoInfo.getString("des"),
+                videoInfo.getJSONObject("dl").getJSONArray("dd").getJSONObject(1)
+                    ?.getString("content")?.split("#")
+                    ?.map {
+                        val split = it.split("$")
+                        Video(split[0], split[1])
+                    }?.toMutableList() as ArrayList<Video>?,
+                sourceKey
+            )
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
     }
 }

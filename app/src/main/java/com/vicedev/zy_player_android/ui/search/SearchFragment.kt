@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.fragment_search.*
  * @date 2020/9/7 21:19
  * @desc 搜索页
  */
-const val SEARCH_RESULT = "search_result"
 
 class SearchFragment : BaseFragment() {
 
