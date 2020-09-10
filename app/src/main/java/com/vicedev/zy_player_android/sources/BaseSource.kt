@@ -1,7 +1,10 @@
 package com.vicedev.zy_player_android.sources
 
+import com.vicedev.zy_player_android.common.canPlayInAppUrl
 import com.vicedev.zy_player_android.sources.bean.*
 import com.vicedev.zy_player_android.utils.Utils
+import org.json.JSONArray
+import org.json.JSONObject
 
 /**
  * @author vicedev
@@ -134,6 +137,30 @@ abstract class BaseSource {
             val jsonObject = Utils.xmlToJson(data)?.toJson()
             val videoInfo =
                 jsonObject?.getJSONObject("rss")?.getJSONObject("list")!!.getJSONObject("video")
+            val dd = videoInfo.getJSONObject("dl").get("dd")
+            var videoList: ArrayList<Video>? = null
+            if (dd is JSONObject) {
+                videoList = dd.getString(("content"))?.split("#")
+                    ?.map {
+                        val split = it.split("$")
+                        Video(split[0], split[1])
+                    }?.toMutableList() as ArrayList<Video>? ?: arrayListOf()
+            } else if (dd is JSONArray) {
+                for (i in 0 until dd.length()) {
+                    val list = dd.getJSONObject(i)?.getString("content")?.split("#")
+                        ?.map {
+                            val split = it.split("$")
+                            Video(split[0], split[1])
+                        }?.toMutableList() as ArrayList<Video>? ?: arrayListOf()
+                    if (list.size > 0) {
+                        videoList = list
+                        if (list[0].playUrl.canPlayInAppUrl()) {
+                            //优先获取应用内播放的资源
+                            break
+                        }
+                    }
+                }
+            }
             return DetailData(
                 videoInfo.getString("id"),
                 videoInfo.getString("tid"),
@@ -146,12 +173,7 @@ abstract class BaseSource {
                 videoInfo.getString("actor"),
                 videoInfo.getString("director"),
                 videoInfo.getString("des"),
-                videoInfo.getJSONObject("dl").getJSONArray("dd").getJSONObject(1)
-                    ?.getString("content")?.split("#")
-                    ?.map {
-                        val split = it.split("$")
-                        Video(split[0], split[1])
-                    }?.toMutableList() as ArrayList<Video>?,
+                videoList,
                 sourceKey
             )
 

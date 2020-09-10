@@ -7,6 +7,7 @@ import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.interfaces.OnSelectListener
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.common.ConfigManager
+import com.vicedev.zy_player_android.common.getActivity
 import com.vicedev.zy_player_android.common.textOrDefault
 import com.vicedev.zy_player_android.ui.BaseFragment
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
@@ -33,6 +34,9 @@ class SearchFragment : BaseFragment() {
                 when (action) {
                     CommonTitleBar.ACTION_SEARCH_DELETE -> {
                         //删除按钮
+                    }
+                    CommonTitleBar.ACTION_LEFT_BUTTON->{
+                        requireActivity().finish()
                     }
                 }
                 if (extra != null) {

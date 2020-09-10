@@ -44,3 +44,12 @@ fun View.getActivity(): Activity? {
     }
     return null
 }
+
+/**
+ * 可以在应用内播放的地址
+ */
+fun String?.canPlayInAppUrl(): Boolean {
+    return (this ?: "").run {
+        endsWith(".m3u8") || endsWith("||.mp4")
+    }
+}

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         app:centerSearchRightType="delete"
         app:centerType="searchView"
+        app:leftType="imageButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

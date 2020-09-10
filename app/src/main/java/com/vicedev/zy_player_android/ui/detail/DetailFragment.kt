@@ -1,20 +1,23 @@
 package com.vicedev.zy_player_android.ui.detail
 
+import android.content.res.Configuration
+import android.graphics.Color
 import android.net.http.SslError
 import android.os.Bundle
+import android.view.ViewGroup
 import android.webkit.SslErrorHandler
 import android.webkit.WebView
 import android.widget.FrameLayout
 import androidx.core.os.bundleOf
-import com.bumptech.glide.Glide
 import com.just.agentweb.AgentWeb
 import com.vicedev.zy_player_android.R
-import com.vicedev.zy_player_android.common.ConfigManager
-import com.vicedev.zy_player_android.common.textOrDefault
+import com.vicedev.zy_player_android.common.*
 import com.vicedev.zy_player_android.sources.BaseSource
 import com.vicedev.zy_player_android.sources.bean.DetailData
 import com.vicedev.zy_player_android.sources.bean.Video
 import com.vicedev.zy_player_android.ui.BaseFragment
+import com.vicedev.zy_player_android.ui.detail.controller.VideoController
+import com.vicedev.zy_player_android.ui.detail.controller.WebController
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.fragment_detail.*
 
@@ -34,7 +37,9 @@ class DetailFragment : BaseFragment() {
     private var source: BaseSource? = null
     private lateinit var id: String
     private var playVideo: Video? = null
-    private var agentWeb: AgentWeb? = null
+
+    private var videoController: VideoController? = null
+    private var webController: WebController? = null
 
     companion object {
         fun instance(sourceKey: String, id: String): DetailFragment {
@@ -53,50 +58,50 @@ class DetailFragment : BaseFragment() {
     override fun getLayoutId(): Int = R.layout.fragment_detail
 
     override fun initTitleBar(titleBar: CommonTitleBar?) {
-    }
-
-    override fun initView() {
-        super.initView()
-        agentWeb = AgentWeb.with(this)
-            .setAgentWebParent(
-                flWebView,
-                FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.MATCH_PARENT,
-                    FrameLayout.LayoutParams.MATCH_PARENT
-                )
-            )
-            .useDefaultIndicator()
-            .setWebViewClient(getWebViewClient())
-            .createAgentWeb()
-            .ready()
-            .go("https://52dy.hanju2017.com/share/s7SkAeFZenaj9hDz")
-    }
-
-    private fun getWebViewClient(): com.just.agentweb.WebViewClient {
-        return object : com.just.agentweb.WebViewClient() {
-            override fun onReceivedSslError(
-                view: WebView?,
-                handler: SslErrorHandler,
-                error: SslError?
-            ) {
-                handler.proceed()
+        titleBar?.run {
+            setListener { v, action, extra ->
+                when (action) {
+                    CommonTitleBar.ACTION_LEFT_BUTTON -> {
+                        requireActivity().finish()
+                    }
+                }
             }
         }
     }
 
+    override fun initView() {
+        super.initView()
+        statusView.failRetryClickListener = {
+            initData()
+        }
+    }
+
+
     override fun onPause() {
-        agentWeb?.webLifeCycle?.onPause()
+        webController?.onPause()
+        videoController?.onPause()
         super.onPause()
     }
 
     override fun onResume() {
-        agentWeb?.webLifeCycle?.onResume()
+        webController?.onResume()
+        videoController?.onResume()
         super.onResume()
     }
 
     override fun onDestroyView() {
-        agentWeb?.webLifeCycle?.onDestroy()
+        webController?.onDestroy()
+        videoController?.onDestroy()
         super.onDestroyView()
+    }
+
+    override fun onBackPressed(): Boolean {
+        return videoController?.onBackPressed() ?: false || webController?.onBackPressed() ?: false
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        videoController?.onConfigurationChanged(newConfig)
     }
 
     override fun initData() {
@@ -121,16 +126,35 @@ class DetailFragment : BaseFragment() {
     private fun setData(detailData: DetailData) {
         detailData.run {
             playVideo = detailData.videoList?.get(0)
+            if (playVideo?.playUrl.canPlayInAppUrl()) {
+                //初始化视频控制
+                if (videoController == null) {
+                    videoController = VideoController()
+                    videoController?.init(requireActivity(), videoPlayer)
+                }
+                videoController?.play(
+                    playVideo?.playUrl,
+                    "${detailData.name}   ${playVideo?.name.textOrDefault()}"
+                )
+                videoPlayer.visible()
+                flWebView.gone()
+            } else {
+                //网页播放
+                if (webController == null) {
+                    webController = WebController()
+                }
+                webController?.loadUrl(this@DetailFragment, playVideo?.playUrl, flWebView)
+                videoPlayer.gone()
+                flWebView.visible()
+            }
             //名字
             tvName.text = name
+            titleBar?.centerTextView?.text = name
             //简介
             tvDesc.text = des.textOrDefault()
             //正在播放
             tvCurPlayName.text = playVideo?.name.textOrDefault()
-            //图
-            Glide.with(requireActivity())
-                .load(pic)
-                .into(ivPic)
         }
     }
+
 }
