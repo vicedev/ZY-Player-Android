@@ -4,6 +4,9 @@ import android.content.res.Configuration
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import com.blankj.utilcode.util.ToastUtils
+import com.lxj.xpopup.XPopup
+import com.lxj.xpopup.core.BottomPopupView
+import com.lxj.xpopup.interfaces.OnSelectListener
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.common.*
 import com.vicedev.zy_player_android.sources.BaseSource
@@ -32,9 +35,14 @@ class DetailFragment : BaseFragment() {
     private var source: BaseSource? = null
     private lateinit var id: String
     private var playVideo: Video? = null
+    private var detailData: DetailData? = null
+    private var playVideoList: ArrayList<Video>? = null
+    private var curPlayPos = 0
 
     private var videoController: VideoController? = null
     private var webController: WebController? = null
+
+    private var anthologyList: BottomPopupView? = null
 
     companion object {
         fun instance(sourceKey: String, id: String): DetailFragment {
@@ -88,6 +96,23 @@ class DetailFragment : BaseFragment() {
                 }
             )
         }
+        //选集
+        llAnthology.setOnClickListener {
+            if (playVideoList?.size ?: 0 > 1) {
+                if (anthologyList == null) {
+                    anthologyList = XPopup.Builder(requireActivity())
+                        .asBottomList("选集",
+                            playVideoList?.map { it.name }?.toTypedArray(),
+                            null,
+                            0,
+                            OnSelectListener { position, text ->
+                                curPlayPos = position
+                                playVideo(playVideoList?.get(position))
+                            })
+                }
+                anthologyList?.show()
+            }
+        }
     }
 
 
@@ -138,37 +163,52 @@ class DetailFragment : BaseFragment() {
     }
 
     private fun setData(detailData: DetailData) {
+        this.detailData = detailData
         detailData.run {
-            playVideo = detailData.videoList?.get(0)
-            if (playVideo?.playUrl.canPlayInAppUrl()) {
-                //初始化视频控制
-                if (videoController == null) {
-                    videoController = VideoController()
-                    videoController?.init(requireActivity(), videoPlayer)
-                }
-                videoController?.play(
-                    playVideo?.playUrl,
-                    "${detailData.name}   ${playVideo?.name.textOrDefault()}"
-                )
-                videoPlayer.visible()
-                flWebView.gone()
+            playVideoList = videoList
+
+            //是否支持选集
+            if (playVideoList?.size ?: 0 > 1) {
+                ivPlayMore.visible()
             } else {
-                //网页播放
-                if (webController == null) {
-                    webController = WebController()
-                }
-                webController?.loadUrl(this@DetailFragment, playVideo?.playUrl, flWebView)
-                videoPlayer.gone()
-                flWebView.visible()
+                ivPlayMore.gone()
             }
+
+            playVideo(detailData.videoList?.get(0))
             //名字
             tvName.text = name
             titleBar?.centerTextView?.text = name
             //简介
             tvDesc.text = des.textOrDefault()
-            //正在播放
-            tvCurPlayName.text = playVideo?.name.textOrDefault()
         }
+    }
+
+    private fun playVideo(playVideo: Video?) {
+        if (playVideo == null) return
+        this.playVideo = playVideo
+        if (playVideo.playUrl.canPlayInAppUrl()) {
+            //初始化视频控制
+            if (videoController == null) {
+                videoController = VideoController()
+                videoController?.init(requireActivity(), videoPlayer)
+            }
+            videoController?.play(
+                playVideo.playUrl,
+                "${detailData?.name.textOrDefault()}   ${playVideo.name.textOrDefault()}"
+            )
+            videoPlayer.visible()
+            flWebView.gone()
+        } else {
+            //网页播放
+            if (webController == null) {
+                webController = WebController()
+            }
+            webController?.loadUrl(this@DetailFragment, playVideo.playUrl, flWebView)
+            videoPlayer.gone()
+            flWebView.visible()
+        }
+        //正在播放
+        tvCurPlayName.text = playVideo?.name.textOrDefault()
     }
 
 }
