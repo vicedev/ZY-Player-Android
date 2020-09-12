@@ -24,7 +24,14 @@ class SearchHistoryView constructor(
                 statusView.setEmptyStatus()
             }
         }
+
+        tagGroup.setOnTagClickListener {
+            onSelectListener?.invoke(it)
+        }
     }
+
+
+    var onSelectListener: ((searchWord: String) -> Unit)? = null
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()

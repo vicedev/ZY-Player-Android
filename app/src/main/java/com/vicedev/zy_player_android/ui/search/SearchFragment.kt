@@ -107,8 +107,19 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun showSearchHistory() {
-        XPopup.Builder(requireActivity())
-            .asCustom(SearchHistoryView(requireActivity()))
-            .show()
+        val searchHistoryView = SearchHistoryView(requireActivity())
+
+        val dialog = XPopup.Builder(requireActivity())
+            .asCustom(searchHistoryView)
+
+        searchHistoryView.onSelectListener={
+            searchWord = it
+            titleBar?.centerSearchEditText?.setText(it)
+            initData()
+
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }
