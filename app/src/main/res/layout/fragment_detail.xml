@@ -95,7 +95,7 @@
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="15dp"
-                        android:src="@drawable/film_collect" />
+                        android:src="@drawable/seecter_bg_collect" />
 
                     <View
                         android:layout_width="0dp"

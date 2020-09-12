@@ -11,7 +11,7 @@ import java.util.*
  * @desc 搜索历史的数据库类
  */
 class SearchHistoryDBModel : LitePalSupport() {
-    @Column(unique = true, defaultValue = "")
+    @Column(unique = true, defaultValue = "", nullable = false)
     var searchWord: String? = null
     var updateData: Date? = null
 }

@@ -38,12 +38,8 @@ object SearchHistoryDBUtils {
         if (searchWord.isBlank()) {
             return false
         }
-        val findList =
-            LitePal.where("searchWord = ?", "searchWord%").find(SearchHistoryDBModel::class.java)
-        if (findList.size > 0) {
-            findList[0].searchWord = searchWord
-            return findList[0].save()
-        }
+        LitePal.where("searchWord = ?", searchWord).findFirst(SearchHistoryDBModel::class.java)
+            ?.delete()
         val searchHistoryDBModel = SearchHistoryDBModel()
         searchHistoryDBModel.searchWord = searchWord
         searchHistoryDBModel.updateData = Date()
@@ -51,13 +47,16 @@ object SearchHistoryDBUtils {
     }
 
     fun searchAll(): ArrayList<SearchHistoryDBModel>? {
-        return LitePal.findAll(SearchHistoryDBModel::class.java) as? ArrayList<SearchHistoryDBModel>
+        val list = LitePal.where("searchWord not null").order("updateData")
+            .find(SearchHistoryDBModel::class.java)
+        list?.reverse()
+        return list as? ArrayList<SearchHistoryDBModel>?
     }
 
     fun searchAllAsync(callback: ((ArrayList<SearchHistoryDBModel>?) -> Unit)?) {
         ThreadUtils.executeByCached(object : ThreadUtils.Task<ArrayList<SearchHistoryDBModel>?>() {
             override fun doInBackground(): ArrayList<SearchHistoryDBModel>? {
-                return LitePal.findAll(SearchHistoryDBModel::class.java) as? ArrayList<SearchHistoryDBModel>
+                return searchAll()
             }
 
             override fun onSuccess(result: ArrayList<SearchHistoryDBModel>?) {

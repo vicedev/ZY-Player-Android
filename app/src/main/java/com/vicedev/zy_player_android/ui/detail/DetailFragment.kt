@@ -13,9 +13,10 @@ import com.vicedev.zy_player_android.sources.BaseSource
 import com.vicedev.zy_player_android.sources.bean.DetailData
 import com.vicedev.zy_player_android.sources.bean.Video
 import com.vicedev.zy_player_android.ui.BaseFragment
+import com.vicedev.zy_player_android.ui.collect.db.CollectDBModel
+import com.vicedev.zy_player_android.ui.collect.db.CollectDBUtils
 import com.vicedev.zy_player_android.ui.detail.controller.VideoController
 import com.vicedev.zy_player_android.ui.detail.controller.WebController
-import com.vicedev.zy_player_android.utils.Utils
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.fragment_detail.*
 
@@ -54,7 +55,8 @@ class DetailFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        source = ConfigManager.generateSource(ConfigManager.OKZYW)
+        val sourceKey = arguments?.getString(SOURCE_KEY)
+        source = if (sourceKey.isNullOrBlank()) null else ConfigManager.generateSource(sourceKey)
         id = arguments?.getString(ID).textOrDefault()
     }
 
@@ -76,6 +78,12 @@ class DetailFragment : BaseFragment() {
         super.initView()
         statusView.failRetryClickListener = {
             initData()
+        }
+
+        CollectDBUtils.searchAsync(id + source?.key) {
+            if (it != null && it.isSaved) {
+                ivCollect.isSelected = true
+            }
         }
     }
 
@@ -111,6 +119,31 @@ class DetailFragment : BaseFragment() {
                             })
                 }
                 anthologyList?.show()
+            }
+        }
+
+        ivCollect.setOnClickListener {
+            //收藏
+            if (ivCollect.isSelected) {
+                val delete = CollectDBUtils.delete(id + source?.key)
+                if (delete) {
+                    ivCollect.isSelected = false
+                } else {
+                    ToastUtils.showShort("取消收藏失败")
+                }
+            } else {
+                val collectDBModel = CollectDBModel()
+                collectDBModel.uniqueKey = id + source?.key
+                collectDBModel.videoId = id
+                collectDBModel.name = detailData?.name
+                collectDBModel.sourceKey = source?.key
+                collectDBModel.sourceName = source?.name
+                val save = CollectDBUtils.save(collectDBModel)
+                if (save) {
+                    ivCollect.isSelected = true
+                } else {
+                    ToastUtils.showShort("收藏失败")
+                }
             }
         }
     }

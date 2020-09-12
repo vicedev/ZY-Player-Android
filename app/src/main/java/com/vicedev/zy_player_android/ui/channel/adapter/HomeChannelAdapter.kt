@@ -1,7 +1,6 @@
 package com.vicedev.zy_player_android.ui.channel.adapter
 
 import com.bumptech.glide.Glide
-import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.common.BaseLoadMoreAdapter
@@ -18,7 +17,7 @@ import com.vicedev.zy_player_android.sources.bean.HomeChannelData
 class HomeChannelAdapter :
     BaseLoadMoreAdapter<HomeChannelData, BaseViewHolder>(
         R.layout.home_channel_item_layout
-    ), LoadMoreModule {
+    ) {
     override fun convert(holder: BaseViewHolder, item: HomeChannelData) {
         holder.setText(R.id.tvTitle, item.name.textOrDefault("--"))
         Glide.with(context)
