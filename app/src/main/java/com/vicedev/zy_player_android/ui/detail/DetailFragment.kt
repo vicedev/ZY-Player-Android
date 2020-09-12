@@ -82,20 +82,20 @@ class DetailFragment : BaseFragment() {
     override fun initListener() {
         super.initListener()
         //网页播放
-        ivWebPlay.setOnClickListener {
-            if (playVideo == null || playVideo?.playUrl.isNullOrBlank()) {
-                ToastUtils.showShort("无法播放")
-                return@setOnClickListener
-            }
-            Utils.openBrowser(
-                requireActivity(),
-                if (playVideo?.playUrl.canPlayInAppUrl()) {
-                    "http://zyplayer.fun/player/player.html?url=${playVideo?.playUrl?.textOrDefault()}&title=${playVideo?.name}"
-                } else {
-                    playVideo?.playUrl.textOrDefault()
-                }
-            )
-        }
+//        ivWebPlay.setOnClickListener {
+//            if (playVideo == null || playVideo?.playUrl.isNullOrBlank()) {
+//                ToastUtils.showShort("无法播放")
+//                return@setOnClickListener
+//            }
+//            Utils.openBrowser(
+//                requireActivity(),
+//                if (playVideo?.playUrl.canPlayInAppUrl()) {
+//                    "http://zyplayer.fun/player/player.html?url=${playVideo?.playUrl?.textOrDefault()}&title=${playVideo?.name}"
+//                } else {
+//                    playVideo?.playUrl.textOrDefault()
+//                }
+//            )
+//        }
         //选集
         llAnthology.setOnClickListener {
             if (playVideoList?.size ?: 0 > 1) {

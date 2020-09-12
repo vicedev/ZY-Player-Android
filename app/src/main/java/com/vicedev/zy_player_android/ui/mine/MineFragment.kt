@@ -12,7 +12,7 @@ class MineFragment : BaseFragment() {
 
     override fun initTitleBar(titleBar: CommonTitleBar?) {
         titleBar?.run {
-            centerTextView.text = "设置"
+            centerTextView.text = "我的"
         }
     }
 

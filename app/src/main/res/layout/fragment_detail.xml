@@ -49,28 +49,29 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <!--                    <View-->
+                    <!--                        android:layout_width="0dp"-->
+                    <!--                        android:layout_height="1px"-->
+                    <!--                        android:layout_weight="1" />-->
+
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/ivWebPlay"-->
+                    <!--                        android:layout_width="25dp"-->
+                    <!--                        android:layout_height="25dp"-->
+                    <!--                        android:src="@drawable/web_play" />-->
+
                     <View
                         android:layout_width="0dp"
                         android:layout_height="1px"
                         android:layout_weight="1" />
 
                     <ImageView
-                        android:id="@+id/ivWebPlay"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/web_play" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="1px"
-                        android:layout_weight="1" />
-
-                    <ImageView
-                        android:id="@+id/ivCollect"
+                        android:id="@+id/ivDownload"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="15dp"
-                        android:src="@drawable/film_collect" />
+                        android:src="@drawable/film_download" />
+
 
                     <!--                <View-->
                     <!--                    android:layout_width="0dp"-->
@@ -90,11 +91,11 @@
                         android:layout_weight="1" />
 
                     <ImageView
-                        android:id="@+id/ivDownload"
+                        android:id="@+id/ivCollect"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="15dp"
-                        android:src="@drawable/film_download" />
+                        android:src="@drawable/film_collect" />
 
                     <View
                         android:layout_width="0dp"
