@@ -2,5 +2,5 @@
     <string name="app_name">ZYPlayer</string>
     <string name="title_home">首页</string>
     <string name="title_collect">收藏</string>
-    <string name="title_setting">设置</string>
+    <string name="title_mine">我的</string>
 </resources>

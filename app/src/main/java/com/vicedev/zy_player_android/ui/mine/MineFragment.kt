@@ -1,14 +1,14 @@
-package com.vicedev.zy_player_android.ui.setting
+package com.vicedev.zy_player_android.ui.mine
 
 import com.blankj.utilcode.util.AppUtils
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.ui.BaseFragment
 import com.vicedev.zy_player_android.utils.Utils
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
-import kotlinx.android.synthetic.main.fragment_setting.*
+import kotlinx.android.synthetic.main.fragment_mine.*
 
-class SettingFragment : BaseFragment() {
-    override fun getLayoutId(): Int = R.layout.fragment_setting
+class MineFragment : BaseFragment() {
+    override fun getLayoutId(): Int = R.layout.fragment_mine
 
     override fun initTitleBar(titleBar: CommonTitleBar?) {
         titleBar?.run {

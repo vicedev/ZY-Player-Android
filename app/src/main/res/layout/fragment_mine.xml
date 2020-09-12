@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.setting.SettingFragment">
+    tools:context=".ui.mine.MineFragment">
 
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
         android:id="@id/title_bar"
