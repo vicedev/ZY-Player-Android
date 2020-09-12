@@ -98,6 +98,8 @@ dependencies {
     implementation 'me.gujun.android.taggroup:library:1.4@aar'
 
     implementation 'org.litepal.guolindev:core:3.2.1'
+
+    implementation 'org.greenrobot:eventbus:3.2.0'
 }
 
 android.applicationVariants.all { variant ->

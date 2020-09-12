@@ -9,6 +9,7 @@ import com.lxj.xpopup.core.BottomPopupView
 import com.lxj.xpopup.interfaces.OnSelectListener
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.common.*
+import com.vicedev.zy_player_android.event.CollectEvent
 import com.vicedev.zy_player_android.sources.BaseSource
 import com.vicedev.zy_player_android.sources.bean.DetailData
 import com.vicedev.zy_player_android.sources.bean.Video
@@ -19,6 +20,7 @@ import com.vicedev.zy_player_android.ui.detail.controller.VideoController
 import com.vicedev.zy_player_android.ui.detail.controller.WebController
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.fragment_detail.*
+import org.greenrobot.eventbus.EventBus
 
 
 /**
@@ -128,6 +130,7 @@ class DetailFragment : BaseFragment() {
                 val delete = CollectDBUtils.delete(id + source?.key)
                 if (delete) {
                     ivCollect.isSelected = false
+                    EventBus.getDefault().postSticky(CollectEvent())
                 } else {
                     ToastUtils.showShort("取消收藏失败")
                 }
@@ -141,6 +144,7 @@ class DetailFragment : BaseFragment() {
                 val save = CollectDBUtils.save(collectDBModel)
                 if (save) {
                     ivCollect.isSelected = true
+                    EventBus.getDefault().postSticky(CollectEvent())
                 } else {
                     ToastUtils.showShort("收藏失败")
                 }

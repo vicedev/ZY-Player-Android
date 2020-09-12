@@ -10,16 +10,19 @@ import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.common.BaseLoadMoreAdapter
 import com.vicedev.zy_player_android.common.textOrDefault
 import com.vicedev.zy_player_android.common.visible
+import com.vicedev.zy_player_android.event.CollectEvent
 import com.vicedev.zy_player_android.ui.BaseListFragment
 import com.vicedev.zy_player_android.ui.collect.db.CollectDBModel
 import com.vicedev.zy_player_android.ui.collect.db.CollectDBUtils
 import com.vicedev.zy_player_android.ui.detail.DetailActivity
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.base_list_fragment.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+
 
 class CollectFragment : BaseListFragment<CollectDBModel, BaseViewHolder>() {
-
-    private var isInit: Boolean = false
 
     override fun initTitleBar(titleBar: CommonTitleBar?) {
         titleBar?.run {
@@ -48,16 +51,9 @@ class CollectFragment : BaseListFragment<CollectDBModel, BaseViewHolder>() {
         if (page == 1) {
             CollectDBUtils.searchAllAsync {
                 callback.invoke(it)
-                isInit = true
             }
         } else {
             callback.invoke(arrayListOf())
-        }
-    }
-
-    fun refresh(){
-        if (isInit){
-            initData()
         }
     }
 
@@ -89,6 +85,23 @@ class CollectFragment : BaseListFragment<CollectDBModel, BaseViewHolder>() {
                     .show()
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this)
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    fun onMessageEvent(event: CollectEvent) {
+        initData()
     }
 
 }

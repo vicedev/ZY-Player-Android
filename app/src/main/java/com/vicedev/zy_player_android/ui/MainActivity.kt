@@ -48,14 +48,7 @@ class MainActivity : BaseActivity() {
             .beginTransaction()
             .apply {
                 fragmentArray.forEach { key, value ->
-                    if (key == id) {
-                        show(value)
-                        if (value is CollectFragment) {
-                            value.refresh()
-                        }
-                    } else {
-                        hide(value)
-                    }
+                    if (key == id) show(value) else hide(value)
                 }
             }.commitAllowingStateLoss()
     }
