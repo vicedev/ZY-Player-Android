@@ -4,6 +4,7 @@ import android.app.Application
 import com.lzy.okgo.OkGo
 import com.tencent.bugly.Bugly
 import com.vicedev.zy_player_android.common.ConfigManager
+import org.litepal.LitePal
 
 /**
  * @author vicedev1001@gmail.com
@@ -17,6 +18,8 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         appContext = this
+
+        LitePal.initialize(this)
 
         //读取下视频源的配置
         ConfigManager.config

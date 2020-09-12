@@ -7,9 +7,10 @@ import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.interfaces.OnSelectListener
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.common.ConfigManager
-import com.vicedev.zy_player_android.common.getActivity
 import com.vicedev.zy_player_android.common.textOrDefault
+import com.vicedev.zy_player_android.db.SearchHistoryDBUtils
 import com.vicedev.zy_player_android.ui.BaseFragment
+import com.vicedev.zy_player_android.ui.search.view.SearchHistoryView
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.fragment_search.*
 
@@ -35,7 +36,7 @@ class SearchFragment : BaseFragment() {
                     CommonTitleBar.ACTION_SEARCH_DELETE -> {
                         //删除按钮
                     }
-                    CommonTitleBar.ACTION_LEFT_BUTTON->{
+                    CommonTitleBar.ACTION_LEFT_BUTTON -> {
                         requireActivity().finish()
                     }
                 }
@@ -54,6 +55,11 @@ class SearchFragment : BaseFragment() {
         sourceKey = ConfigManager.OKZYW
     }
 
+    override fun initView() {
+        super.initView()
+        changeEditHint()
+    }
+
     override fun initListener() {
         super.initListener()
         faBtnExchange.setOnClickListener {
@@ -70,6 +76,7 @@ class SearchFragment : BaseFragment() {
 
         faBtnHistory.setOnClickListener {
             //搜索历史
+            showSearchHistory()
         }
 
         //监听搜索框变化
@@ -80,9 +87,10 @@ class SearchFragment : BaseFragment() {
 
     override fun initData() {
         super.initData()
-        titleBar?.centerSearchEditText?.hint =
-            ConfigManager.sourceConfigs[sourceKey]?.name.textOrDefault("搜索")
-
+        if (searchWord.isBlank()) {
+            return
+        }
+        SearchHistoryDBUtils.saveAsync(searchWord)
         childFragmentManager
             .beginTransaction()
             .replace(
@@ -93,4 +101,14 @@ class SearchFragment : BaseFragment() {
             .commitAllowingStateLoss()
     }
 
+    private fun changeEditHint() {
+        titleBar?.centerSearchEditText?.hint =
+            ConfigManager.sourceConfigs[sourceKey]?.name.textOrDefault("搜索")
+    }
+
+    private fun showSearchHistory() {
+        XPopup.Builder(requireActivity())
+            .asCustom(SearchHistoryView(requireActivity()))
+            .show()
+    }
 }

@@ -94,6 +94,10 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     implementation 'com.just.agentweb:agentweb-androidx:4.1.4'
+
+    implementation 'me.gujun.android.taggroup:library:1.4@aar'
+
+    implementation 'org.litepal.guolindev:core:3.2.1'
 }
 
 android.applicationVariants.all { variant ->
