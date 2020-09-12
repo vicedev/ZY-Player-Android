@@ -3,6 +3,7 @@ package com.vicedev.zy_player_android.ui.mine
 import com.blankj.utilcode.util.AppUtils
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.ui.BaseFragment
+import com.vicedev.zy_player_android.ui.reward.RewardActivity
 import com.vicedev.zy_player_android.utils.Utils
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.fragment_mine.*
@@ -26,6 +27,10 @@ class MineFragment : BaseFragment() {
         //赏个star
         tvStar.setOnClickListener {
             Utils.openBrowser(requireActivity(), "https://github.com/vicedev/ZY-Player-Android")
+        }
+
+        tvReward.setOnClickListener {
+            RewardActivity.jump(requireActivity())
         }
     }
 }

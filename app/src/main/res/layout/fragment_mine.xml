@@ -42,6 +42,16 @@
         android:textColor="@color/normalFontColor"
         android:textSize="14sp" />
 
+    <TextView
+        android:id="@+id/tvReward"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:padding="12dp"
+        android:text="打赏一波"
+        android:textColor="@color/normalFontColor"
+        android:textSize="14sp" />
+
     <View
         style="@style/Divider"
         android:layout_marginLeft="12dp" />
@@ -52,7 +62,7 @@
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:padding="12dp"
-        tools:text="版本 v1.0.0"
         android:textColor="@color/normalFontColor"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        tools:text="版本 v1.0.0" />
 </LinearLayout>
