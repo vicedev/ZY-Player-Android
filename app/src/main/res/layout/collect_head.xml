@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <View
+        style="@style/Divider"
+        android:layout_marginLeft="12dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:singleLine="true"
+            android:text="名称"
+            android:textColor="@color/normalFontColor"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center_vertical|right"
+            android:padding="12dp"
+            android:singleLine="true"
+            android:text="视频源"
+            android:textColor="@color/normalFontColor"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/ivDeleteAll"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:src="@drawable/delete" />
+    </LinearLayout>
+
+    <View
+        style="@style/Divider"
+        android:layout_marginLeft="12dp" />
+
+</LinearLayout>

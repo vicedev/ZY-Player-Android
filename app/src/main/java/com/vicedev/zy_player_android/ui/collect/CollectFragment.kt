@@ -17,6 +17,7 @@ import com.vicedev.zy_player_android.ui.collect.db.CollectDBUtils
 import com.vicedev.zy_player_android.ui.detail.DetailActivity
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.base_list_fragment.*
+import kotlinx.android.synthetic.main.collect_head.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -40,6 +41,28 @@ class CollectFragment : BaseListFragment<CollectDBModel, BaseViewHolder>() {
                     data[position].videoId.textOrDefault()
                 )
             }
+            flHead.addView(View.inflate(requireActivity(), R.layout.collect_head, null).apply {
+                //删除全部
+                findViewById<View>(R.id.ivDeleteAll).setOnClickListener {
+                    XPopup.Builder(context)
+                        .asConfirm("", "确认删除全部吗") {
+                            try {
+                                val delete = CollectDBUtils.deleteAll()
+                                if (delete) {
+                                    setNewInstance(null)
+                                    if (data.isEmpty()) {
+                                        statusView.setEmptyStatus()
+                                    }
+                                } else {
+                                    ToastUtils.showShort("删除失败")
+                                }
+                            } catch (e: Exception) {
+                                ToastUtils.showShort("删除失败")
+                            }
+                        }
+                        .show()
+                }
+            })
         }
     }
 
