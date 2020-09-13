@@ -47,7 +47,7 @@ class CommonSource(
         tid: String,
         callback: (t: ArrayList<HomeChannelData>?) -> Unit
     ) {
-        OkGo.get<String>("$baseUrl?ac=videolist&t=$tid&pg=$page")
+        OkGo.get<String>(if (tid == "new") "$baseUrl?ac=videolist&pg=$page" else "$baseUrl?ac=videolist&t=$tid&pg=$page")
             .tag(key)
             .execute(object : StringCallback() {
                 override fun onSuccess(response: Response<String>?) {
