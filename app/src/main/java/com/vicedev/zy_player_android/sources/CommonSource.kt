@@ -11,14 +11,14 @@ import com.vicedev.zy_player_android.sources.bean.SearchResultData
 /**
  * @author vicedev
  * @email vicedev1001@gmail.com
- * @date 2020/9/2 21:47
- * @desc OK 资源网
+ * @date 2020/9/13 9:51
+ * @desc 通用的解析视频源
  */
-
-class OKZYWSource(
-    override val baseUrl: String = "http://cj.okzy.tv/inc/api.php",
-    override val downloadBaseUrl: String = "http://cj.okzy.tv/inc/apidown.php",
-    override val name: String = "OK 资源网", override val key: String = "okzy"
+class CommonSource(
+    override val key: String,
+    override val name: String,
+    override val baseUrl: String,
+    override val downloadBaseUrl: String
 ) : BaseSource() {
 
     override fun requestHomeData(callback: (t: HomeData?) -> Unit) {
@@ -112,5 +112,4 @@ class OKZYWSource(
                 }
             })
     }
-
 }

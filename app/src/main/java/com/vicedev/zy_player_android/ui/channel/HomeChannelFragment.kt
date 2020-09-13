@@ -11,7 +11,6 @@ import com.vicedev.zy_player_android.common.ConfigManager
 import com.vicedev.zy_player_android.common.GridSpaceItemDecoration
 import com.vicedev.zy_player_android.common.textOrDefault
 import com.vicedev.zy_player_android.sources.BaseSource
-import com.vicedev.zy_player_android.sources.OKZYWSource
 import com.vicedev.zy_player_android.sources.bean.HomeChannelData
 import com.vicedev.zy_player_android.ui.BaseListFragment
 import com.vicedev.zy_player_android.ui.channel.adapter.HomeChannelAdapter
@@ -41,7 +40,7 @@ class HomeChannelFragment : BaseListFragment<HomeChannelData, BaseViewHolder>() 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        source = ConfigManager.generateSource(ConfigManager.OKZYW)
+        source = ConfigManager.curUseSourceConfig()
         tid = arguments?.getString(TID).textOrDefault()
     }
 

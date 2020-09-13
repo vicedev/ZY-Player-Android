@@ -2,8 +2,10 @@ package com.vicedev.zy_player_android.common
 
 import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.ResourceUtils
+import com.blankj.utilcode.util.SPUtils
 import com.vicedev.zy_player_android.sources.BaseSource
-import com.vicedev.zy_player_android.sources.OKZYWSource
+import com.vicedev.zy_player_android.sources.CommonSource
+import org.json.JSONArray
 
 /**
  * @author vicedev1001@gmail.com
@@ -45,20 +47,48 @@ object ConfigManager {
         hashMap
     }
 
-    const val OKZYW = "okzy"
-
-    val sourceConfigs: HashMap<String, SourceConfig> by lazy {
-        hashMapOf(OKZYW to SourceConfig(OKZYW, "OK 资源网") { OKZYWSource() })
+    val sourceConfigs: LinkedHashMap<String, SourceConfig> by lazy {
+        val configJson = ResourceUtils.readAssets2String("SourceConfig.txt")
+        val configArray = JSONArray(configJson)
+        val configMap = LinkedHashMap<String, SourceConfig>()
+        for (i in 0 until configArray.length()) {
+            val config = configArray.getJSONObject(i)
+            val key = config.getString("key")
+            val name = config.getString("name")
+            val api = config.getString("api")
+            val download = config.getString("download")
+            if (config != null && !key.isNullOrBlank() && !name.isNullOrBlank() && !api.isNullOrBlank()) {
+                configMap[key] = SourceConfig(key, name) {
+                    CommonSource(key, name, api, download)
+                }
+            }
+        }
+        configMap
     }
 
     /**
      * 根据key获取相应的source
      */
-    fun generateSource(key: String): BaseSource {
-        return when (key) {
-            OKZYW -> sourceConfigs[OKZYW]?.generateSource()
-            else -> sourceConfigs[OKZYW]?.generateSource()
-        } ?: OKZYWSource()
+    fun generateSource(key: String?): BaseSource {
+        return sourceConfigs[key]?.generateSource() ?: CommonSource("", "", "", "")
+    }
+
+    private val defaultSourceKey = "okzy"
+
+    /**
+     * 获取当前选择的源
+     */
+    fun curUseSourceConfig(): BaseSource {
+        return generateSource(SPUtils.getInstance().getString("curSourceKey", defaultSourceKey))
+    }
+
+    /**
+     * 保存当前选择的源
+     */
+    fun saveCurUseSourceConfig(sourceKey: String?) {
+        if (sourceConfigs.containsKey(sourceKey)) {
+            SPUtils.getInstance().put("curSourceKey", sourceKey)
+        }
     }
 }
 

@@ -52,7 +52,7 @@ class SearchFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sourceKey = ConfigManager.OKZYW
+        sourceKey = ConfigManager.curUseSourceConfig().key
     }
 
     override fun initView() {

@@ -58,7 +58,7 @@ class DetailFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val sourceKey = arguments?.getString(SOURCE_KEY)
-        source = if (sourceKey.isNullOrBlank()) null else ConfigManager.generateSource(sourceKey)
+        source =  ConfigManager.generateSource(sourceKey.textOrDefault())
         id = arguments?.getString(ID).textOrDefault()
     }
 

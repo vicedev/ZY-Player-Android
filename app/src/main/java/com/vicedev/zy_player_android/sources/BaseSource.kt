@@ -1,5 +1,6 @@
 package com.vicedev.zy_player_android.sources
 
+import com.lzy.okgo.OkGo
 import com.vicedev.zy_player_android.common.canPlayInAppUrl
 import com.vicedev.zy_player_android.sources.bean.*
 import com.vicedev.zy_player_android.utils.Utils
@@ -181,5 +182,9 @@ abstract class BaseSource {
             e.printStackTrace()
         }
         return null
+    }
+
+    fun cancelAll() {
+        OkGo.cancelTag(OkGo.getInstance().okHttpClient, key)
     }
 }
