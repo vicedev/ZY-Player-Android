@@ -77,6 +77,7 @@ class SearchFragment : BaseFragment() {
                         keys.indexOfFirst { it == sourceKey },
                         OnSelectListener { position, text ->
                             sourceKey = keys[position]
+                            changeEditHint()
                             ConfigManager.saveCurUseSourceConfig(text)
                             initData()
                         })
