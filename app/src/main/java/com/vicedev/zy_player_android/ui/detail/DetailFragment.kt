@@ -119,6 +119,7 @@ class DetailFragment : BaseFragment() {
                                 curPlayPos = position
                                 playVideo(playVideoList?.get(position))
                             })
+                        .bindLayout(R.layout.xpopup_center_impl_list)
                 }
                 anthologyList?.show()
             }

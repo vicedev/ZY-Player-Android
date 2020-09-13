@@ -150,8 +150,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/minorFontColor"
+                                android:maxWidth="200dp"
+                                android:singleLine="true"
                                 android:textSize="14sp"
-                                tools:text="七龙珠" />
+                                tools:text="七龙珠七龙珠七龙珠七龙珠七龙珠七龙珠七龙珠七龙珠" />
 
                             <ImageView
                                 android:id="@+id/ivPlayMore"

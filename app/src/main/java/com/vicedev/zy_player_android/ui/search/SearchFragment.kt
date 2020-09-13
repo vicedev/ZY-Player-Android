@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.core.widget.addTextChangedListener
 import com.blankj.utilcode.util.KeyboardUtils
 import com.lxj.xpopup.XPopup
+import com.lxj.xpopup.core.BasePopupView
 import com.lxj.xpopup.interfaces.OnSelectListener
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.common.ConfigManager
@@ -26,6 +27,8 @@ class SearchFragment : BaseFragment() {
     private var sourceKey: String? = null
 
     private var searchWord: String = ""
+
+    private var selectSourceDialog: BasePopupView? = null
 
     override fun getLayoutId(): Int = R.layout.fragment_search
 
@@ -64,14 +67,23 @@ class SearchFragment : BaseFragment() {
         super.initListener()
         faBtnExchange.setOnClickListener {
             //选择视频源
-            XPopup.Builder(requireActivity())
-                .asCenterList("选择搜索源",
-                    ConfigManager.sourceConfigs.values.map { it.name }.toTypedArray(),
-                    OnSelectListener { position, key ->
-                        sourceKey = key
-                        initData()
-                    })
-                .show()
+            if (selectSourceDialog == null) {
+                val values = ConfigManager.sourceConfigs.values
+                val keys = ConfigManager.sourceConfigs.keys.toTypedArray()
+                selectSourceDialog = XPopup.Builder(requireActivity())
+                    .asCenterList("选择视频源",
+                        values.map { it.name }.toTypedArray(),
+                        null,
+                        keys.indexOfFirst { it == sourceKey },
+                        OnSelectListener { position, text ->
+                            sourceKey = keys[position]
+                            ConfigManager.saveCurUseSourceConfig(text)
+                            initData()
+                        })
+                    .bindLayout(R.layout.xpopup_center_impl_list)
+
+            }
+            selectSourceDialog?.show()
         }
 
         faBtnHistory.setOnClickListener {
@@ -112,7 +124,7 @@ class SearchFragment : BaseFragment() {
         val dialog = XPopup.Builder(requireActivity())
             .asCustom(searchHistoryView)
 
-        searchHistoryView.onSelectListener={
+        searchHistoryView.onSelectListener = {
             searchWord = it
             titleBar?.centerSearchEditText?.setText(it)
             initData()

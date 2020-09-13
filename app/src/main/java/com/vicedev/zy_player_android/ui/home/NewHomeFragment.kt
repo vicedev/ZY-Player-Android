@@ -63,6 +63,7 @@ class NewHomeFragment : BaseFragment() {
                             ConfigManager.saveCurUseSourceConfig(source?.key)
                             initData()
                         })
+                    .bindLayout(R.layout.xpopup_center_impl_list)
             }
             selectSourceDialog?.show()
         }

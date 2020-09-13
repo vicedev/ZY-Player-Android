@@ -144,7 +144,15 @@ abstract class BaseSource {
                 videoList = dd.getString(("content"))?.split("#")
                     ?.map {
                         val split = it.split("$")
-                        Video(split[0], split[1])
+                        if (split.size == 2) {
+                            Video(split[0], split[1])
+                        } else {
+                            if (split[0].startsWith("http")) {
+                                Video(split[0], split[0])
+                            } else {
+                                Video(split[0], split[0])
+                            }
+                        }
                     }?.toMutableList() as ArrayList<Video>? ?: arrayListOf()
             } else if (dd is JSONArray) {
                 for (i in 0 until dd.length()) {
