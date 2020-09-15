@@ -147,14 +147,10 @@ abstract class BaseSource {
                 videoList = dd.getString(("content"))?.split("#")
                     ?.map {
                         val split = it.split("$")
-                        if (split.size == 2) {
+                        if (split.size >= 2) {
                             Video(split[0], split[1])
                         } else {
-                            if (split[0].startsWith("http")) {
-                                Video(split[0], split[0])
-                            } else {
-                                Video(split[0], split[0])
-                            }
+                            Video(split[0], split[0])
                         }
                     }?.toMutableList() as ArrayList<Video>? ?: arrayListOf()
             } else if (dd is JSONArray) {
@@ -162,14 +158,10 @@ abstract class BaseSource {
                     val list = dd.getJSONObject(i)?.getString("content")?.split("#")
                         ?.map {
                             val split = it.split("$")
-                            if (split.size == 2) {
+                            if (split.size >= 2) {
                                 Video(split[0], split[1])
                             } else {
-                                if (split[0].startsWith("http")) {
-                                    Video(split[0], split[0])
-                                } else {
-                                    Video(split[0], split[0])
-                                }
+                                Video(split[0], split[0])
                             }
                         }?.toMutableList() as ArrayList<Video>? ?: arrayListOf()
                     if (list.size > 0) {
@@ -213,14 +205,10 @@ abstract class BaseSource {
             return video.getJSONObject("dl")?.getJSONObject("dd")?.getString("content")?.split("#")
                 ?.map {
                     val split = it.split("$")
-                    if (split.size == 2) {
+                    if (split.size >= 2) {
                         DownloadData(split[0], split[1])
                     } else {
-                        if (split[0].startsWith("http")) {
-                            DownloadData(split[0], split[0])
-                        } else {
-                            DownloadData(split[0], split[0])
-                        }
+                        DownloadData(split[0], split[0])
                     }
                 }?.toMutableList() as ArrayList<DownloadData>? ?: arrayListOf()
         } catch (e: Exception) {

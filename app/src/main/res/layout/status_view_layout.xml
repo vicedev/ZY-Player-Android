@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="数据加载中..."
-            android:textColor="@color/normalFontColor" />
+            android:textColor="@color/normalFontColor"
+            android:textSize="14sp" />
     </LinearLayout>
     <!--加载失败-->
 
@@ -36,7 +37,8 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:text="加载失败，点击重试"
-            android:textColor="@color/normalFontColor" />
+            android:textColor="@color/normalFontColor"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tvToWeb"
@@ -61,5 +63,6 @@
         android:gravity="center"
         android:text="没有数据"
         android:textColor="@color/normalFontColor"
+        android:textSize="14sp"
         android:visibility="invisible" />
 </FrameLayout>

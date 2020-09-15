@@ -67,7 +67,7 @@ class VideoController {
             .setAutoFullWithSize(false)
             .setShowFullAnimation(false)
             .setNeedLockFull(true)
-            .setCacheWithPlay(false)
+            .setCacheWithPlay(true)
             .setVideoAllCallBack(object : GSYSampleCallBack() {
                 override fun onPrepared(url: String, vararg objects: Any) {
                     super.onPrepared(url, *objects)
