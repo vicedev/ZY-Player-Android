@@ -18,6 +18,7 @@ import com.vicedev.zy_player_android.ui.collect.db.CollectDBModel
 import com.vicedev.zy_player_android.ui.collect.db.CollectDBUtils
 import com.vicedev.zy_player_android.ui.detail.controller.VideoController
 import com.vicedev.zy_player_android.ui.detail.controller.WebController
+import com.vicedev.zy_player_android.utils.ClipboardUtils
 import com.vicedev.zy_player_android.utils.Utils
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.fragment_detail.*
@@ -59,7 +60,7 @@ class DetailFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val sourceKey = arguments?.getString(SOURCE_KEY)
-        source =  ConfigManager.generateSource(sourceKey.textOrDefault())
+        source = ConfigManager.generateSource(sourceKey.textOrDefault())
         id = arguments?.getString(ID).textOrDefault()
     }
 
@@ -150,6 +151,34 @@ class DetailFragment : BaseFragment() {
                 } else {
                     ToastUtils.showShort("收藏失败")
                 }
+            }
+        }
+
+        //下载
+        ivDownload.setOnClickListener {
+//            if (source?.downloadBaseUrl.isNullOrBlank()) {
+//                ToastUtils.showShort("该资源暂不支持下载哦~")
+//                return@setOnClickListener
+//            }
+//            source?.requestDownloadData(id) {
+//                if (it.isNullOrEmpty()) {
+//                    ToastUtils.showShort("该资源暂不支持下载哦~")
+//                    return@requestDownloadData
+//                } else {
+//                    DetailFilmDownloadDialog().show(it.map { data ->
+//                        FilmItemInfo(
+//                            playVideo?.name.textOrDefault(),
+//                            data.name,
+//                            data.downloadUrl
+//                        )
+//                    } as ArrayList<FilmItemInfo>, childFragmentManager)
+//                }
+//            }
+            if (playVideo?.playUrl.isVideoUrl()) {
+                ClipboardUtils.copyText(playVideo?.playUrl)
+                ToastUtils.showShort("地址已复制，快去下载吧~")
+            } else {
+                ToastUtils.showShort("该资源暂不支持下载哦~")
             }
         }
     }

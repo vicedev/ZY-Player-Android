@@ -39,9 +39,12 @@ abstract class BaseSource {
     //请求详情数据
     abstract fun requestDetailData(id: String, callback: (t: DetailData?) -> Unit)
 
+    //请求下载列表
+    abstract fun requestDownloadData(id: String, callback: (t: ArrayList<DownloadData>?) -> Unit)
+
 
     //以下为解析数据
-    fun parseHomeData1(data: String?): HomeData? {
+    fun parseHomeData(data: String?): HomeData? {
         try {
             if (data == null) return null
             val jsonObject = Utils.xmlToJson(data)?.toJson()
@@ -84,7 +87,7 @@ abstract class BaseSource {
         return null
     }
 
-    fun parseHomeChannelData1(data: String?): ArrayList<HomeChannelData>? {
+    fun parseHomeChannelData(data: String?): ArrayList<HomeChannelData>? {
         try {
             if (data == null) return null
             val jsonObject = Utils.xmlToJson(data)?.toJson()
@@ -108,7 +111,7 @@ abstract class BaseSource {
         return arrayListOf()
     }
 
-    fun parseSearchResultData1(data: String?): ArrayList<SearchResultData>? {
+    fun parseSearchResultData(data: String?): ArrayList<SearchResultData>? {
         try {
             if (data == null) return null
             val jsonObject = Utils.xmlToJson(data)?.toJson()
@@ -132,7 +135,7 @@ abstract class BaseSource {
         return arrayListOf()
     }
 
-    fun parseDetailData1(sourceKey: String, data: String?): DetailData? {
+    fun parseDetailData(sourceKey: String, data: String?): DetailData? {
         try {
             if (data == null) return null
             val jsonObject = Utils.xmlToJson(data)?.toJson()
@@ -159,7 +162,15 @@ abstract class BaseSource {
                     val list = dd.getJSONObject(i)?.getString("content")?.split("#")
                         ?.map {
                             val split = it.split("$")
-                            Video(split[0], split[1])
+                            if (split.size == 2) {
+                                Video(split[0], split[1])
+                            } else {
+                                if (split[0].startsWith("http")) {
+                                    Video(split[0], split[0])
+                                } else {
+                                    Video(split[0], split[0])
+                                }
+                            }
                         }?.toMutableList() as ArrayList<Video>? ?: arrayListOf()
                     if (list.size > 0) {
                         videoList = list
@@ -190,6 +201,32 @@ abstract class BaseSource {
             e.printStackTrace()
         }
         return null
+    }
+
+    fun parseDownloadData(data: String?): ArrayList<DownloadData>? {
+        try {
+            if (data == null) return null
+            val jsonObject = Utils.xmlToJson(data)?.toJson()
+            val video =
+                jsonObject?.getJSONObject("rss")?.getJSONObject("list")!!.getJSONObject("video")
+
+            return video.getJSONObject("dl")?.getJSONObject("dd")?.getString("content")?.split("#")
+                ?.map {
+                    val split = it.split("$")
+                    if (split.size == 2) {
+                        DownloadData(split[0], split[1])
+                    } else {
+                        if (split[0].startsWith("http")) {
+                            DownloadData(split[0], split[0])
+                        } else {
+                            DownloadData(split[0], split[0])
+                        }
+                    }
+                }?.toMutableList() as ArrayList<DownloadData>? ?: arrayListOf()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return arrayListOf()
     }
 
     fun cancelAll() {
