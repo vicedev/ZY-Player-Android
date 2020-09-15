@@ -49,16 +49,16 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <!--                    <View-->
-                    <!--                        android:layout_width="0dp"-->
-                    <!--                        android:layout_height="1px"-->
-                    <!--                        android:layout_weight="1" />-->
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1px"
+                        android:layout_weight="1" />
 
-                    <!--                    <ImageView-->
-                    <!--                        android:id="@+id/ivWebPlay"-->
-                    <!--                        android:layout_width="25dp"-->
-                    <!--                        android:layout_height="25dp"-->
-                    <!--                        android:src="@drawable/web_play" />-->
+                    <ImageView
+                        android:id="@+id/ivWebPlay"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/web_play" />
 
                     <View
                         android:layout_width="0dp"
@@ -149,9 +149,9 @@
                                 android:id="@+id/tvCurPlayName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/minorFontColor"
                                 android:maxWidth="200dp"
                                 android:singleLine="true"
+                                android:textColor="@color/minorFontColor"
                                 android:textSize="14sp"
                                 tools:text="七龙珠七龙珠七龙珠七龙珠七龙珠七龙珠七龙珠七龙珠" />
 

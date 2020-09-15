@@ -52,5 +52,9 @@ class MineFragment : BaseFragment() {
                     })
                 .show()
         }
+        //问题反馈
+        tvFeedback.setOnClickListener {
+            Utils.openBrowser(requireActivity(), "https://support.qq.com/product/281859")
+        }
     }
 }

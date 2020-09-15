@@ -18,6 +18,7 @@ import com.vicedev.zy_player_android.ui.collect.db.CollectDBModel
 import com.vicedev.zy_player_android.ui.collect.db.CollectDBUtils
 import com.vicedev.zy_player_android.ui.detail.controller.VideoController
 import com.vicedev.zy_player_android.ui.detail.controller.WebController
+import com.vicedev.zy_player_android.utils.Utils
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.fragment_detail.*
 import org.greenrobot.eventbus.EventBus
@@ -92,20 +93,20 @@ class DetailFragment : BaseFragment() {
     override fun initListener() {
         super.initListener()
         //网页播放
-//        ivWebPlay.setOnClickListener {
-//            if (playVideo == null || playVideo?.playUrl.isNullOrBlank()) {
-//                ToastUtils.showShort("无法播放")
-//                return@setOnClickListener
-//            }
-//            Utils.openBrowser(
-//                requireActivity(),
-//                if (playVideo?.playUrl.canPlayInAppUrl()) {
-//                    "http://zyplayer.fun/player/player.html?url=${playVideo?.playUrl?.textOrDefault()}&title=${playVideo?.name}"
-//                } else {
-//                    playVideo?.playUrl.textOrDefault()
-//                }
-//            )
-//        }
+        ivWebPlay.setOnClickListener {
+            if (playVideo == null || playVideo?.playUrl.isNullOrBlank()) {
+                ToastUtils.showShort("无法播放")
+                return@setOnClickListener
+            }
+            Utils.openBrowser(
+                requireActivity(),
+                if (playVideo?.playUrl.isVideoUrl()) {
+                    "http://zyplayer.fun/player/player.html?url=${playVideo?.playUrl?.textOrDefault()}"
+                } else {
+                    playVideo?.playUrl.textOrDefault()
+                }
+            )
+        }
         //选集
         llAnthology.setOnClickListener {
             if (playVideoList?.size ?: 0 > 1) {
@@ -224,7 +225,7 @@ class DetailFragment : BaseFragment() {
     private fun playVideo(playVideo: Video?) {
         if (playVideo == null) return
         this.playVideo = playVideo
-        if (playVideo.playUrl.canPlayInAppUrl()) {
+        if (playVideo.playUrl.isVideoUrl()) {
             //初始化视频控制
             if (videoController == null) {
                 videoController = VideoController()

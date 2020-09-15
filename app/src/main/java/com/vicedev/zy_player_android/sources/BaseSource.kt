@@ -1,7 +1,7 @@
 package com.vicedev.zy_player_android.sources
 
 import com.lzy.okgo.OkGo
-import com.vicedev.zy_player_android.common.canPlayInAppUrl
+import com.vicedev.zy_player_android.common.isVideoUrl
 import com.vicedev.zy_player_android.sources.bean.*
 import com.vicedev.zy_player_android.utils.Utils
 import org.json.JSONArray
@@ -163,7 +163,7 @@ abstract class BaseSource {
                         }?.toMutableList() as ArrayList<Video>? ?: arrayListOf()
                     if (list.size > 0) {
                         videoList = list
-                        if (list[0].playUrl.canPlayInAppUrl()) {
+                        if (list[0].playUrl.isVideoUrl()) {
                             //优先获取应用内播放的资源
                             break
                         }
