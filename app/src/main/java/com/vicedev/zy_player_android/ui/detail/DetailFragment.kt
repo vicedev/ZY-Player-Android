@@ -204,7 +204,10 @@ class DetailFragment : BaseFragment() {
     }
 
     override fun onBackPressed(): Boolean {
-        return videoController?.onBackPressed() ?: false || webController?.onBackPressed() ?: false
+        if (videoController?.onBackPressed() == true || webController?.onBackPressed() == true){
+            return true
+        }
+        return false
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

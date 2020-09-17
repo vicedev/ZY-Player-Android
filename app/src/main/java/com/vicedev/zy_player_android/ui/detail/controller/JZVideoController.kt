@@ -1,5 +1,6 @@
 package com.vicedev.zy_player_android.ui.detail.controller
 
+import android.content.pm.ActivityInfo
 import cn.jzvd.Jzvd
 import cn.jzvd.JzvdStd
 import com.vicedev.zy_player_android.widgets.CustomJzvdStd
@@ -12,9 +13,9 @@ import com.vicedev.zy_player_android.widgets.CustomJzvdStd
  */
 class JZVideoController {
 
-    private lateinit var player: CustomJzvdStd
+    private lateinit var player: JzvdStd
 
-    fun init(player: CustomJzvdStd) {
+    fun init(player: JzvdStd) {
         this.player = player
     }
 
@@ -23,11 +24,11 @@ class JZVideoController {
     }
 
     fun onResume() {
-        JzvdStd.goOnPlayOnResume();
+        JzvdStd.goOnPlayOnResume()
     }
 
     fun onPause() {
-        JzvdStd.goOnPlayOnPause();
+        JzvdStd.goOnPlayOnPause()
     }
 
     fun onDestroy() {
