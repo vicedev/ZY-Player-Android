@@ -12,6 +12,7 @@ import com.vicedev.zy_player_android.common.GridSpaceItemDecoration
 import com.vicedev.zy_player_android.common.textOrDefault
 import com.vicedev.zy_player_android.sources.BaseSource
 import com.vicedev.zy_player_android.sources.bean.HomeChannelData
+import com.vicedev.zy_player_android.ui.BaseLazyListFragment
 import com.vicedev.zy_player_android.ui.BaseListFragment
 import com.vicedev.zy_player_android.ui.channel.adapter.HomeChannelAdapter
 import com.vicedev.zy_player_android.ui.detail.DetailActivity
@@ -25,7 +26,7 @@ import kotlinx.android.synthetic.main.base_list_fragment.*
  */
 const val TID = "tid"
 
-class HomeChannelFragment : BaseListFragment<HomeChannelData, BaseViewHolder>() {
+class HomeChannelFragment : BaseLazyListFragment<HomeChannelData, BaseViewHolder>() {
 
     private lateinit var source: BaseSource
     private lateinit var tid: String

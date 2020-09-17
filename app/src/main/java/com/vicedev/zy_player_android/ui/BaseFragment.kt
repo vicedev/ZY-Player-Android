@@ -17,6 +17,7 @@ abstract class BaseFragment : Fragment(), BackPressedCall {
 
     lateinit var rootView: ViewGroup
     var titleBar: CommonTitleBar? = null
+    private var isLoaded = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +40,17 @@ abstract class BaseFragment : Fragment(), BackPressedCall {
         initTitleBar(titleBar)
         initView()
         initListener()
-        initData()
+        if (this !is LazyLoad) {
+            initData()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!isLoaded && this is LazyLoad) {
+            initData()
+            isLoaded = true
+        }
     }
 
     abstract fun initTitleBar(titleBar: CommonTitleBar?)

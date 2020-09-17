@@ -54,11 +54,12 @@ class HomeSourceFragment : BaseFragment() {
                 return@requestHomeData
             }
             classifyList.clear()
-            classifyList.add(Classify("new","最新"))
+            classifyList.add(Classify("new", "最新"))
             classifyList.addAll(it.classifyList.filter { classify ->
                 !classify.id.isNullOrBlank() && !classify.name.isNullOrBlank()
             } as ArrayList<Classify>)
             viewpager.adapter = ViewPageAdapter()
+            viewpager.offscreenPageLimit = 100
             tabLayout.setupWithViewPager(viewpager)
             statusView.setSuccessStatus()
         }
