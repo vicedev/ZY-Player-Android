@@ -8,4 +8,4 @@
 .externalNativeBuild
 .cxx
 /androidTest
-zykey.jks
+app/zykey.jks
