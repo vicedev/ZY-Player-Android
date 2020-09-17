@@ -89,7 +89,7 @@
             </LinearLayout>
 
             <View
-                style="@style/Divider"
+                style="@style/DivideLine"
                 android:layout_marginTop="12dp" />
 
             <TextView

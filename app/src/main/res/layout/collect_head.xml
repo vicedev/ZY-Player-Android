@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <View
-        style="@style/Divider"
+        style="@style/DivideLine"
         android:layout_marginLeft="12dp" />
 
     <LinearLayout
@@ -46,7 +46,7 @@
     </LinearLayout>
 
     <View
-        style="@style/Divider"
+        style="@style/DivideLine"
         android:layout_marginLeft="12dp" />
 
 </LinearLayout>

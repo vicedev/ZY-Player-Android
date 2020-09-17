@@ -10,7 +10,8 @@
         android:id="@id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:centerType="textView" />
+        app:centerType="textView"
+        app:leftType="imageButton"/>
 
 
     <TextView
@@ -23,7 +24,7 @@
         android:textColor="@color/normalFontColor"
         android:textSize="18sp" />
 
-    <View style="@style/Divider" />
+    <View style="@style/DivideLine" />
 
     <ScrollView
         android:layout_width="match_parent"

@@ -21,21 +21,21 @@ class MineFragment : BaseFragment() {
 
     override fun initView() {
         super.initView()
-        tvVersion.text = "版本 ${AppUtils.getAppVersionName()}"
+        setVersion.itemName = "版本 ${AppUtils.getAppVersionName()}"
     }
 
     override fun initListener() {
         super.initListener()
         //赏个star
-        tvStar.setOnClickListener {
+        setStr.setOnClickListener {
             Utils.openBrowser(requireActivity(), "https://github.com/vicedev/ZY-Player-Android")
         }
         //打赏一波
-        tvReward.setOnClickListener {
+        setReward.setOnClickListener {
             RewardActivity.jump(requireActivity())
         }
         //历史版本下载
-        tvHistoryDownload.setOnClickListener {
+        setHistoryDownload.setOnClickListener {
             XPopup.Builder(requireActivity())
                 .asCenterList("历史版本下载", arrayOf("github", "百度网盘，提取码: py2s"),
                     OnSelectListener { position, text ->
@@ -53,7 +53,7 @@ class MineFragment : BaseFragment() {
                 .show()
         }
         //问题反馈
-        tvFeedback.setOnClickListener {
+        setFeedback.setOnClickListener {
             Utils.openBrowser(requireActivity(), "https://support.qq.com/product/281859")
         }
     }

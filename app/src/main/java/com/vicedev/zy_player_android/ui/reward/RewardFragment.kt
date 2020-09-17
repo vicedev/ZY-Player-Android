@@ -16,6 +16,14 @@ class RewardFragment : BaseFragment() {
     override fun initTitleBar(titleBar: CommonTitleBar?) {
         titleBar?.run {
             centerTextView.text = "打赏一波"
+
+            setListener { v, action, extra ->
+                when (action) {
+                    CommonTitleBar.ACTION_LEFT_BUTTON -> {
+                        requireActivity().finish()
+                    }
+                }
+            }
         }
     }
 

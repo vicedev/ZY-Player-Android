@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SetItemView">
+        <attr name="needDivideLine" format="boolean"/>
+        <attr name="needRightArrow" format="boolean"/>
+        <attr name="itemName" format="string"/>
+    </declare-styleable>
+</resources>

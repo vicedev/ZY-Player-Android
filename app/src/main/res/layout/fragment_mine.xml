@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:padding="12dp"
         android:text="ZY-Player-Android created by vicedev"
@@ -31,66 +32,36 @@
         android:textSize="14sp" />
 
 
-    <TextView
-        android:id="@+id/tvStar"
+    <com.vicedev.zy_player_android.widgets.SetItemView
+        android:id="@+id/setStr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="#ffffff"
-        android:padding="12dp"
-        android:text="赏个star"
-        android:textColor="@color/normalFontColor"
-        android:textSize="14sp" />
+        app:itemName="赏个star"
+        app:needDivideLine="false" />
 
-    <TextView
-        android:id="@+id/tvReward"
+    <com.vicedev.zy_player_android.widgets.SetItemView
+        android:id="@+id/setReward"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:padding="12dp"
-        android:text="打赏一波"
-        android:textColor="@color/normalFontColor"
-        android:textSize="14sp" />
+        app:itemName="打赏一波" />
 
-    <View
-        style="@style/Divider"
-        android:layout_marginLeft="12dp" />
-
-    <TextView
-        android:id="@+id/tvHistoryDownload"
+    <com.vicedev.zy_player_android.widgets.SetItemView
+        android:id="@+id/setHistoryDownload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:padding="12dp"
-        android:text="历史版本下载"
-        android:textColor="@color/normalFontColor"
-        android:textSize="14sp" />
+        app:itemName="历史版本下载" />
 
-    <View
-        style="@style/Divider"
-        android:layout_marginLeft="12dp" />
-
-    <TextView
-        android:id="@+id/tvFeedback"
+    <com.vicedev.zy_player_android.widgets.SetItemView
+        android:id="@+id/setFeedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:padding="12dp"
-        android:text="问题反馈"
-        android:textColor="@color/normalFontColor"
-        android:textSize="14sp" />
+        app:itemName="问题反馈" />
 
-    <View
-        style="@style/Divider"
-        android:layout_marginLeft="12dp" />
-
-    <TextView
-        android:id="@+id/tvVersion"
+    <com.vicedev.zy_player_android.widgets.SetItemView
+        android:id="@+id/setVersion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:padding="12dp"
-        android:textColor="@color/normalFontColor"
-        android:textSize="14sp"
-        tools:text="版本 v1.0.0" />
+        app:itemName="版本 v1.0.0"
+        app:needRightArrow="false" />
+
 </LinearLayout>

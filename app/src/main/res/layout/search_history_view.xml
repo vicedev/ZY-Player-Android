@@ -34,7 +34,7 @@
             android:src="@drawable/delete" />
     </RelativeLayout>
 
-    <View style="@style/Divider" />
+    <View style="@style/DivideLine" />
 
     <FrameLayout
         android:layout_width="match_parent"
