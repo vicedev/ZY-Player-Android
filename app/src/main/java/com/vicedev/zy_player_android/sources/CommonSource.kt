@@ -26,6 +26,7 @@ class CommonSource(
                     try {
                         callback.invoke(parseHomeData(response?.body()))
                     } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 
@@ -34,6 +35,7 @@ class CommonSource(
                     try {
                         callback.invoke(null)
                     } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
             })
@@ -51,6 +53,7 @@ class CommonSource(
                     try {
                         callback.invoke(parseHomeChannelData(response?.body()))
                     } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 
@@ -59,6 +62,7 @@ class CommonSource(
                     try {
                         callback.invoke(null)
                     } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
             })
@@ -76,6 +80,7 @@ class CommonSource(
                     try {
                         callback.invoke(parseSearchResultData(response?.body()))
                     } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 
@@ -84,6 +89,7 @@ class CommonSource(
                     try {
                         callback.invoke(null)
                     } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
             })
@@ -97,6 +103,7 @@ class CommonSource(
                     try {
                         callback.invoke(parseDetailData(key, response?.body()))
                     } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 
@@ -105,6 +112,7 @@ class CommonSource(
                     try {
                         callback.invoke(null)
                     } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
             })
@@ -118,6 +126,7 @@ class CommonSource(
                     try {
                         callback.invoke(parseDownloadData(response?.body()))
                     } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 
@@ -126,6 +135,7 @@ class CommonSource(
                     try {
                         callback.invoke(null)
                     } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
             })

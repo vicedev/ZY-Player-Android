@@ -45,14 +45,8 @@
             android:windowSoftInputMode="adjustPan" />
 
         <activity
-            android:name=".ui.detail.FilmDetailActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
-
-        <activity
             android:name=".ui.detail.DetailActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />

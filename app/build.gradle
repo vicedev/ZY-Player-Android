@@ -10,8 +10,8 @@ android {
         applicationId "com.vicedev.zy_player_android"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 4
-        versionName "2.0.0"
+        versionCode 5
+        versionName "2.1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -100,6 +100,8 @@ dependencies {
     implementation 'org.litepal.guolindev:core:3.2.1'
 
     implementation 'org.greenrobot:eventbus:3.2.0'
+
+    implementation 'cn.jzvd:jiaozivideoplayer:7.4.2'
 }
 
 android.applicationVariants.all { variant ->
