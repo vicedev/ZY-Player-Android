@@ -22,7 +22,7 @@ class App : Application() {
         LitePal.initialize(this)
 
         //读取下视频源的配置
-        ConfigManager.config
+        ConfigManager.sourceConfigs
         //OkGo初始化
         OkGo.getInstance().init(this)                   //必须调用初始化
 //            .setOkHttpClient(
