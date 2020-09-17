@@ -2,8 +2,6 @@
 
 基于[ZY-Player](https://github.com/Hunlongyu/ZY-Player)开发的Android版本视频播放器
 
-### 公告：这段时间工作太忙一直没更新，近期将会重新开始下一个版本的开发。
-
 ### 下載
 
 - [github下载](https://github.com/vicedev/ZY-Player-Android/raw/master/release/ZY-Player-Android-1.0.1.apk)
