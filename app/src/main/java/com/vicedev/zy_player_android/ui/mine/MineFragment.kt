@@ -37,7 +37,7 @@ class MineFragment : BaseFragment() {
         //历史版本下载
         setHistoryDownload.setOnClickListener {
             XPopup.Builder(requireActivity())
-                .asCenterList("历史版本下载", arrayOf("github", "百度网盘，提取码: py2s"),
+                .asCenterList("历史版本下载", arrayOf("github", "百度网盘，提取码: py2s", "蓝奏云，提取码：1wyh"),
                     OnSelectListener { position, text ->
                         when (position) {
                             0 -> Utils.openBrowser(
@@ -47,6 +47,10 @@ class MineFragment : BaseFragment() {
                             1 -> Utils.openBrowser(
                                 requireActivity(),
                                 "https://pan.baidu.com/s/1fV1rO-WAcqbf0NBIgm1NsA"
+                            )
+                            2 -> Utils.openBrowser(
+                                requireActivity(),
+                                "https://wws.lanzous.com/b01nmvjvi"
                             )
                         }
                     })
