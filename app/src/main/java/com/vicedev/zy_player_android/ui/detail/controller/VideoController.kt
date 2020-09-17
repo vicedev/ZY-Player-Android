@@ -45,12 +45,13 @@ class VideoController {
         //增加title
         videoPlayer.titleTextView.gone()
         //设置返回键
-        videoPlayer.backButton.run {
-            setOnClickListener {
-                onBackPressed()
-            }
-            visible()
-        }
+//        videoPlayer.backButton.run {
+//            setOnClickListener {
+//                onBackPressed()
+//            }
+//            visible()
+//        }
+        videoPlayer.backButton.gone()
         //外部辅助的旋转，帮助全屏
         orientationUtils = OrientationUtils(activity, videoPlayer).apply {
             //初始化不打开外部的旋转
@@ -66,7 +67,7 @@ class VideoController {
             .setAutoFullWithSize(false)
             .setShowFullAnimation(false)
             .setNeedLockFull(true)
-            .setCacheWithPlay(false)
+            .setCacheWithPlay(true)
             .setVideoAllCallBack(object : GSYSampleCallBack() {
                 override fun onPrepared(url: String, vararg objects: Any) {
                     super.onPrepared(url, *objects)
@@ -102,6 +103,14 @@ class VideoController {
                 .setVideoTitle(it.name)
                 .build(videoPlayer)
         }
+        videoPlayer.startPlayLogic()
+    }
+
+    fun play(playUrl: String?, name: String?) {
+        videoOptionBuilder
+            .setUrl(playUrl)
+            .setVideoTitle(name)
+            .build(videoPlayer)
         videoPlayer.startPlayLogic()
     }
 

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.view.View
 import androidx.core.view.isVisible
+import java.util.*
 
 
 /**
@@ -43,4 +44,19 @@ fun View.getActivity(): Activity? {
         context2 = context2.baseContext
     }
     return null
+}
+
+/**
+ * 可以在应用内播放的地址
+ */
+fun String?.isVideoUrl(): Boolean {
+    return (this ?: "").toLowerCase(Locale.ROOT).run {
+        endsWith(".m3u8")
+                || endsWith("||.mp4")
+                ||endsWith(".flv")
+                ||endsWith(".avi")
+                ||endsWith(".rm")
+                ||endsWith(".rmvb")
+                ||endsWith(".wmv")
+    }
 }

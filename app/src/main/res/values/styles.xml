@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Divider">
+    <style name="DivideLine">
         <item name="android:background">@color/dividerColor</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1px</item>

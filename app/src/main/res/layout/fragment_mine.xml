@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.setting.SettingFragment">
+    tools:context=".ui.mine.MineFragment">
 
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
         android:id="@id/title_bar"
@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:padding="12dp"
         android:text="ZY-Player-Android created by vicedev"
@@ -31,28 +32,36 @@
         android:textSize="14sp" />
 
 
-    <TextView
-        android:id="@+id/tvStar"
+    <com.vicedev.zy_player_android.widgets.SetItemView
+        android:id="@+id/setStr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="#ffffff"
-        android:padding="12dp"
-        android:text="赏个star"
-        android:textColor="@color/normalFontColor"
-        android:textSize="14sp" />
+        app:itemName="赏个star"
+        app:needDivideLine="false" />
 
-    <View
-        style="@style/Divider"
-        android:layout_marginLeft="12dp" />
-
-    <TextView
-        android:id="@+id/tvVersion"
+    <com.vicedev.zy_player_android.widgets.SetItemView
+        android:id="@+id/setReward"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:padding="12dp"
-        tools:text="版本 v1.0.0"
-        android:textColor="@color/normalFontColor"
-        android:textSize="14sp" />
+        app:itemName="打赏一波" />
+
+    <com.vicedev.zy_player_android.widgets.SetItemView
+        android:id="@+id/setHistoryDownload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemName="历史版本下载" />
+
+    <com.vicedev.zy_player_android.widgets.SetItemView
+        android:id="@+id/setFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemName="问题反馈" />
+
+    <com.vicedev.zy_player_android.widgets.SetItemView
+        android:id="@+id/setVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemName="版本 v1.0.0"
+        app:needRightArrow="false" />
+
 </LinearLayout>

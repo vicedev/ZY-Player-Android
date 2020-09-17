@@ -32,7 +32,7 @@
         tools:text="是大家还是觉得时间的还是觉得是大家还是觉得时间的还是觉得是大家还是觉得时间的还是觉得" />
 
     <View
-        style="@style/Divider"
+        style="@style/DivideLine"
         android:layout_alignBottom="@id/ivDownload"
         android:layout_marginLeft="12dp" />
 </RelativeLayout>

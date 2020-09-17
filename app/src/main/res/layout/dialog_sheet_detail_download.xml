@@ -29,7 +29,7 @@
             android:src="@drawable/dialog_close" />
 
         <View
-            style="@style/Divider"
+            style="@style/DivideLine"
             android:layout_alignParentBottom="true" />
     </RelativeLayout>
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+            android:id="@id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:centerSearchEditable="false"
+            app:centerType="searchView" />
+
+        <FrameLayout
+            android:id="@+id/flContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/faBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/exchange"
+        app:borderWidth="0dp"
+        app:fabSize="mini" />
+</FrameLayout>

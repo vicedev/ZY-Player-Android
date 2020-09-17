@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+        android:id="@id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:centerText="详情"
+        app:centerType="textView"
+        app:leftType="imageButton" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/flWebView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:visibility="visible"
+                tools:visibility="visible" />
+
+            <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+                android:id="@+id/videoPlayer"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1px"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/ivWebPlay"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/web_play" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1px"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/ivDownload"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/film_download" />
+
+
+                    <!--                <View-->
+                    <!--                    android:layout_width="0dp"-->
+                    <!--                    android:layout_height="1px"-->
+                    <!--                    android:layout_weight="1" />-->
+
+                    <!--                <ImageView-->
+                    <!--                    android:id="@+id/ivShare"-->
+                    <!--                    android:layout_width="25dp"-->
+                    <!--                    android:layout_height="25dp"-->
+                    <!--                    android:layout_marginLeft="15dp"-->
+                    <!--                    android:src="@drawable/film_share" />-->
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1px"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/ivCollect"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/seecter_bg_collect" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1px"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <View
+                    style="@style/DivideLine"
+                    android:layout_marginTop="12dp" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/normalFontColor"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:text="大内密探" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="正在播放："
+                            android:textColor="@color/normalFontColor"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:id="@+id/llAnthology"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:orientation="horizontal"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp">
+
+                            <TextView
+                                android:id="@+id/tvCurPlayName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="200dp"
+                                android:singleLine="true"
+                                android:textColor="@color/minorFontColor"
+                                android:textSize="14sp"
+                                tools:text="七龙珠七龙珠七龙珠七龙珠七龙珠七龙珠七龙珠七龙珠" />
+
+                            <ImageView
+                                android:id="@+id/ivPlayMore"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/arrow_right" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="剧情简介："
+                        android:textColor="@color/normalFontColor"
+                        android:textSize="14sp" />
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvDesc"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/minorFontColor"
+                                android:textSize="14sp"
+                                tools:text="大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探大内密探" />
+
+                        </LinearLayout>
+                    </ScrollView>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.vicedev.zy_player_android.widgets.StatusView
+            android:id="@+id/statusView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+</LinearLayout>

@@ -15,11 +15,11 @@
         android:id="@+id/navigation_collect"
         android:name="com.vicedev.zy_player_android.ui.collect.CollectFragment"
         android:label="@string/title_collect"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_collect" />
 
     <fragment
-        android:id="@+id/navigation_setting"
-        android:name="com.vicedev.zy_player_android.ui.setting.SettingFragment"
-        android:label="@string/title_setting"
-        tools:layout="@layout/fragment_collect" />
+        android:id="@+id/navigation_mine"
+        android:name="com.vicedev.zy_player_android.ui.mine.MineFragment"
+        android:label="@string/title_mine"
+        tools:layout="@layout/fragment_mine" />
 </navigation>

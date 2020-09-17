@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.ToastUtils
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.ui.collect.CollectFragment
-import com.vicedev.zy_player_android.ui.home.HomeFragment
-import com.vicedev.zy_player_android.ui.setting.SettingFragment
+import com.vicedev.zy_player_android.ui.home.NewHomeFragment
+import com.vicedev.zy_player_android.ui.mine.MineFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -21,9 +21,9 @@ class MainActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
-        fragmentArray.put(R.id.navigation_home, HomeFragment())
+        fragmentArray.put(R.id.navigation_home, NewHomeFragment())
         fragmentArray.put(R.id.navigation_collect, CollectFragment())
-        fragmentArray.put(R.id.navigation_setting, SettingFragment())
+        fragmentArray.put(R.id.navigation_mine, MineFragment())
         supportFragmentManager
             .beginTransaction()
             .apply {
@@ -59,7 +59,7 @@ class MainActivity : BaseActivity() {
         if (mHits[0] >= (SystemClock.uptimeMillis() - 1000)) {
             super.onBackPressed();
         } else {
-            ToastUtils.showShort("再次点击退出程序")
+            ToastUtils.showShort("再按一次退出程序")
         }
     }
 }
