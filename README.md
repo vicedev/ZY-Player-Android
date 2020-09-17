@@ -4,7 +4,7 @@
 
 ### 下載
 
-- [github下载](https://github.com/vicedev/ZY-Player-Android/raw/master/release/ZY-Player-Android-1.0.1.apk)
+- [github下载](https://github.com/vicedev/ZY-Player-Android/raw/master/release)
 - [百度网盘下载](https://pan.baidu.com/s/1fV1rO-WAcqbf0NBIgm1NsA)，提取码: py2s
 - [蓝奏云下载](https://wws.lanzous.com/b01nmvjvi)，提取码: 1wyh
 
