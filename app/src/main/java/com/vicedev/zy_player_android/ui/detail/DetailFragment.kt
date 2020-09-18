@@ -17,6 +17,7 @@ import com.vicedev.zy_player_android.ui.BaseFragment
 import com.vicedev.zy_player_android.ui.collect.db.CollectDBModel
 import com.vicedev.zy_player_android.ui.collect.db.CollectDBUtils
 import com.vicedev.zy_player_android.ui.detail.controller.JZVideoController
+import com.vicedev.zy_player_android.ui.detail.controller.VideoController
 import com.vicedev.zy_player_android.ui.detail.controller.WebController
 import com.vicedev.zy_player_android.utils.ClipboardUtils
 import com.vicedev.zy_player_android.utils.Utils
@@ -44,8 +45,8 @@ class DetailFragment : BaseFragment() {
     private var playVideoList: ArrayList<Video>? = null
     private var curPlayPos = 0
 
-    //    private var videoController: VideoController? = null
-    private var videoController: JZVideoController? = null
+        private var videoController: VideoController? = null
+//    private var videoController: JZVideoController? = null
     private var webController: WebController? = null
 
     private var anthologyList: BottomPopupView? = null
@@ -212,7 +213,7 @@ class DetailFragment : BaseFragment() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-//        videoController?.onConfigurationChanged(newConfig)
+        videoController?.onConfigurationChanged(newConfig)
     }
 
     override fun initData() {
@@ -260,15 +261,15 @@ class DetailFragment : BaseFragment() {
         this.playVideo = playVideo
         if (playVideo.playUrl.isVideoUrl()) {
             //初始化视频控制
-//            if (videoController == null) {
-//                videoController = VideoController()
-//                videoController?.init(requireActivity(), videoPlayer)
-//            }
-
             if (videoController == null) {
-                videoController = JZVideoController()
-                videoController?.init(videoPlayer)
+                videoController = VideoController()
+                videoController?.init(requireActivity(), videoPlayer)
             }
+
+//            if (videoController == null) {
+//                videoController = JZVideoController()
+//                videoController?.init(videoPlayer)
+//            }
             videoController?.play(
                 playVideo.playUrl,
                 "${detailData?.name.textOrDefault()}   ${playVideo.name.textOrDefault()}"

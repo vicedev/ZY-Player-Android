@@ -2,9 +2,13 @@ package com.vicedev.zy_player_android
 
 import android.app.Application
 import com.lzy.okgo.OkGo
+import com.shuyu.gsyvideoplayer.cache.CacheFactory
+import com.shuyu.gsyvideoplayer.player.PlayerFactory
 import com.tencent.bugly.Bugly
 import com.vicedev.zy_player_android.common.ConfigManager
 import org.litepal.LitePal
+import tv.danmaku.ijk.media.exo2.Exo2PlayerManager
+import tv.danmaku.ijk.media.exo2.ExoPlayerCacheManager
 
 /**
  * @author vicedev1001@gmail.com
@@ -47,5 +51,10 @@ class App : Application() {
                 true
             )
         }
+
+        //播放器使用exo模式
+        PlayerFactory.setPlayManager(Exo2PlayerManager::class.java)
+        //exo的缓存
+        CacheFactory.setCacheManager(ExoPlayerCacheManager::class.java)
     }
 }

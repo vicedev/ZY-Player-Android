@@ -31,7 +31,7 @@
                 android:visibility="visible"
                 tools:visibility="visible" />
 
-            <cn.jzvd.JzvdStd
+            <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
                 android:id="@+id/videoPlayer"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
