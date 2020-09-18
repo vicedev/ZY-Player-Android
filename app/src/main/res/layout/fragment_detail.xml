@@ -31,7 +31,7 @@
                 android:visibility="visible"
                 tools:visibility="visible" />
 
-            <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+            <com.vicedev.zy_player_android.widgets.CustomGSYVideoPlayer
                 android:id="@+id/videoPlayer"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
