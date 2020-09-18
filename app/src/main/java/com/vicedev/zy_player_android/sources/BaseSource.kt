@@ -50,19 +50,31 @@ abstract class BaseSource {
             val jsonObject = Utils.xmlToJson(data)?.toJson()
             jsonObject?.getJSONObject("rss")?.run {
                 val videoList = ArrayList<NewVideo>()
-                val videos = getJSONObject("list").getJSONArray("video")
+                val video = getJSONObject("list").get("video")
                 try {
-                    for (i in 0 until videos.length()) {
-                        val json = videos.getJSONObject(i)
+                    if (video is JSONObject) {
                         videoList.add(
                             NewVideo(
-                                json.getString("last"),
-                                json.getString("id"),
-                                json.getString("tid"),
-                                json.getString("name"),
-                                json.getString("type")
+                                video.getString("last"),
+                                video.getString("id"),
+                                video.getString("tid"),
+                                video.getString("name"),
+                                video.getString("type")
                             )
                         )
+                    } else if (video is JSONArray) {
+                        for (i in 0 until video.length()) {
+                            val json = video.getJSONObject(i)
+                            videoList.add(
+                                NewVideo(
+                                    json.getString("last"),
+                                    json.getString("id"),
+                                    json.getString("tid"),
+                                    json.getString("name"),
+                                    json.getString("type")
+                                )
+                            )
+                        }
                     }
                 } catch (e: Exception) {
                 }
@@ -116,17 +128,27 @@ abstract class BaseSource {
             if (data == null) return null
             val jsonObject = Utils.xmlToJson(data)?.toJson()
             val videoList = ArrayList<SearchResultData>()
-            val videos =
-                jsonObject?.getJSONObject("rss")?.getJSONObject("list")!!.getJSONArray("video")
-            for (i in 0 until videos.length()) {
-                val json = videos.getJSONObject(i)
+            val video =
+                jsonObject?.getJSONObject("rss")?.getJSONObject("list")?.get("video")
+            if (video is JSONObject) {
                 videoList.add(
                     SearchResultData(
-                        json.getString("id"),
-                        json.getString("name"),
-                        json.getString("type")
+                        video.getString("id"),
+                        video.getString("name"),
+                        video.getString("type")
                     )
                 )
+            } else if (video is JSONArray) {
+                for (i in 0 until video.length()) {
+                    val json = video.getJSONObject(i)
+                    videoList.add(
+                        SearchResultData(
+                            json.getString("id"),
+                            json.getString("name"),
+                            json.getString("type")
+                        )
+                    )
+                }
             }
             return videoList
         } catch (e: Exception) {
