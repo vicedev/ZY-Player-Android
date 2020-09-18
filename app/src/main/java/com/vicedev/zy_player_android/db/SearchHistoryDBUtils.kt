@@ -1,6 +1,7 @@
 package com.vicedev.zy_player_android.db
 
 import com.blankj.utilcode.util.ThreadUtils
+import com.vicedev.zy_player_android.common.Task
 import org.litepal.LitePal
 import java.util.*
 
@@ -13,24 +14,12 @@ import java.util.*
 
 object SearchHistoryDBUtils {
     fun saveAsync(searchWord: String, callback: ((Boolean) -> Unit)? = null) {
-        ThreadUtils.executeByCached(object : ThreadUtils.Task<Boolean>() {
-            override fun doInBackground(): Boolean {
-                return save(searchWord)
-            }
 
-            override fun onSuccess(result: Boolean?) {
-                callback?.invoke(result ?: false)
-            }
-
-            override fun onFail(t: Throwable?) {
-                callback?.invoke(false)
-            }
-
-            override fun onCancel() {
-                callback?.invoke(false)
-            }
-
-        })
+        ThreadUtils.executeByCached(Task<Boolean>({
+            save(searchWord)
+        }, {
+            callback?.invoke(it ?: false)
+        }))
     }
 
 
@@ -54,23 +43,13 @@ object SearchHistoryDBUtils {
     }
 
     fun searchAllAsync(callback: ((ArrayList<SearchHistoryDBModel>?) -> Unit)?) {
-        ThreadUtils.executeByCached(object : ThreadUtils.Task<ArrayList<SearchHistoryDBModel>?>() {
-            override fun doInBackground(): ArrayList<SearchHistoryDBModel>? {
-                return searchAll()
-            }
 
-            override fun onSuccess(result: ArrayList<SearchHistoryDBModel>?) {
-                callback?.invoke(result)
-            }
+        ThreadUtils.executeByCached(Task<ArrayList<SearchHistoryDBModel>?>({
+            searchAll()
+        }, {
+            callback?.invoke(it)
+        }))
 
-            override fun onFail(t: Throwable?) {
-                callback?.invoke(null)
-            }
-
-            override fun onCancel() {
-                callback?.invoke(null)
-            }
-        })
     }
 
     fun deleteAll(): Boolean {

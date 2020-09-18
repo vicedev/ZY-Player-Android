@@ -1,6 +1,7 @@
 package com.vicedev.zy_player_android.ui.collect.db
 
 import com.blankj.utilcode.util.ThreadUtils
+import com.vicedev.zy_player_android.common.Task
 import org.litepal.LitePal
 import java.util.*
 
@@ -13,24 +14,12 @@ import java.util.*
 
 object CollectDBUtils {
     fun saveAsync(collectDBModel: CollectDBModel, callback: ((Boolean) -> Unit)? = null) {
-        ThreadUtils.executeByCached(object : ThreadUtils.Task<Boolean>() {
-            override fun doInBackground(): Boolean {
-                return save(collectDBModel)
-            }
 
-            override fun onSuccess(result: Boolean?) {
-                callback?.invoke(result ?: false)
-            }
-
-            override fun onFail(t: Throwable?) {
-                callback?.invoke(false)
-            }
-
-            override fun onCancel() {
-                callback?.invoke(false)
-            }
-
-        })
+        ThreadUtils.executeByCached(Task<Boolean>({
+            save(collectDBModel)
+        }, {
+            callback?.invoke(it ?: false)
+        }))
     }
 
 
@@ -48,23 +37,11 @@ object CollectDBUtils {
     }
 
     fun searchAllAsync(callback: ((ArrayList<CollectDBModel>?) -> Unit)?) {
-        ThreadUtils.executeByCached(object : ThreadUtils.Task<ArrayList<CollectDBModel>?>() {
-            override fun doInBackground(): ArrayList<CollectDBModel>? {
-                return searchAll()
-            }
-
-            override fun onSuccess(result: ArrayList<CollectDBModel>?) {
-                callback?.invoke(result)
-            }
-
-            override fun onFail(t: Throwable?) {
-                callback?.invoke(null)
-            }
-
-            override fun onCancel() {
-                callback?.invoke(null)
-            }
-        })
+        ThreadUtils.executeByCached(Task<ArrayList<CollectDBModel>?>({
+            searchAll()
+        }, {
+            callback?.invoke(it)
+        }))
     }
 
     fun search(uniqueKey: String?): CollectDBModel? {
@@ -73,24 +50,12 @@ object CollectDBUtils {
     }
 
     fun searchAsync(uniqueKey: String?, callback: ((CollectDBModel?) -> Unit)?) {
-        ThreadUtils.executeByCached(object : ThreadUtils.Task<CollectDBModel?>() {
-            override fun doInBackground(): CollectDBModel? {
-                return search(uniqueKey)
-            }
 
-            override fun onSuccess(result: CollectDBModel?) {
-                callback?.invoke(result)
-            }
-
-            override fun onFail(t: Throwable?) {
-                callback?.invoke(null)
-            }
-
-            override fun onCancel() {
-                callback?.invoke(null)
-            }
-
-        })
+        ThreadUtils.executeByCached(Task<CollectDBModel?>({
+            search(uniqueKey)
+        }, {
+            callback?.invoke(it)
+        }))
     }
 
     fun deleteAll(): Boolean {
