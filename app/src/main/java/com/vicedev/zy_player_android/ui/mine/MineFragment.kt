@@ -6,6 +6,7 @@ import com.lxj.xpopup.interfaces.OnSelectListener
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.ui.BaseFragment
 import com.vicedev.zy_player_android.ui.reward.RewardActivity
+import com.vicedev.zy_player_android.ui.setting.SettingActivity
 import com.vicedev.zy_player_android.utils.Utils
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.fragment_mine.*
@@ -59,6 +60,11 @@ class MineFragment : BaseFragment() {
         //问题反馈
         setFeedback.setOnClickListener {
             Utils.openBrowser(requireActivity(), "https://support.qq.com/product/281859")
+        }
+
+        //设置
+        setSetting.setOnClickListener {
+            SettingActivity.jump(requireActivity())
         }
     }
 }

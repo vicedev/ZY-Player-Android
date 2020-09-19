@@ -37,31 +37,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:itemName="赏个star"
-        app:needDivideLine="false" />
+        app:needDivideLine="false"
+        app:needRightArrow="true" />
 
     <com.vicedev.zy_player_android.widgets.SetItemView
         android:id="@+id/setReward"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemName="打赏一波" />
+        app:itemName="打赏一波"
+        app:needRightArrow="true" />
 
     <com.vicedev.zy_player_android.widgets.SetItemView
         android:id="@+id/setHistoryDownload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemName="历史版本下载" />
+        app:itemName="历史版本下载"
+        app:needRightArrow="true" />
 
     <com.vicedev.zy_player_android.widgets.SetItemView
         android:id="@+id/setFeedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemName="问题反馈" />
+        app:itemName="问题反馈"
+        app:needRightArrow="true" />
+
+    <com.vicedev.zy_player_android.widgets.SetItemView
+        android:id="@+id/setSetting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemName="设置"
+        app:needRightArrow="true" />
 
     <com.vicedev.zy_player_android.widgets.SetItemView
         android:id="@+id/setVersion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemName="版本 v1.0.0"
-        app:needRightArrow="false" />
+        app:itemName="版本 v1.0.0" />
 
 </LinearLayout>

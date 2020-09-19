@@ -36,10 +36,17 @@ class SetItemView @JvmOverloads constructor(
         } else {
             divideLine.gone()
         }
-        if (ta.getBoolean(R.styleable.SetItemView_needRightArrow, true)) {
+
+        val needRightArrow = ta.getBoolean(R.styleable.SetItemView_needRightArrow, false)
+        val needSwitchBtn = ta.getBoolean(R.styleable.SetItemView_needSwitchBtn, false)
+
+        //右侧箭头图标与开关互斥
+        if (needRightArrow) {
             ivArrowRight.visible()
-        } else {
+            switchBtn.gone()
+        } else if (needSwitchBtn) {
             ivArrowRight.gone()
+            switchBtn.visible()
         }
         ta.recycle()
     }

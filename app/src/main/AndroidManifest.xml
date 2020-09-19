@@ -60,6 +60,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.setting.SettingActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
 
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"

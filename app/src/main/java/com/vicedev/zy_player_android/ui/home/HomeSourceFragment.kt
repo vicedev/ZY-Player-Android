@@ -3,8 +3,10 @@ package com.vicedev.zy_player_android.ui.home
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
+import com.blankj.utilcode.util.SPUtils
 import com.vicedev.zy_player_android.R
 import com.vicedev.zy_player_android.common.ConfigManager
+import com.vicedev.zy_player_android.common.SP_OPEN_FL
 import com.vicedev.zy_player_android.sources.BaseSource
 import com.vicedev.zy_player_android.sources.bean.Classify
 import com.vicedev.zy_player_android.ui.BaseFragment
@@ -53,10 +55,15 @@ class HomeSourceFragment : BaseFragment() {
                 statusView.setFailStatus()
                 return@requestHomeData
             }
+            val openFL = SPUtils.getInstance().getBoolean(SP_OPEN_FL)
             classifyList.clear()
             classifyList.add(Classify("new", "最新"))
             classifyList.addAll(it.classifyList.filter { classify ->
-                !classify.id.isNullOrBlank() && !classify.name.isNullOrBlank()
+                !classify.id.isNullOrBlank() && !classify.name.isNullOrBlank() &&
+                        //筛去福利
+                        (if (openFL) true else (!classify.name.contains("福利") && !classify.name.contains(
+                            "伦理"
+                        )))
             } as ArrayList<Classify>)
             viewpager.adapter = ViewPageAdapter()
             viewpager.offscreenPageLimit = 100

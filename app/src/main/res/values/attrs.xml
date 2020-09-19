@@ -3,6 +3,7 @@
     <declare-styleable name="SetItemView">
         <attr name="needDivideLine" format="boolean"/>
         <attr name="needRightArrow" format="boolean"/>
+        <attr name="needSwitchBtn" format="boolean"/>
         <attr name="itemName" format="string"/>
     </declare-styleable>
 </resources>
