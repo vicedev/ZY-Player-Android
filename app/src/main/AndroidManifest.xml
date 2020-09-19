@@ -47,7 +47,6 @@
         <activity
             android:name=".ui.detail.DetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
-            android:hardwareAccelerated="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 

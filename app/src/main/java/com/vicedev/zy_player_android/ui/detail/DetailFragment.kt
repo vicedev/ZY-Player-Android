@@ -21,6 +21,7 @@ import com.vicedev.zy_player_android.ui.detail.controller.VideoController
 import com.vicedev.zy_player_android.ui.detail.controller.WebController
 import com.vicedev.zy_player_android.utils.ClipboardUtils
 import com.vicedev.zy_player_android.utils.Utils
+import com.vicedev.zy_player_android.widgets.CustomGSYVideoPlayer
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import kotlinx.android.synthetic.main.fragment_detail.*
 import org.greenrobot.eventbus.EventBus
@@ -64,6 +65,8 @@ class DetailFragment : BaseFragment() {
         val sourceKey = arguments?.getString(SOURCE_KEY)
         source = ConfigManager.generateSource(sourceKey.textOrDefault())
         id = arguments?.getString(ID).textOrDefault()
+
+        CustomGSYVideoPlayer.reset()
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_detail

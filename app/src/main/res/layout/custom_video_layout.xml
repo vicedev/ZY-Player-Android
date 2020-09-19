@@ -74,6 +74,39 @@
             android:paddingRight="16dp"
             android:scaleType="center"
             android:src="@drawable/video_enlarge" />
+
+        <LinearLayout
+            android:id="@+id/llCustomBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_above="@id/layout_bottom"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/tvSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:minEms="3"
+                android:paddingLeft="10dp"
+                android:text="1x"
+                android:textColor="@android:color/white"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvScaleType"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:minEms="5"
+                android:paddingLeft="10dp"
+                android:text="默认比例"
+                android:textColor="@android:color/white"
+                android:textSize="13sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <ProgressBar
@@ -93,11 +126,13 @@
         android:layout_marginTop="6dp"
         android:visibility="gone" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/layout_top"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/video_title_bg">
+        android:background="@drawable/video_title_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/back"
@@ -111,32 +146,14 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/tvScaleType"
-            android:layout_toRightOf="@id/back"
-            android:gravity="left"
             android:paddingLeft="10dp"
             android:singleLine="true"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
-            tools:text="袈裟大师的技术点建设大街是点击是的好时机荻花圣殿精神抖擞" />
+            android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tvScaleType"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:minEms="5"
-            android:paddingLeft="10dp"
-            android:text="默认比例"
-            android:textColor="@android:color/white"
-            android:textSize="13sp" />
-
-    </RelativeLayout>
+    </LinearLayout>
 
     <moe.codeest.enviews.ENDownloadView
         android:id="@+id/loading"
@@ -174,6 +191,12 @@
         android:layout_marginRight="50dp"
         android:scaleType="centerInside"
         android:src="@drawable/unlock"
+        android:visibility="gone" />
+
+    <com.vicedev.zy_player_android.widgets.TextVideoSelectPanel
+        android:id="@+id/videoSelectPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:visibility="gone" />
 
 </RelativeLayout>

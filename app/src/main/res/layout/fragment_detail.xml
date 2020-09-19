@@ -25,18 +25,23 @@
             android:orientation="vertical">
 
             <FrameLayout
-                android:id="@+id/flWebView"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:visibility="visible"
-                tools:visibility="visible" />
+                android:layout_height="wrap_content">
 
-            <com.vicedev.zy_player_android.widgets.CustomGSYVideoPlayer
-                android:id="@+id/videoPlayer"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:visibility="gone"
-                tools:visibility="visible" />
+                <FrameLayout
+                    android:id="@+id/flWebView"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:visibility="visible"
+                    tools:visibility="visible" />
+
+                <com.vicedev.zy_player_android.widgets.CustomGSYVideoPlayer
+                    android:id="@+id/videoPlayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
