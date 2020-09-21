@@ -14,13 +14,6 @@
         "download": "http://www.zdziyuan.com/inc/apidown.php"
     },
     {
-        "id": 3,
-        "key": "doubanzy",
-        "name": "豆瓣电影资源",
-        "api": "http://v.1988cj.com/inc/api.php",
-        "download": "http://v.1988cj.com/inc/apidown.php"
-    },
-    {
         "id": 4,
         "key": "135zy",
         "name": "135 资源网",
@@ -29,17 +22,17 @@
     },
     {
         "id": 5,
+        "key": "mhzy",
+        "name": "卧龙资源网",
+        "api": "https://www.mhapi123.com/inc/api.php",
+        "download": ""
+    },
+    {
+        "id": 6,
         "key": "kuyunzy",
         "name": "酷云资源",
         "api": "http://caiji.kuyun98.com/inc/ldg_api.php",
         "download": "http://caiji.kuyun98.com/inc/apidown.php"
-    },
-    {
-        "id": 6,
-        "key": "mgtvzy",
-        "name": "芒果 TV 资源网",
-        "api": "https://api.shijiapi.com/api.php/provide/vod/at/xml/",
-        "download": ""
     },
     {
         "id": 7,
@@ -91,13 +84,6 @@
         "download": ""
     },
     {
-        "id": 14,
-        "key": "wolongzy",
-        "name": "卧龙资源",
-        "api": "http://cj.wlzy.tv/inc/api_mac.php",
-        "download": ""
-    },
-    {
         "id": 15,
         "key": "mahuazy",
         "name": "麻花资源",
@@ -114,7 +100,7 @@
     {
         "id": 17,
         "key": "158zy",
-        "name": "壹伍捌资源网",
+        "name": "158资源网",
         "api": "http://cj.158zyz.net:158/inc/api.php",
         "download": ""
     },
@@ -134,9 +120,9 @@
     },
     {
         "id": 20,
-        "key": "kyzy",
-        "name": "快影资源站",
-        "api": "https://www.kyzy.tv/api.php/kyyun/vod/at/xml/",
+        "key": "mgtvzy",
+        "name": "芒果 TV 资源网",
+        "api": "https://api.shijiapi.com/api.php/provide/vod/at/xml/",
         "download": ""
     },
     {
@@ -147,17 +133,10 @@
         "download": ""
     },
     {
-        "id": 22,
-        "key": "bbkdj",
-        "name": "步步高顶尖资源网",
-        "api": "http://api.bbkdj.com/api",
-        "download": ""
-    },
-    {
         "id": 23,
-        "key": "1886zy",
-        "name": "1886 资源",
-        "api": "http://cj.1886zy.co/inc/api.php",
+        "key": "niuniucj",
+        "name": "牛牛资源",
+        "api": "http://v.niuniucj.com/inc/api.php",
         "download": ""
     },
     {
@@ -165,6 +144,97 @@
         "key": "mbo",
         "name": "秒播资源",
         "api": "http://caiji.mb77.vip/inc/api.php",
+        "download": ""
+    },
+    {
+        "id": 26,
+        "key": "leduozy",
+        "name": "乐多资源",
+        "api": "http://www.leduozy.com/inc/api.php",
+        "download": ""
+    },
+    {
+        "id": 28,
+        "key": "xhgcjym",
+        "name": "小黄瓜资源",
+        "api": "http://cj.xhgcjym.com/inc/api.php",
+        "download": "http://cj.xhgcjym.com/inc/apidown.php"
+    },
+    {
+        "id": 29,
+        "key": "jiali",
+        "name": "佳丽 TV",
+        "api": "https://jialiapi.com/api.php/provide/vod/at/xml/",
+        "download": ""
+    },
+    {
+        "id": 30,
+        "key": "agzy",
+        "name": "环亚资源",
+        "api": "http://wmcj8.com/inc/sapi.php",
+        "download": ""
+    },
+    {
+        "id": 31,
+        "key": "lajiaozy",
+        "name": "辣椒资源",
+        "api": "http://api.11bat.com/mac10.php",
+        "download": ""
+    },
+    {
+        "id": 32,
+        "key": "9188zy",
+        "name": "9188 资源",
+        "api": "http://cj.vod1769.com/zyapimacc.php",
+        "download": ""
+    },
+    {
+        "id": 33,
+        "key": "dadizy",
+        "name": "大地资源",
+        "api": "https://dadiapi.com/api.php",
+        "download": ""
+    },
+    {
+        "id": 34,
+        "key": "ixxzya",
+        "name": "IXX 资源",
+        "api": "http://api.iixxzyapi.com/inc/api.php",
+        "download": "http://api.iixxzyapi.com/inc/apidown.php"
+    },
+    {
+        "id": 35,
+        "key": "khzy",
+        "name": "快活资源站",
+        "api": "https://www.khzyapi.com/api.php/provide/vod/at/xml/",
+        "download": ""
+    },
+    {
+        "id": 37,
+        "key": "rerezy",
+        "name": "热热资源",
+        "api": "http://api.rereapi.com/inc/api.php",
+        "download": ""
+    },
+    {
+        "id": 40,
+        "key": "809zy",
+        "name": "红客资源网",
+        "api": "http://cj.809zy.com/inc/seacmsapi.php",
+        "download": ""
+    },
+    {
+        "id": 41,
+        "key": "cj644zy",
+        "name": "日韩资源网",
+        "api": "http://api.cj644.com/inc/seacmsapi.php",
+        "download": ""
+    },
+    {
+        "id": 42,
+        "key": "8090zy",
+        "name": "8090资源网",
+        "api": "http://zy.yilans.net/api.php/provide/vod/at/xml/",
         "download": ""
     }
 ]
