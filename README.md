@@ -4,7 +4,6 @@
 
 ### 下載
 
-- [github下载](https://github.com/vicedev/ZY-Player-Android/raw/master/release)
 - [百度网盘下载](https://pan.baidu.com/s/1fV1rO-WAcqbf0NBIgm1NsA)，提取码: py2s
 - [蓝奏云下载](https://wws.lanzous.com/b01nmvjvi)，提取码: 1wyh
 
@@ -28,12 +27,17 @@
 - 多语言
 - 投屏
 - 播放历史
-- 搜索全部源
 - 数据时间顺序排序
 - 拉起外部播放器播放
 - 支持导入源
 
 ### 版本记录
+
+#### v2.3.0
+
+- 全屏模式支持选集、上下集
+- 支持全网搜
+- 增加省钱专区
 
 #### v2.2.0
 
