@@ -14,8 +14,8 @@
 | ![home](./images/image1.jpg)  | ![collect](./images/image2.jpg) |
 | 我的 | 详情 |
 | ![mine](./images/image3.jpg) | ![detail](./images/image4.jpg) |
-| 搜索 |  |
-| ![search](./images/image5.jpg) |  |
+| 搜索 | 视频源管理 |
+| ![search](./images/image5.jpg) | ![search](./images/image6.jpg) |
 
 ### TODO 
 
@@ -28,9 +28,12 @@
 - 投屏
 - 播放历史
 - 数据时间顺序排序
-- 支持导入源
 
 ### 版本记录
+
+#### v2.4.0
+
+- 支持视频源管理
 
 #### v2.3.3
 
