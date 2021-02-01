@@ -22,7 +22,7 @@
 #### v2.4.5
 
 - 首页变成了一行三列
-- 增加了简易的iptv模块
+- 增加了简易的iptv模块（视频源来自[zy_client_android](https://github.com/javakam/zy_client_android)）
 - 加了点广告
 
 #### v2.4.4
